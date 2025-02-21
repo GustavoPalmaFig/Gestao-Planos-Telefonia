@@ -1,0 +1,160 @@
+[
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.ClienteController",
+    "Method": "CreateCliente",
+    "RelativePath": "Cliente/CreateCliente",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cliente",
+        "Type": "Gest\u00E3o_Planos_Telefonia.backend.Models.Cliente",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.ClienteController",
+    "Method": "DeleteCliente",
+    "RelativePath": "Cliente/DeleteCliente/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.ClienteController",
+    "Method": "GetAllClientes",
+    "RelativePath": "Cliente/GetAllClientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.ClienteController",
+    "Method": "GetClienteById",
+    "RelativePath": "Cliente/GetClienteById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.ClienteController",
+    "Method": "UpdateCliente",
+    "RelativePath": "Cliente/UpdateCliente/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "cliente",
+        "Type": "Gest\u00E3o_Planos_Telefonia.backend.Models.Cliente",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.PlanoController",
+    "Method": "CreatePlano",
+    "RelativePath": "Plano/CreatePlano",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Plano",
+        "Type": "Gest\u00E3o_Planos_Telefonia.backend.Models.Plano",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.PlanoController",
+    "Method": "DeletePlano",
+    "RelativePath": "Plano/DeletePlano/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.PlanoController",
+    "Method": "GetAllPlanos",
+    "RelativePath": "Plano/GetAllPlanos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.PlanoController",
+    "Method": "GetPlanoById",
+    "RelativePath": "Plano/GetPlanoById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Gest\u00E3o_Planos_Telefonia.backend.Controllers.PlanoController",
+    "Method": "UpdatePlano",
+    "RelativePath": "Plano/UpdatePlano/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "Plano",
+        "Type": "Gest\u00E3o_Planos_Telefonia.backend.Models.Plano",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
