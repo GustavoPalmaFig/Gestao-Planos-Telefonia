@@ -3,40 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:models\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\repository\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:repository\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\models\\clienteplano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:models\\clienteplano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\models\\plano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:models\\plano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\services\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:services\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:services\\clienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\repository\\iclienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:repository\\iclienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\repository\\planorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:repository\\planorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\models\\clienteplano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:models\\clienteplano.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|c:\\users\\gutof\\projetos\\projeto angular .net\\gest\u00E3o-planos-telefonia.backend\\services\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C6381585-19FA-4F38-BDA6-F0ACC7ED33A9}|Gest\u00E3o-Planos-Telefonia.backend.csproj|solutionrelative:services\\iclienteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,69 +42,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACEAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-22T04:17:07.721Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Cliente.cs",
-              "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Models\\Cliente.cs",
-              "RelativeDocumentMoniker": "Models\\Cliente.cs",
-              "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Models\\Cliente.cs",
-              "RelativeToolTip": "Models\\Cliente.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T00:36:49.763Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "ClienteController.cs",
               "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Controllers\\ClienteController.cs",
               "RelativeDocumentMoniker": "Controllers\\ClienteController.cs",
               "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Controllers\\ClienteController.cs",
               "RelativeToolTip": "Controllers\\ClienteController.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAvwDIAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAArwDIAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T01:08:59.782Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ClienteService.cs",
               "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Services\\ClienteService.cs",
               "RelativeDocumentMoniker": "Services\\ClienteService.cs",
               "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Services\\ClienteService.cs",
               "RelativeToolTip": "Services\\ClienteService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAC0AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T01:34:28.952Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "ClienteRepository.cs",
               "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Repository\\ClienteRepository.cs",
               "RelativeDocumentMoniker": "Repository\\ClienteRepository.cs",
               "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Repository\\ClienteRepository.cs",
               "RelativeToolTip": "Repository\\ClienteRepository.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAvwB0AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAYwBkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T02:00:20.959Z",
               "EditorCaption": ""
@@ -116,39 +86,54 @@
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "PlanoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Repository\\PlanoRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\PlanoRepository.cs",
+              "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Repository\\PlanoRepository.cs",
+              "RelativeToolTip": "Repository\\PlanoRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBgAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-22T20:21:08.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "ClientePlano.cs",
               "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Models\\ClientePlano.cs",
               "RelativeDocumentMoniker": "Models\\ClientePlano.cs",
               "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Models\\ClientePlano.cs",
               "RelativeToolTip": "Models\\ClientePlano.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-21T00:37:51.393Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Plano.cs",
               "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Models\\Plano.cs",
               "RelativeDocumentMoniker": "Models\\Plano.cs",
               "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Models\\Plano.cs",
               "RelativeToolTip": "Models\\Plano.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAwAsAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T00:30:36.644Z"
+              "WhenOpened": "2025-02-21T00:30:36.644Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IClienteRepository.cs",
-              "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Repository\\IClienteRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\IClienteRepository.cs",
-              "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Repository\\IClienteRepository.cs",
-              "RelativeToolTip": "Repository\\IClienteRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gest\u00E3o-Planos-Telefonia.backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-21T01:59:43.028Z"
+              "WhenOpened": "2025-02-22T04:17:07.721Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",

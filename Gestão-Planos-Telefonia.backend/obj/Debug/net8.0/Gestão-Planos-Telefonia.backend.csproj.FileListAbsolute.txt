@@ -96,3 +96,7 @@ C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\ob
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\Gestão-Planos-Telefonia.backend.pdb
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\Gestão-Planos-Telefonia.backend.genruntimeconfig.cache
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\ref\Gestão-Planos-Telefonia.backend.dll
+C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

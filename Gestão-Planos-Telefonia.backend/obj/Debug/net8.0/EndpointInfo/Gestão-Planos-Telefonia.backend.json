@@ -47,6 +47,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cliente"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Cliente"
@@ -89,6 +94,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cliente"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Cliente"
@@ -178,6 +188,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plano"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Plano"
@@ -220,6 +235,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Plano"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Plano"

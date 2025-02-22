@@ -5,9 +5,9 @@
         public Guid Id { get; set; } = Guid.NewGuid();
 
         public Guid ClienteId { get; set; }
-        public Cliente Cliente { get; set; } = new();
+        public Cliente? Cliente { get; set; }
 
         public Guid PlanoId { get; set; }
-        public Plano Plano { get; set; } = new();
+        public Plano? Plano { get; set; }
     }
 }

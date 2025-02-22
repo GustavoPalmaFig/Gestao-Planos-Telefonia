@@ -12,6 +12,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { TooltipModule } from 'primeng/tooltip';
+import { Plano } from '../../app/models/plano';
+import { PlanoService } from '../../app/services/plano.service';
 
 @Component({
   selector: 'app-clientes',
@@ -27,13 +30,15 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     ReactiveFormsModule,
     ToastModule,
     MultiSelectModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    TooltipModule
   ],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
   providers: [ConfirmationService, MessageService, provideNgxMask()]
 })
 export class ClientesComponent implements OnInit {
+  allPlanos: Plano[] = [];
   allClientes: Cliente[] = [];
   clienteForm!: FormGroup;
   selectedClientes!: Cliente[] | null;
@@ -43,7 +48,7 @@ export class ClientesComponent implements OnInit {
   clienteFormDialog: boolean = false;
   submitted = false;
 
-  constructor(private clienteService: ClienteService, private confirmationService: ConfirmationService,
+  constructor(private clienteService: ClienteService, private planoService: PlanoService, private confirmationService: ConfirmationService,
     private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig) {
       this.clienteForm = this.fb.group({
         id: [null],
@@ -51,11 +56,12 @@ export class ClientesComponent implements OnInit {
         cpf: ['', Validators.required],
         telefone: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        clientesPlanos: [[]]
+        clientesPlanos: []
       });
   }
 
   ngOnInit() {
+    this.planoService.getAllPlanos().subscribe(planos => this.allPlanos = planos);
     this.clienteService.getAllClientes().subscribe(clientes => {
       this.allClientes = clientes;
       this.isLoading = false;
@@ -65,13 +71,17 @@ export class ClientesComponent implements OnInit {
       emptyMessage: 'Nenhum registro encontrado',
       apply: 'Aplicar',
       clear: 'Limpar'
-  });
+    });
   }
 
   openClienteFormDialog(cliente?: Cliente) {
     if (cliente) {
       this.clienteForm.patchValue(cliente);
-    } else {
+      if (cliente.clientesPlanos && cliente.clientesPlanos.length > 0) {
+        this.clienteForm.get('clientesPlanos')?.setValue(cliente.clientesPlanos.map(cp => cp.planoId));
+      } 
+    } 
+    else {
       this.clienteForm.reset();
     }
     this.clienteFormDialog = true;
@@ -83,7 +93,16 @@ export class ClientesComponent implements OnInit {
     if (this.clienteForm.valid) {
       const cliente = this.clienteForm.value as Cliente;
 
-      if (!cliente.clientesPlanos) {
+      const selectedPlanosIds = this.clienteForm.get('clientesPlanos')?.value as string[];
+
+      if (selectedPlanosIds?.length > 0) {
+        cliente.clientesPlanos = selectedPlanosIds.map(planoId => {
+          return {
+            clienteId: cliente.id,
+            planoId: planoId,
+          };
+        });
+      } else {
         cliente.clientesPlanos = [];
       }
 

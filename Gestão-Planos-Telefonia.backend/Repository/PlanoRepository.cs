@@ -19,7 +19,7 @@ namespace Gestão_Planos_Telefonia.backend.Repository
 
         public async Task<Plano> GetByIdAsync(Guid id)
         {
-            return await context.Planos.FindAsync(id);
+            return await context.Planos.FirstAsync(p => p.Id == id);
         }
 
         public async Task<Plano> AddAsync(Plano Plano)

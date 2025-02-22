@@ -182,6 +182,18 @@
                         Email é obrigatório.
                     </small>
                 </div>
+
+                <div class="mb-3">
+                    <label for="planosAssociados" class="form-label">Planos Associados</label>
+                    <p-multiSelect 
+                        formControlName="clientesPlanos"
+                        [options]="allPlanos"
+                        optionValue="id"
+                        optionLabel="nome" 
+                        placeholder="Selecione os planos associados"
+                        appendTo="body">
+                    </p-multiSelect>
+                </div>
             </form>
         </ng-template>
 
@@ -194,7 +206,8 @@
             <p-button
                 label="Save" 
                 icon="pi pi-check" 
-                [text]="true" 
+                [text]="true"
+                [disabled]="submitted && clienteForm.invalid"
                 (onClick)="saveCliente()" />
         </ng-template>
 </p-dialog>

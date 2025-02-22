@@ -1,7 +1,8 @@
-using Gestão_Planos_Telefonia.backend;
-using Gestão_Planos_Telefonia.backend.Repository;
-using Gestão_Planos_Telefonia.backend.Services;
+using GestÃ£o_Planos_Telefonia.backend;
+using GestÃ£o_Planos_Telefonia.backend.Repository;
+using GestÃ£o_Planos_Telefonia.backend.Services;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +14,7 @@ builder.Services.AddCors(options =>
                           .AllowAnyMethod());
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
