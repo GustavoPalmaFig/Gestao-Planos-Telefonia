@@ -1,0 +1,15 @@
+<p-toast />
+
+<p-toolbar class="fixed-header">
+    <div class="p-toolbar-group-start">
+    </div>
+    
+    <div class="p-toolbar-group-end">
+        <p-button icon="pi pi-home" label="Página Inicial" [raised]="true" [rounded]="true" class="mr-2"/>
+        <p-button icon="pi pi-users" label="Clientes" [raised]="true" class="mr-2" (onClick)="navigate('clientes')"/>
+        <p-button icon="pi pi-phone" label="Planos" [raised]="true" (onClick)="navigate('planos')"/>
+    </div>
+</p-toolbar>
+<div class="page-padding page-background">
+    <router-outlet></router-outlet>
+</div>
