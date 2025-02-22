@@ -150,6 +150,7 @@
                         prefix="R$ "
                         [thousandSeparator]="'.'"
                         [decimalMarker]="','"
+                        placeholder="R$ 0,00"
                         autofocus 
                         class="form-control"
                         [ngClass]="{'is-invalid': submitted && planoForm.controls['preco'].invalid}"
@@ -168,6 +169,7 @@
                         [mask]="'separator.0'"
                         suffix=" GB"
                         [thousandSeparator]="'.'"
+                        placeholder="0 GB"
                         autofocus 
                         class="form-control"
                         [ngClass]="{'is-invalid': submitted && planoForm.controls['franquiaDados'].invalid}"
