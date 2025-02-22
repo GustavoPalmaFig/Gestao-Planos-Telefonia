@@ -11,6 +11,7 @@ import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api'
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 @Component({
   selector: 'app-clientes',
@@ -25,11 +26,12 @@ import { ToastModule } from 'primeng/toast';
     FormsModule,
     ReactiveFormsModule,
     ToastModule,
-    MultiSelectModule
+    MultiSelectModule,
+    NgxMaskDirective
   ],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService, provideNgxMask()]
 })
 export class ClientesComponent implements OnInit {
   allClientes: Cliente[] = [];

@@ -129,7 +129,7 @@
                         formControlName="nome" 
                         autofocus 
                         class="form-control"
-                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
+                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['nome'].invalid}"
                         required/>
                     <small class="p-error" *ngIf="submitted && clienteForm.controls['nome'].invalid">
                         Nome é obrigatório.
@@ -142,6 +142,7 @@
                         pInputText 
                         id="cpf" 
                         formControlName="cpf" 
+                        [mask]="'000.000.000-00'"
                         autofocus 
                         class="form-control"
                         [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
@@ -156,10 +157,11 @@
                         type="text" 
                         pInputText 
                         id="telefone" 
-                        formControlName="telefone" 
+                        formControlName="telefone"
+                        [mask]="'(00) 00000-0000'"
                         autofocus 
                         class="form-control"
-                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
+                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['telefone'].invalid}"
                         required/>
                     <small class="p-error" *ngIf="submitted && clienteForm.controls['telefone'].invalid">
                         Telefone é obrigatório.
@@ -168,13 +170,13 @@
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input 
-                        type="text" 
+                        type="email" 
                         pInputText 
                         id="email" 
-                        formControlName="email" 
+                        formControlName="email"
                         autofocus 
                         class="form-control"
-                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
+                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['email'].invalid}"
                         required/>
                     <small class="p-error" *ngIf="submitted && clienteForm.controls['email'].invalid">
                         Email é obrigatório.
