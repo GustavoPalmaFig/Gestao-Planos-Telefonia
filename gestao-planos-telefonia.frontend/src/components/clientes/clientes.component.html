@@ -242,14 +242,16 @@
 
         <ng-template pTemplate="footer">
             <p-button 
-                label="Cancel" 
+                label="Cancelar" 
                 icon="pi pi-times" 
-                [text]="true" 
+                [text]="true"
+                severity="danger"
                 (onClick)="hideDialog()" />
             <p-button
-                label="Save" 
+                label="Salvar" 
                 icon="pi pi-check" 
                 [text]="true"
+                severity="success"
                 [disabled]="submitted && clienteForm.invalid"
                 (onClick)="saveCliente()" />
         </ng-template>

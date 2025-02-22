@@ -70,9 +70,7 @@ export class ClientesComponent implements OnInit {
     this.primengConfig.setTranslation({
       emptyMessage: 'Nenhum registro encontrado',
       apply: 'Aplicar',
-      clear: 'Limpar',
-      cancel: 'Cancelar',
-      accept: 'Salvar',
+      clear: 'Limpar'
     });
   }
 
