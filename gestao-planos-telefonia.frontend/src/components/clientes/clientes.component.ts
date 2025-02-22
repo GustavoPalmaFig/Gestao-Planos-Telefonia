@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../app/models/cliente';
 import { ClienteService } from '../../app/services/cliente.service';
-import { Table, TableModule } from 'primeng/table';
+import { Table, TableModule, TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -40,13 +40,13 @@ import { PlanoService } from '../../app/services/plano.service';
 export class ClientesComponent implements OnInit {
   allPlanos: Plano[] = [];
   allClientes: Cliente[] = [];
+  selectedClientesToDelete!: Cliente[] | null;
   clienteForm!: FormGroup;
-  selectedClientes!: Cliente[] | null;
-  searchValue: string | undefined;
+  expandedRows: { [key: string]: boolean } = {};
 
   isLoading: boolean = true;
   clienteFormDialog: boolean = false;
-  submitted = false;
+  submitted: boolean = false;
 
   constructor(private clienteService: ClienteService, private planoService: PlanoService, private confirmationService: ConfirmationService,
     private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig) {
@@ -70,7 +70,9 @@ export class ClientesComponent implements OnInit {
     this.primengConfig.setTranslation({
       emptyMessage: 'Nenhum registro encontrado',
       apply: 'Aplicar',
-      clear: 'Limpar'
+      clear: 'Limpar',
+      cancel: 'Cancelar',
+      accept: 'Salvar',
     });
   }
 
@@ -85,6 +87,10 @@ export class ClientesComponent implements OnInit {
       this.clienteForm.reset();
     }
     this.clienteFormDialog = true;
+  }
+
+  resetForm() {
+    this.clienteForm.reset();
   }
 
   saveCliente() {
@@ -125,6 +131,8 @@ export class ClientesComponent implements OnInit {
   }
 
   deleteSelectedClientes(cliente?: Cliente) {
+    this.selectedClientesToDelete = cliente ? [cliente] : this.selectedClientesToDelete;
+
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir o(s) cliente(s) selecionado(s)?',
       header: 'Confirmar',
@@ -132,16 +140,18 @@ export class ClientesComponent implements OnInit {
       rejectLabel: 'Cancelar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-      const clientesToDelete = cliente ? [cliente] : this.selectedClientes || [];
-      
-      clientesToDelete.map(async cliente => {
-        this.clienteService.deleteCliente(cliente.id!).subscribe(() => {
-        this.allClientes = this.allClientes.filter(c => c.id !== cliente.id);
+        this.selectedClientesToDelete!.map(async cliente => {
+          this.clienteService.deleteCliente(cliente.id!).subscribe(() => {
+          this.allClientes = this.allClientes.filter(c => c.id !== cliente.id);
+          });
         });
-      });
 
-      this.selectedClientes = null;
-      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente(s) Deletedo(s)', life: 3000 });
+        this.selectedClientesToDelete = null;
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente(s) Deletedo(s)', life: 3000 });
+      },
+      reject: () => {
+        this.selectedClientesToDelete = null;
+        this.messageService.add({ severity: 'warn', summary: 'Cancelada', detail: 'Operação Cancelada', life: 3000 });
       }
     });
   }
@@ -154,10 +164,5 @@ export class ClientesComponent implements OnInit {
   getFilterOptionsByField(field: keyof Cliente) {
     const options = this.allClientes.map(cliente => cliente[field]);
     return[...new Set(options)]
-  }
-
-  clear(table: Table) {
-    table.clear();
-    this.searchValue = ''
   }
 }

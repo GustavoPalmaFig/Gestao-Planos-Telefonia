@@ -68,10 +68,6 @@ export class PlanosComponent implements OnInit {
     });
   }
 
-  setCurrencyValues(value: number) {
-    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-  }
-
   openPlanoFormDialog(plano?: Plano) {
     if (plano) {
       this.planoForm.patchValue(plano);

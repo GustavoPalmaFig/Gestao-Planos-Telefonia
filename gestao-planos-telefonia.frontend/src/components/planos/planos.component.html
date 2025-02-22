@@ -77,7 +77,7 @@
                                     [showClear]="true"
                                     appendTo="body">
                                     <ng-template let-option pTemplate="item">
-                                        <div><span>{{ setCurrencyValues(option) }}</span></div>
+                                        <div><span>{{ option | currency : 'R$ ' }}</span></div>
                                     </ng-template>
                                 </p-multiSelect>
                             </ng-template>
@@ -93,7 +93,7 @@
             <tr>
                 <td><p-tableCheckbox [value]="plano"/></td>
                 <td>{{ plano.nome }}</td>
-                <td>{{ setCurrencyValues(plano.preco) }}</td>
+                <td>{{ plano.preco | currency : 'R$ ' }}</td>
                 <td>{{ plano.franquiaDados }} GB</td>
                 <td>{{ plano.minutosLigacao }}</td>
                 <td>

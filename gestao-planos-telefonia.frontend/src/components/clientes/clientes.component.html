@@ -13,24 +13,26 @@
             label="Deletar" 
             icon="pi pi-trash" 
             (onClick)="deleteSelectedClientes()" 
-            [disabled]="!selectedClientes || !selectedClientes.length" />
+            [disabled]="!selectedClientesToDelete || !selectedClientesToDelete.length" />
     </ng-template>
 </p-toolbar>
 <div class="card">
     <p-table
         #clientesTable
         [value]="allClientes"
+        dataKey="id"
         styleClass="p-datatable-striped" 
         [tableStyle]="{ 'min-width': '50rem' }"
         [rows]="5"
-        [(selection)]="selectedClientes"
+        [(selection)]="selectedClientesToDelete"
         [rowHover]="true"
         [paginator]="true"
         [rowsPerPageOptions]="[5, 10, 20]"
-        currentPageReportTemplate="{first}/{last} de {totalRecords}">
+        currentPageReportTemplate="{first}/{last} de {totalRecords}"
+        [expandedRowKeys]="expandedRows">
         <ng-template pTemplate="caption">
             <div class="flex">
-                <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(clientesTable)" />
+                <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clientesTable.clear()" />
             </div>
         </ng-template>
         <ng-template pTemplate="header">
@@ -85,7 +87,7 @@
                 <th></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-cliente>
+        <ng-template pTemplate="body" let-cliente let-expanded="expanded">
             <tr>
                 <td><p-tableCheckbox [value]="cliente"/></td>
                 <td>{{ cliente.nome }}</td>
@@ -93,19 +95,59 @@
                 <td>{{ cliente.telefone }}</td>
                 <td>{{ cliente.email }}</td>
                 <td>
+                    <span pTooltip="{{ !cliente.clientesPlanos || !cliente.clientesPlanos.length ? 'Este cliente não possui nenhum plano' : 'Clique para visualizar os planos do cliente' }}" tooltipPosition="left">
+                        <p-button 
+                            icon="pi pi-phone" 
+                            class="mr-2" 
+                            [rounded]="true" 
+                            [outlined]="!this.expandedRows[cliente.id]" 
+                            severity="info" 
+                            [disabled]="!cliente.clientesPlanos || !cliente.clientesPlanos.length"
+                            [pRowToggler]="cliente"/>
+                    </span>
                     <p-button 
                         icon="pi pi-pencil" 
                         class="mr-2" 
-                        [rounded]="true" 
-                        [outlined]="true" 
+                        [rounded]="true"
+                        [outlined]="clienteForm.get('id')?.value != cliente.id"
                         severity="success" 
+                        pTooltip="Clique para editar o cliente" 
+                        tooltipPosition="left"
                         (onClick)="openClienteFormDialog(cliente)" />
                     <p-button 
                         icon="pi pi-trash" 
                         severity="danger" 
                         [rounded]="true" 
-                        [outlined]="true" 
+                        [outlined]="!(selectedClientesToDelete && selectedClientesToDelete.length === 1 && selectedClientesToDelete[0] === cliente)" 
+                        pTooltip="Clique para deletar o cliente" 
+                        tooltipPosition="left"
                         (onClick)="deleteSelectedClientes(cliente)" />
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-cliente>
+            <tr>
+                <td colspan="7">
+                    <div class="p-3">
+                        <p-table [value]="cliente.clientesPlanos" dataKey="id">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="customer">Nome <p-sortIcon field="nome" /></th>
+                                    <th pSortableColumn="date">Preço <p-sortIcon field="price" /></th>
+                                    <th pSortableColumn="amount">Franquia de dados <p-sortIcon field="franquiaDados" /></th>
+                                    <th pSortableColumn="status">Minutos Ligação <p-sortIcon field="minutosLigacao" /></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-clientesPlanos>
+                                <tr>
+                                    <td>{{ clientesPlanos.plano.nome }}</td>
+                                    <td>{{ clientesPlanos.plano.preco | currency : 'R$ ' }}</td>
+                                    <td>{{ clientesPlanos.plano.franquiaDados }}</td>
+                                    <td>{{ clientesPlanos.plano.minutosLigacao}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
                 </td>
             </tr>
         </ng-template>
@@ -117,7 +159,8 @@
     [style]="{ width: '450px' }" 
     [header]="clienteForm.get('id')?.value ? 'Edição' : 'Cadastro' + ' Cliente'" 
     [modal]="true" 
-    styleClass="p-fluid">
+    styleClass="p-fluid"
+    (onHide)="resetForm()">
         <ng-template pTemplate="content">
             <form [formGroup]="clienteForm" class="needs-validation" novalidate>
                 <div class="mb-3">
