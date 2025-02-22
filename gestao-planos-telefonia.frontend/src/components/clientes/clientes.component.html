@@ -17,7 +17,8 @@
     </ng-template>
 </p-toolbar>
 <div class="card">
-    <p-table 
+    <p-table
+        #clientesTable
         [value]="allClientes"
         styleClass="p-datatable-striped" 
         [tableStyle]="{ 'min-width': '50rem' }"
@@ -27,11 +28,58 @@
         [paginator]="true"
         [rowsPerPageOptions]="[5, 10, 20]"
         currentPageReportTemplate="{first}/{last} de {totalRecords}">
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash" (onClick)="clear(clientesTable)" />
+            </div>
+        </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th><p-tableHeaderCheckbox /></th>
-                <th>Nome</th>
-                <th>CPF</th>
+                <th>
+                    <div class="flex align-items-center">
+                        Nome
+                        <p-columnFilter field="nome" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                            <ng-template pTemplate="header">
+                                <div class="px-3 pt-3 pb-0">
+                                    <span class="font-bold">Filtrar por nome</span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-multiSelect 
+                                    [ngModel]="value" 
+                                    [options]="getFilterOptionsByField('nome')"
+                                    placeholder="Selecionar nome" 
+                                    (onChange)="filter($event.value)" 
+                                    [showClear]="true"
+                                    appendTo="body">
+                                </p-multiSelect>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                </th>
+                <th>
+                    <div class="flex align-items-center">
+                        CPF
+                        <p-columnFilter field="cpf" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                            <ng-template pTemplate="header">
+                                <div class="px-3 pt-3 pb-0">
+                                    <span class="font-bold">Filtrar por CPF</span>
+                                </div>
+                            </ng-template>
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-multiSelect 
+                                    [ngModel]="value" 
+                                    [options]="getFilterOptionsByField('cpf')"
+                                    placeholder="Selecionar CPF" 
+                                    (onChange)="filter($event.value)" 
+                                    [showClear]="true"
+                                    appendTo="body">
+                                </p-multiSelect>
+                            </ng-template>
+                        </p-columnFilter>
+                    </div>
+                </th>
                 <th>Telefone</th>
                 <th>Email</th>
                 <th></th>
@@ -71,52 +119,63 @@
     [modal]="true" 
     styleClass="p-fluid">
         <ng-template pTemplate="content">
-            <form [formGroup]="clienteForm">
-                <div class="field">
-                    <label for="nome">Nome</label>
-                    <input 
+            <form [formGroup]="clienteForm" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input
                         type="text" 
                         pInputText 
                         id="nome" 
                         formControlName="nome" 
-                        required 
-                        autofocus />
+                        autofocus 
+                        class="form-control"
+                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
+                        required/>
                     <small class="p-error" *ngIf="submitted && clienteForm.controls['nome'].invalid">
                         Nome é obrigatório.
                     </small>
                 </div>
-                <div class="field">
-                    <label for="cpf">CPF</label>
+                <div class="mb-3">
+                    <label for="cpf" class="form-label">CPF</label>
                     <input 
                         type="text" 
                         pInputText 
                         id="cpf" 
                         formControlName="cpf" 
-                        required />
+                        autofocus 
+                        class="form-control"
+                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
+                        required/>
                     <small class="p-error" *ngIf="submitted && clienteForm.controls['cpf'].invalid">
                         CPF é obrigatório.
                     </small>
                 </div>
-                <div class="field">
-                    <label for="telefone">Telefone</label>
+                <div class="mb-3">
+                    <label for="telefone" class="form-label">Telefone</label>
                     <input 
                         type="text" 
                         pInputText 
                         id="telefone" 
                         formControlName="telefone" 
-                        required />
+                        autofocus 
+                        class="form-control"
+                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
+                        required/>
                     <small class="p-error" *ngIf="submitted && clienteForm.controls['telefone'].invalid">
                         Telefone é obrigatório.
                     </small>
                 </div>
-                <div class="field">
-                    <label for="email">Email</label>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
                     <input 
                         type="text" 
                         pInputText 
                         id="email" 
                         formControlName="email" 
-                        required />
+                        autofocus 
+                        class="form-control"
+                        [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
+                        required/>
                     <small class="p-error" *ngIf="submitted && clienteForm.controls['email'].invalid">
                         Email é obrigatório.
                     </small>

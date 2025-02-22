@@ -1,0 +1,18 @@
+::ng-deep {
+    .p-toast {
+      max-width: 300px;
+    }
+
+    .p-toast-detail {
+      white-space: break-spaces;
+    }
+
+    .p-dialog.p-confirm-dialog .p-confirm-dialog-icon {
+      color: #ecb11f;
+    }
+
+    .p-dialog.p-confirm-dialog .p-confirm-dialog-reject {
+      background: red;
+      border: 1px solid red;
+    }
+  }

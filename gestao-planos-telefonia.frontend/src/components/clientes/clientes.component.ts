@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../app/models/cliente';
 import { ClienteService } from '../../app/services/cliente.service';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 
@@ -23,7 +24,8 @@ import { ToastModule } from 'primeng/toast';
     ConfirmDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastModule
+    ToastModule,
+    MultiSelectModule
   ],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
@@ -33,13 +35,14 @@ export class ClientesComponent implements OnInit {
   allClientes: Cliente[] = [];
   clienteForm!: FormGroup;
   selectedClientes!: Cliente[] | null;
-  
+  searchValue: string | undefined;
+
   isLoading: boolean = true;
   clienteFormDialog: boolean = false;
   submitted = false;
 
   constructor(private clienteService: ClienteService, private confirmationService: ConfirmationService,
-    private messageService: MessageService, private fb: FormBuilder) {
+    private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig) {
       this.clienteForm = this.fb.group({
         id: [null],
         nome: ['', Validators.required],
@@ -55,6 +58,12 @@ export class ClientesComponent implements OnInit {
       this.allClientes = clientes;
       this.isLoading = false;
     });
+
+    this.primengConfig.setTranslation({
+      emptyMessage: 'Nenhum registro encontrado',
+      apply: 'Aplicar',
+      clear: 'Limpar'
+  });
   }
 
   openClienteFormDialog(cliente?: Cliente) {
@@ -81,14 +90,14 @@ export class ClientesComponent implements OnInit {
           const index = this.allClientes.findIndex(c => c.id === cliente.id);
           this.allClientes[index] = cliente;
           this.clienteFormDialog = false;
-          this.messageService.add({ severity: 'successo', summary: 'Successful', detail: 'Cliente Atualizado', life: 3000 });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente Atualizado', life: 3000 });
         });
       }
       else {
         this.clienteService.createCliente(cliente).subscribe((newCliente) => {
           this.allClientes.push(newCliente);
           this.clienteFormDialog = false;
-          this.messageService.add({ severity: 'successo', summary: 'Successful', detail: 'Cliente Criado', life: 3000 });
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente Criado', life: 3000 });
         });
       }
     }
@@ -98,6 +107,8 @@ export class ClientesComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir o(s) cliente(s) selecionado(s)?',
       header: 'Confirmar',
+      acceptLabel: 'Sim',
+      rejectLabel: 'Cancelar',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
       const clientesToDelete = cliente ? [cliente] : this.selectedClientes || [];
@@ -109,7 +120,7 @@ export class ClientesComponent implements OnInit {
       });
 
       this.selectedClientes = null;
-      this.messageService.add({ severity: 'successo', summary: 'Successful', detail: 'Cliente(s) Deletedo(s)', life: 3000 });
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente(s) Deletedo(s)', life: 3000 });
       }
     });
   }
@@ -117,5 +128,15 @@ export class ClientesComponent implements OnInit {
   hideDialog() {
     this.clienteFormDialog = false;
     this.submitted = false;
+  }
+
+  getFilterOptionsByField(field: keyof Cliente) {
+    const options = this.allClientes.map(cliente => cliente[field]);
+    return[...new Set(options)]
+  }
+
+  clear(table: Table) {
+    table.clear();
+    this.searchValue = ''
   }
 }

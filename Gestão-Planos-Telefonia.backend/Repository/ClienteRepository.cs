@@ -36,7 +36,6 @@ namespace Gestão_Planos_Telefonia.backend.Repository
             dbCliente.ClientesPlanos.Clear();
             dbCliente.ClientesPlanos.AddRange(cliente.ClientesPlanos);
 
-            context.Clientes.Update(cliente);
             await context.SaveChangesAsync();
             return cliente;
         }

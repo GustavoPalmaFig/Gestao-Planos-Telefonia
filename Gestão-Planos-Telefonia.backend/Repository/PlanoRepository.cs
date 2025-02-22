@@ -32,7 +32,6 @@ namespace Gestão_Planos_Telefonia.backend.Repository
         public async Task<Plano> UpdateAsync(Plano dbPlano, Plano Plano)
         {
             context.Entry(dbPlano).CurrentValues.SetValues(Plano);
-            context.Planos.Update(Plano);
             await context.SaveChangesAsync();
             return Plano;
         }
