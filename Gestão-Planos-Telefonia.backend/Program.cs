@@ -2,7 +2,6 @@ using Gestão_Planos_Telefonia.backend;
 using Gestão_Planos_Telefonia.backend.Repository;
 using Gestão_Planos_Telefonia.backend.Services;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
