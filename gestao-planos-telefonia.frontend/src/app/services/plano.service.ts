@@ -21,11 +21,12 @@ export class PlanoService {
   }
 
   createPlano(plano: Plano): Observable<Plano> {
+    delete plano.id;
     return this.apiService.post<Plano>(`${this.apiRoot}/CreatePlano`, plano);
   }
 
-  updatePlano(id: string, plano: Plano): Observable<Plano> {
-    return this.apiService.put<Plano>(`${this.apiRoot}/UpdatePlano/${id}`, plano);
+  updatePlano(plano: Plano): Observable<Plano> {
+    return this.apiService.put<Plano>(`${this.apiRoot}/UpdatePlano/${plano.id}`, plano);
   }
 
   deletePlano(id: string): Observable<void> {
