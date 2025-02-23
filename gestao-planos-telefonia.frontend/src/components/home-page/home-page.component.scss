@@ -56,3 +56,37 @@
   display: flex;
   justify-content: center;
 }
+
+.chart-subtitle {
+  width: 80%;
+}
+
+.chart-filter {
+  width: 20%;
+}
+
+@media (max-width: 768px) {
+  .cards-flex-container {
+    flex-direction: column;
+  }
+
+  .big-number-card, .chart-card {
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .chart-title {
+    font-size: 1rem;
+  }
+
+  .chart-subtitle {
+    width: 70%;
+  }
+  
+  .chart-filter {
+    width: 30%;
+  }
+}
