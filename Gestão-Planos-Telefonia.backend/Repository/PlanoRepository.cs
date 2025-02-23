@@ -14,7 +14,7 @@ namespace Gestão_Planos_Telefonia.backend.Repository
 
         public async Task<List<Plano>> GetAllAsync()
         {
-            return await context.Planos.ToListAsync();
+            return await context.Planos.Include(c => c.ClientesPlanos).ThenInclude(cp => cp.Cliente).ToListAsync();
         }
 
         public async Task<Plano> GetByIdAsync(Guid id)

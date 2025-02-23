@@ -11,7 +11,8 @@ import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api'
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask  } from 'ngx-mask';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-planos',
@@ -27,24 +28,26 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
     ReactiveFormsModule,
     ToastModule,
     MultiSelectModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    TooltipModule
   ],
   templateUrl: './planos.component.html',
   styleUrls: ['./planos.component.scss'],
-  providers: [ConfirmationService, MessageService, provideNgxMask()]
+  providers: [ConfirmationService, MessageService, provideNgxMask(), NgxMaskPipe]
 })
 export class PlanosComponent implements OnInit {
   allPlanos: Plano[] = [];
   planoForm!: FormGroup;
-  selectedPlanos!: Plano[] | null;
-  searchValue: string | undefined;
+  selectedPlanosToDelete!: Plano[] | null;
+  expandedRows: { [key: string]: boolean } = {};
 
   isLoading: boolean = true;
   planoFormDialog: boolean = false;
   submitted = false;
 
   constructor(private planoService: PlanoService, private confirmationService: ConfirmationService,
-    private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig) {
+    private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig,
+    public maskPipe: NgxMaskPipe) {
       this.planoForm = this.fb.group({
         id: [null],
         nome: ['', Validators.required],
@@ -102,27 +105,40 @@ export class PlanosComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Plano Criado', life: 3000 });
         });
       }
+
+      this.resetForm();
     }
   }
 
+  resetForm() {
+    this.planoForm.reset();
+    this.planoForm.markAsPristine();
+    this.planoForm.markAsUntouched();
+    this.submitted = false;
+  }
+
   deleteSelectedPlanos(plano?: Plano) {
+    this.selectedPlanosToDelete = plano ? [plano] : this.selectedPlanosToDelete;
+
     this.confirmationService.confirm({
       message: 'Tem certeza que deseja excluir o(s) plano(s) selecionado(s)?',
       header: 'Confirmar',
       acceptLabel: 'Sim',
       rejectLabel: 'Cancelar',
       icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-      const planosToDelete = plano ? [plano] : this.selectedPlanos || [];
-      
-      planosToDelete.map(async plano => {
-        this.planoService.deletePlano(plano.id!).subscribe(() => {
-        this.allPlanos = this.allPlanos.filter(c => c.id !== plano.id);
+      accept: () => {      
+        this.selectedPlanosToDelete!.map(async plano => {
+          this.planoService.deletePlano(plano.id!).subscribe(() => {
+          this.allPlanos = this.allPlanos.filter(c => c.id !== plano.id);
+          });
         });
-      });
 
-      this.selectedPlanos = null;
-      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Plano(s) Deletedo(s)', life: 3000 });
+        this.selectedPlanosToDelete = null;
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Plano(s) Deletedo(s)', life: 3000 });
+      },
+      reject: () => {
+        this.selectedPlanosToDelete = null;
+        this.messageService.add({ severity: 'warn', summary: 'Cancelada', detail: 'Operação Cancelada', life: 3000 });
       }
     });
   }
@@ -135,10 +151,5 @@ export class PlanosComponent implements OnInit {
   getFilterOptionsByField(field: keyof Plano) {
     const options = this.allPlanos.map(plano => plano[field]);
     return[...new Set(options)]
-  }
-
-  clear(table: Table) {
-    table.clear();
-    this.searchValue = ''
   }
 }

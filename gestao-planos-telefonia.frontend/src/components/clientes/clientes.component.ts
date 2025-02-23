@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../app/models/cliente';
 import { ClienteService } from '../../app/services/cliente.service';
-import { Table, TableModule, TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -11,7 +11,7 @@ import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api'
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TooltipModule } from 'primeng/tooltip';
 import { Plano } from '../../app/models/plano';
 import { PlanoService } from '../../app/services/plano.service';
@@ -35,7 +35,7 @@ import { PlanoService } from '../../app/services/plano.service';
   ],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],
-  providers: [ConfirmationService, MessageService, provideNgxMask()]
+  providers: [ConfirmationService, MessageService, provideNgxMask(), NgxMaskPipe]
 })
 export class ClientesComponent implements OnInit {
   allPlanos: Plano[] = [];
@@ -49,7 +49,8 @@ export class ClientesComponent implements OnInit {
   submitted: boolean = false;
 
   constructor(private clienteService: ClienteService, private planoService: PlanoService, private confirmationService: ConfirmationService,
-    private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig) {
+    private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig,
+    public maskPipe: NgxMaskPipe) {
       this.clienteForm = this.fb.group({
         id: [null],
         nome: ['', Validators.required],
@@ -87,10 +88,6 @@ export class ClientesComponent implements OnInit {
     this.clienteFormDialog = true;
   }
 
-  resetForm() {
-    this.clienteForm.reset();
-  }
-
   saveCliente() {
     this.submitted = true;
     
@@ -102,7 +99,7 @@ export class ClientesComponent implements OnInit {
       if (selectedPlanosIds?.length > 0) {
         cliente.clientesPlanos = selectedPlanosIds.map(planoId => {
           return {
-            clienteId: cliente.id,
+            clienteId: cliente.id || undefined,
             planoId: planoId,
           };
         });
@@ -112,20 +109,31 @@ export class ClientesComponent implements OnInit {
 
       if (cliente.id) {
         this.clienteService.updateCliente(cliente).subscribe(() => {
+          cliente.clientesPlanos?.forEach(cp => cp.plano = this.allPlanos.find(p => p.id === cp.planoId));
           const index = this.allClientes.findIndex(c => c.id === cliente.id);
           this.allClientes[index] = cliente;
           this.clienteFormDialog = false;
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente Atualizado', life: 3000 });
+          this.resetForm();
         });
       }
       else {
         this.clienteService.createCliente(cliente).subscribe((newCliente) => {
+          newCliente.clientesPlanos?.forEach(cp => cp.plano = this.allPlanos.find(p => p.id === cp.planoId));
           this.allClientes.push(newCliente);
           this.clienteFormDialog = false;
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Cliente Criado', life: 3000 });
+          this.resetForm();
         });
       }
     }
+  }
+
+  resetForm() {
+    this.clienteForm.reset();
+    this.clienteForm.markAsPristine();
+    this.clienteForm.markAsUntouched();
+    this.submitted = false;
   }
 
   deleteSelectedClientes(cliente?: Cliente) {

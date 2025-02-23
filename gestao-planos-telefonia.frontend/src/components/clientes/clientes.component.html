@@ -91,8 +91,8 @@
             <tr>
                 <td><p-tableCheckbox [value]="cliente"/></td>
                 <td>{{ cliente.nome }}</td>
-                <td>{{ cliente.cpf }}</td>
-                <td>{{ cliente.telefone }}</td>
+                <td>{{ maskPipe.transform(cliente.cpf, '000.000.000-00') }}</td>
+                <td>{{ maskPipe.transform(cliente.telefone, '(00) 00000-0000') }}</td>
                 <td>{{ cliente.email }}</td>
                 <td>
                     <span pTooltip="{{ !cliente.clientesPlanos || !cliente.clientesPlanos.length ? 'Este cliente não possui nenhum plano' : 'Clique para visualizar os planos do cliente' }}" tooltipPosition="left">
@@ -132,16 +132,16 @@
                         <p-table [value]="cliente.clientesPlanos" dataKey="id">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th pSortableColumn="customer">Nome <p-sortIcon field="nome" /></th>
-                                    <th pSortableColumn="date">Preço <p-sortIcon field="price" /></th>
-                                    <th pSortableColumn="amount">Franquia de dados <p-sortIcon field="franquiaDados" /></th>
-                                    <th pSortableColumn="status">Minutos Ligação <p-sortIcon field="minutosLigacao" /></th>
+                                    <th>Nome</th>
+                                    <th>Preço</th>
+                                    <th>Franquia de dados</th>
+                                    <th>Minutos Ligação</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-clientesPlanos>
                                 <tr>
                                     <td>{{ clientesPlanos.plano.nome }}</td>
-                                    <td>{{ clientesPlanos.plano.preco | currency : 'R$ ' }}</td>
+                                    <td>{{ clientesPlanos.plano.preco | currency: 'BRL' }}</td>
                                     <td>{{ clientesPlanos.plano.franquiaDados }}</td>
                                     <td>{{ clientesPlanos.plano.minutosLigacao}}</td>
                                 </tr>
