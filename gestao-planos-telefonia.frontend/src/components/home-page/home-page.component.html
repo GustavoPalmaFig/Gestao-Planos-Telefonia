@@ -21,16 +21,17 @@
 
 <div class="charts-section">
     <h5 class="subtitle chart-subtitle">Selecione à direita os anos de análise para filtrar os gráficos e interaja passando o mouse sobre cada um deles.</h5>
-    <p-multiSelect 
-        class="chart-filter"
-        [options]="availableYears" 
-        [(ngModel)]="selectedYears" 
-        (onChange)="onYearChange()" 
-        appendTo="body"
-        placeholder="Ano de Análise"
-        optionLabel="label"
-        optionValue="value">
-    </p-multiSelect>
+    <div class="chart-filter">
+        <p-multiSelect 
+            [options]="availableYears" 
+            [(ngModel)]="selectedYears" 
+            (onChange)="onYearChange()" 
+            appendTo="body"
+            placeholder="Ano de Análise"
+            optionLabel="label"
+            optionValue="value">
+        </p-multiSelect>
+    </div>
 </div>
 
 <div class="cards-flex-container">
