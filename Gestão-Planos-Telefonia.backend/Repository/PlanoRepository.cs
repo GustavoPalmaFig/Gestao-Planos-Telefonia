@@ -3,14 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gestão_Planos_Telefonia.backend.Repository
 {
-    public class PlanoRepository : IPlanoRepository
+    public class PlanoRepository(TelefoniaContext _context) : IPlanoRepository
     {
-        private readonly TelefoniaContext context;
-
-        public PlanoRepository(TelefoniaContext _context)
-        {
-            context = _context;
-        }
+        private readonly TelefoniaContext context = _context;
 
         public async Task<List<Plano>> GetAllAsync()
         {
@@ -22,23 +17,23 @@ namespace Gestão_Planos_Telefonia.backend.Repository
             return await context.Planos.FirstAsync(p => p.Id == id);
         }
 
-        public async Task<Plano> AddAsync(Plano Plano)
+        public async Task<Plano> AddAsync(Plano plano)
         {
-            await context.Planos.AddAsync(Plano);
+            await context.Planos.AddAsync(plano);
             await context.SaveChangesAsync();
-            return Plano;
+            return plano;
         }
 
-        public async Task<Plano> UpdateAsync(Plano dbPlano, Plano Plano)
+        public async Task<Plano> UpdateAsync(Plano dbPlano, Plano plano)
         {
-            context.Entry(dbPlano).CurrentValues.SetValues(Plano);
+            context.Entry(dbPlano).CurrentValues.SetValues(plano);
             await context.SaveChangesAsync();
-            return Plano;
+            return plano;
         }
 
-        public async Task DeleteAsync(Plano Plano)
+        public async Task DeleteAsync(Plano plano)
         {
-            context.Planos.Remove(Plano);
+            context.Planos.Remove(plano);
             await context.SaveChangesAsync();
         }
     }

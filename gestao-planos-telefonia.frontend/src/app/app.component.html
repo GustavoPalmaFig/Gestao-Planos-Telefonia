@@ -1,12 +1,14 @@
 <p-toast />
 
 <p-toolbar class="fixed-header">
-    <div class="p-toolbar-group-start"></div>
+    <div class="p-toolbar-group-start">
+        <img src="assets/images/gpt-logo-5.png" alt="Gestão de Planos de Telefonia" class="logo clickable" (click)="navigate('')" />
+    </div>
     
     <div class="p-toolbar-group-end">
-        <p-button icon="pi pi-home" label="Página Inicial" [raised]="true" [rounded]="true" class="mr-2" (onClick)="navigate('')"/>
-        <p-button icon="pi pi-users" label="Clientes" [raised]="true" class="mr-2" (onClick)="navigate('clientes')"/>
-        <p-button icon="pi pi-phone" label="Planos" [raised]="true" (onClick)="navigate('planos')"/>
+        <p-button icon="pi pi-home" label="Página Inicial" [raised]="true" [rounded]="true" class="header-button mr-2" (onClick)="navigate('')"/>
+        <p-button icon="pi pi-users" label="Clientes" [raised]="true" class="header-button mr-2" (onClick)="navigate('clientes')"/>
+        <p-button icon="pi pi-phone" label="Planos" [raised]="true" class="header-button" (onClick)="navigate('planos')"/>
     </div>
 </p-toolbar>
 

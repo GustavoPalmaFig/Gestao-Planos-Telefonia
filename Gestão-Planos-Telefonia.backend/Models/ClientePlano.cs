@@ -9,5 +9,7 @@
 
         public Guid PlanoId { get; set; }
         public Plano? Plano { get; set; }
+
+        public DateTime CreatedAt { get; set; }
     }
 }

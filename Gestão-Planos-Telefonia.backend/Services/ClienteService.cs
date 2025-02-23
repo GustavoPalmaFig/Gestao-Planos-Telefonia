@@ -3,14 +3,9 @@ using Gestão_Planos_Telefonia.backend.Repository;
 
 namespace Gestão_Planos_Telefonia.backend.Services
 {
-    public class ClienteService : IClienteService
+    public class ClienteService(IClienteRepository _clienteRepository) : IClienteService
     {
-        private readonly IClienteRepository clienteRepository;
-
-        public ClienteService(IClienteRepository _clienteRepository)
-        {
-            clienteRepository = _clienteRepository;
-        }
+        private readonly IClienteRepository clienteRepository = _clienteRepository;
 
         public async Task<List<Cliente>> GetAllClientesAsync()
         {
@@ -25,6 +20,7 @@ namespace Gestão_Planos_Telefonia.backend.Services
 
         public async Task<Cliente> CreateClienteAsync(Cliente cliente)
         {
+            SetDates(cliente);
             return await clienteRepository.AddAsync(cliente);
         }
 
@@ -36,13 +32,7 @@ namespace Gestão_Planos_Telefonia.backend.Services
                 throw new KeyNotFoundException("Cliente not found");
             }
 
-
-            //dbCliente.Nome = cliente.Nome ?? cliente.Nome;
-            //dbCliente.CPF = cliente.CPF ?? cliente.CPF;
-            //dbCliente.Telefone = cliente.Telefone ?? cliente.Telefone;
-            //dbCliente.Email = cliente.Email ?? cliente.Email;
-
-            //return await _clienteRepository.UpdateAsync(cliente);
+            SetDates(cliente);
             return await clienteRepository.UpdateAsync(dbCliente, cliente);
         }
 
@@ -55,6 +45,13 @@ namespace Gestão_Planos_Telefonia.backend.Services
             }
 
             await clienteRepository.DeleteAsync(cliente);
+        }
+
+        private static void SetDates(Cliente cliente)
+        {
+            cliente.CreatedAt = DateTime.Now;
+            cliente.UpdatedAt = DateTime.Now;
+            cliente.ClientesPlanos.ForEach(cp => cp.CreatedAt = DateTime.Now);
         }
     }
 }

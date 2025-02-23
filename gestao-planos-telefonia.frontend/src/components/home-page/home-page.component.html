@@ -1,0 +1,61 @@
+<p class="title">Gestão de Planos de Telefonia</p>
+<h5 class="subtitle">Nesta página estão disponíveis os dados de Clientes, Planos e suas associações.</h5>
+
+<div class="cards-flex-container">
+    <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'clientes', title: 'Clientes Cadastrados', icon: 'user', bigNumber: allClientes.length}"></ng-template>
+    <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'planos', title: 'Planos Disponíveis', icon: 'phone', bigNumber: allPlanos.length}"></ng-template>
+    <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {title: 'Média Planos/Clientes', icon: 'flag', bigNumber: averageAssociatedPlanosClientes.toFixed(2)}"></ng-template>
+</div>
+
+<ng-template #bigNumberTemplate let-pageRedirect="pageRedirect" let-title="title" let-icon="icon" let-bigNumber="bigNumber">
+    <div class="big-number-card" (click)="navigate(pageRedirect)" [ngClass]="{'clickable': pageRedirect}" [pTooltip]="pageRedirect ? 'Acessar ' + title : ''" tooltipPosition="top">
+        <div style="width: 93%;">
+            <div class="big-number"><span>{{bigNumber}}</span></div>
+            <div class="big-number-title">
+                <span>{{title}}</span>
+            </div>
+        </div>
+        <em [class]="'big-number-icon pi pi-' + icon"></em>
+    </div>
+</ng-template>
+
+<div class="charts-section">
+    <h5 class="subtitle col-10 px-0">Selecione à direita os anos de análise para filtrar os gráficos e interaja passando o mouse sobre cada um deles.</h5>
+    <p-multiSelect 
+        class="col-2 px-0"
+        [options]="availableYears" 
+        [(ngModel)]="selectedYears" 
+        (onChange)="onYearChange()" 
+        appendTo="body"
+        placeholder="Ano de Análise"
+        optionLabel="label"
+        optionValue="value">
+    </p-multiSelect>
+</div>
+
+<div class="cards-flex-container">
+    <div class="chart-card" style="display: grid;">
+        <p class="chart-title">Proporção de Clientes Associados a Cada Plano</p>
+        <apx-chart 
+            [series]="pieChart.series" 
+            [chart]="pieChart.chart" 
+            [labels]="pieChart.labels"
+            [legend]="pieChart.legend" 
+            [responsive]="pieChart.responsive">
+        </apx-chart>
+    </div>
+    <div class="chart-card">
+        <p class="chart-title">Clientes cadastrados por mês</p>
+        <apx-chart 
+        [series]="barChart.series"
+        [chart]="barChart.chart"
+        [xaxis]="barChart.xaxis"
+        [yaxis]="barChart.yaxis"
+        [plotOptions]="barChart.plotOptions"
+        [dataLabels]="barChart.dataLabels"
+        [tooltip]="barChart.tooltip">
+        </apx-chart>
+    </div>
+</div>
+
+

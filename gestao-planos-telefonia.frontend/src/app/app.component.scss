@@ -8,6 +8,23 @@
     display: contents;
 }
 
+.logo {
+    height: 40px;
+    cursor: pointer;
+}
+
 .page-padding {
     padding: 1rem 2rem;
+}
+
+::ng-deep {
+    .p-toolbar {
+        border: unset;
+        border-radius: unset;
+    }
+
+    .header-button.p-button {
+        background-color: #5897fb;
+        border-color: #5897fb;
+    }
 }

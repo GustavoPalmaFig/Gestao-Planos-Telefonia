@@ -15,6 +15,9 @@ namespace Gestão_Planos_Telefonia.backend.Models
         [Required]
         public int MinutosLigacao { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
         public List<ClientePlano> ClientesPlanos { get; set; } = new();
     }
 }

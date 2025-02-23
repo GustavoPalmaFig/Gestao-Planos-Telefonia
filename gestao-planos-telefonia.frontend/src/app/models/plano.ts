@@ -7,4 +7,6 @@ export interface Plano {
     franquiaDados?: number;
     minutosLigacao?: number;
     clientesPlanos?: ClientePlano[];
+    createdAt?: Date;
+    updatedAt?: Date;
 }

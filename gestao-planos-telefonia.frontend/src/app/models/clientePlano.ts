@@ -7,4 +7,6 @@ export interface ClientePlano {
     cliente?: Cliente;
     planoId?: string;
     plano?: Plano;
+    createdAt?: Date;
+    updatedAt?: Date;
 }

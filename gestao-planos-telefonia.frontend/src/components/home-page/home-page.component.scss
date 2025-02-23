@@ -1,0 +1,70 @@
+@import '../../assets/styles/basics.scss';
+
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #5897fb;
+  margin-top: 15px;
+}
+
+.subtitle {
+  color: grey;
+}
+
+.cards-flex-container{
+  display: flex;
+  column-gap: 1%;
+  margin: 1.5rem 0;
+}
+  
+.big-number{
+  font-size: 48px;
+  font-weight: bold;
+  color: #5897fb;
+  margin-bottom: 30px;
+
+  &-card {
+    border: 1px solid #dadada;
+    padding: .5rem 1rem;
+    display: flex;
+    width: 100%;
+    border-radius: 7px;
+    background-color: white;
+  }
+
+  &-title{
+    font-size: 22px;
+    font-weight: 500;
+    color: grey;
+  }
+
+  &-icon {
+    font-size: 28px;
+    color: #7ccbed;
+    border-color: #5897fb;
+  }
+}
+
+.charts-section {
+  border-top: 2px solid #1c88b7;
+  padding-top: 1.5rem;
+  display: flex;
+}
+
+.chart-card {
+  border: 1px solid #dadada;
+  border-radius: 7px;
+  padding: 1.5rem;
+  background-color: white;
+  width: 100%;
+  justify-content: center;
+}
+
+.chart-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #5897fb;
+  display: flex;
+  justify-content: center;
+}

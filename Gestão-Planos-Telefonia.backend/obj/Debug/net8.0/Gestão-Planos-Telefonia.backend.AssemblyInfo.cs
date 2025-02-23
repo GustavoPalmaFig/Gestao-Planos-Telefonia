@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Gestão-Planos-Telefonia.backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e05904bd7a7c15c86e430704c0200b7941c00486")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c433d21afa49444f53a32596318e5ec09e0dc3d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Gestão-Planos-Telefonia.backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Gestão-Planos-Telefonia.backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

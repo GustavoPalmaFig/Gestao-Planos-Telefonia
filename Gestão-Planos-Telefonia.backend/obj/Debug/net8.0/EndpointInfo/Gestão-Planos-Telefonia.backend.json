@@ -319,6 +319,14 @@
             "minLength": 1,
             "type": "string"
           },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
           "clientesPlanos": {
             "type": "array",
             "items": {
@@ -349,6 +357,10 @@
           },
           "plano": {
             "$ref": "#/components/schemas/Plano"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
@@ -381,6 +393,14 @@
           "minutosLigacao": {
             "type": "integer",
             "format": "int32"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
           },
           "clientesPlanos": {
             "type": "array",

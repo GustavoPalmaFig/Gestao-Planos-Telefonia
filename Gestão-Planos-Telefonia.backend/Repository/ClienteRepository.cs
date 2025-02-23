@@ -3,14 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gestão_Planos_Telefonia.backend.Repository
 {
-    public class ClienteRepository : IClienteRepository
+    public class ClienteRepository(TelefoniaContext _context) : IClienteRepository
     {
-        private readonly TelefoniaContext context;
-
-        public ClienteRepository(TelefoniaContext _context)
-        {
-            context = _context;
-        }
+        private readonly TelefoniaContext context = _context;
 
         public async Task<List<Cliente>> GetAllAsync()
         {

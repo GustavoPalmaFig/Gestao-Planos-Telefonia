@@ -3,14 +3,9 @@ using Gestão_Planos_Telefonia.backend.Repository;
 
 namespace Gestão_Planos_Telefonia.backend.Services
 {
-    public class PlanoService : IPlanoService
+    public class PlanoService(IPlanoRepository _PlanoRepository) : IPlanoService
     {
-        private readonly IPlanoRepository PlanoRepository;
-
-        public PlanoService(IPlanoRepository _PlanoRepository)
-        {
-            PlanoRepository = _PlanoRepository;
-        }
+        private readonly IPlanoRepository PlanoRepository = _PlanoRepository;
 
         public async Task<List<Plano>> GetAllPlanosAsync()
         {
@@ -23,12 +18,13 @@ namespace Gestão_Planos_Telefonia.backend.Services
             return Plano ?? throw new KeyNotFoundException("Plano not found");
         }
 
-        public async Task<Plano> CreatePlanoAsync(Plano Plano)
+        public async Task<Plano> CreatePlanoAsync(Plano plano)
         {
-            return await PlanoRepository.AddAsync(Plano);
+            SetDates(plano);
+            return await PlanoRepository.AddAsync(plano);
         }
 
-        public async Task<Plano> UpdatePlanoAsync(Guid id, Plano Plano)
+        public async Task<Plano> UpdatePlanoAsync(Guid id, Plano plano)
         {
             var dbPlano = await PlanoRepository.GetByIdAsync(id);
             if (dbPlano == null)
@@ -36,16 +32,8 @@ namespace Gestão_Planos_Telefonia.backend.Services
                 throw new KeyNotFoundException("Plano not found");
             }
 
-            //context.Entry(dbDemand).CurrentValues.SetValues(demand);
-
-
-            //dbPlano.Nome = Plano.Nome ?? Plano.Nome;
-            //dbPlano.CPF = Plano.CPF ?? Plano.CPF;
-            //dbPlano.Telefone = Plano.Telefone ?? Plano.Telefone;
-            //dbPlano.Email = Plano.Email ?? Plano.Email;
-
-            //return await _PlanoRepository.UpdateAsync(Plano);
-            return await PlanoRepository.UpdateAsync(dbPlano, Plano);
+            SetDates(plano);
+            return await PlanoRepository.UpdateAsync(dbPlano, plano);
         }
 
         public async Task DeletePlanoAsync(Guid id)
@@ -57,6 +45,12 @@ namespace Gestão_Planos_Telefonia.backend.Services
             }
 
             await PlanoRepository.DeleteAsync(Plano);
+        }
+
+        private static void SetDates(Plano plano)
+        {
+            plano.CreatedAt = DateTime.Now;
+            plano.UpdatedAt = DateTime.Now;
         }
     }
 }

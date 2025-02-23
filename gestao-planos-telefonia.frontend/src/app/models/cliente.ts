@@ -7,4 +7,6 @@ export interface Cliente {
     telefone?: string;
     email?: string;
     clientesPlanos?: ClientePlano[];
+    createdAt?: Date;
+    updatedAt?: Date;
 }
