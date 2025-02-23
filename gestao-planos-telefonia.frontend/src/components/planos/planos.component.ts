@@ -41,7 +41,6 @@ export class PlanosComponent implements OnInit {
   selectedPlanosToDelete!: Plano[] | null;
   expandedRows: { [key: string]: boolean } = {};
 
-  isLoading: boolean = true;
   planoFormDialog: boolean = false;
   submitted = false;
 
@@ -59,10 +58,7 @@ export class PlanosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.planoService.getAllPlanos().subscribe(planos => {
-      this.allPlanos = planos;
-      this.isLoading = false;
-    });
+    this.planoService.getAllPlanos().subscribe(planos => this.allPlanos = planos);
 
     this.primengConfig.setTranslation({
       emptyMessage: 'Nenhum registro encontrado',

@@ -6,9 +6,9 @@
     </div>
     
     <div class="p-toolbar-group-end">
-        <p-button icon="pi pi-home" label="Página Inicial" [raised]="true" [rounded]="true" class="header-button mr-2" (onClick)="navigate('')"/>
-        <p-button icon="pi pi-users" label="Clientes" [raised]="true" class="header-button mr-2" (onClick)="navigate('clientes')"/>
-        <p-button icon="pi pi-phone" label="Planos" [raised]="true" class="header-button" (onClick)="navigate('planos')"/>
+        <p-button icon="pi pi-home" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Tela Inicial" tooltipPosition="left" size="large" (onClick)="navigate('')"/>
+        <p-button icon="pi pi-users" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Clientes" tooltipPosition="left" size="large" (onClick)="navigate('clientes')"/>
+        <p-button icon="pi pi-phone" [rounded]="false" [text]="true" class="header-button" pTooltip="Planos" tooltipPosition="left" size="large" (onClick)="navigate('planos')"/>
     </div>
 </p-toolbar>
 

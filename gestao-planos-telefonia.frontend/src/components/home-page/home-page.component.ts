@@ -77,8 +77,6 @@ export class HomePageComponent implements OnInit{
   pieChart!: PieChartOptions;
   barChart!: BarChartOptions;
 
-  isLoading: boolean = true;
-
   months = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
   availableYears!: { label: string, value: number }[];
   selectedYears: number[] = [new Date().getFullYear()];
@@ -95,8 +93,6 @@ export class HomePageComponent implements OnInit{
       this.calculateAverageAssociatedPlanosClientes();
       this.getAvailableYears();
       this.onYearChange();
-      
-      this.isLoading = false;
     });
   }
 

@@ -14,17 +14,22 @@
 }
 
 .page-padding {
-    padding: 1rem 2rem;
+    padding: 0 2rem;
 }
 
 ::ng-deep {
     .p-toolbar {
         border: unset;
         border-radius: unset;
+        border-bottom: 1px solid #dadada;
     }
 
     .header-button.p-button {
         background-color: #5897fb;
         border-color: #5897fb;
+    }
+
+    .p-toolbar-group-end {
+        margin-right: 2rem;
     }
 }

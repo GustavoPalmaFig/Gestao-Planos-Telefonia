@@ -44,7 +44,6 @@ export class ClientesComponent implements OnInit {
   clienteForm!: FormGroup;
   expandedRows: { [key: string]: boolean } = {};
 
-  isLoading: boolean = true;
   clienteFormDialog: boolean = false;
   submitted: boolean = false;
 
@@ -63,10 +62,7 @@ export class ClientesComponent implements OnInit {
 
   ngOnInit() {
     this.planoService.getAllPlanos().subscribe(planos => this.allPlanos = planos);
-    this.clienteService.getAllClientes().subscribe(clientes => {
-      this.allClientes = clientes;
-      this.isLoading = false;
-    });
+    this.clienteService.getAllClientes().subscribe(clientes => this.allClientes = clientes);
 
     this.primengConfig.setTranslation({
       emptyMessage: 'Nenhum registro encontrado',
