@@ -77,10 +77,10 @@ git clone https://https://github.com/GustavoPalmaFig/Gestao-Planos-Telefonia.git
    ```
 4. Execute a API:
    ```sh
-   dotnet run
+   dotnet run --urls "https://localhost:7020"
    ```
-5. A API estará disponível em: [http://localhost:7020](http://localhost:7020)
-6. A documentação via Swagger está disponível em: [http://localhost:7020/swagger](http://localhost:7020/swagger)
+5. A API estará disponível em: [https://localhost:7020](https://localhost:7020)
+6. A documentação via Swagger está disponível em: [https://localhost:7020/swagger](https://localhost:7020/swagger)
 
 ### **3. Configurar e Executar o Frontend**
 1. Navegue até a pasta do frontend:
