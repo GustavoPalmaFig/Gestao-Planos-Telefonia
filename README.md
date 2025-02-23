@@ -22,6 +22,7 @@ O **Sistema de Gestão de Planos de Telefonia** é uma aplicação web desenvolv
   - Telefone
   - Email
 - Editar e excluir clientes existentes
+- Vincular planos ao cliente durante a criação e edição
 - Listar todos os clientes com busca e filtro por nome ou CPF
 
 ### **Associação de Clientes a Planos**
