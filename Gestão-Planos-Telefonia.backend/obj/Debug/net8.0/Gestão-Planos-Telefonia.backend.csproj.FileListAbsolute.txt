@@ -89,7 +89,6 @@ C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\ob
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Gestão-Planos-Telefonia.backend.props
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Gestão-Planos-Telefonia.backend.props
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\Gest_o-P.B0A35B08.Up2Date
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\Gestão-Planos-Telefonia.backend.dll
 C:\Users\gutof\Projetos\Projeto Angular .NET\Gestão-Planos-Telefonia.backend\obj\Debug\net8.0\refint\Gestão-Planos-Telefonia.backend.dll

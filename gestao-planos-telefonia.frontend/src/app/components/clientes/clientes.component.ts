@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../../app/models/cliente';
-import { ClienteService } from '../../app/services/cliente.service';
+import { Cliente } from '../../models/cliente';
+import { ClienteService } from '../../services/cliente.service';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -13,8 +13,8 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ToastModule } from 'primeng/toast';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TooltipModule } from 'primeng/tooltip';
-import { Plano } from '../../app/models/plano';
-import { PlanoService } from '../../app/services/plano.service';
+import { Plano } from '../../models/plano';
+import { PlanoService } from '../../services/plano.service';
 
 @Component({
   selector: 'app-clientes',
