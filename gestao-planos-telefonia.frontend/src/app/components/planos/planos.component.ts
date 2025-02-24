@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Plano } from '../../app/models/plano';
-import { PlanoService } from '../../app/services/plano.service';
-import { Table, TableModule } from 'primeng/table';
+import { Plano } from '../../models/plano';
+import { PlanoService } from '../../services/plano.service';
+import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';

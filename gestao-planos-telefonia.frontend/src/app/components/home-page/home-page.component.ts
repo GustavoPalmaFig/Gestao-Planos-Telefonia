@@ -1,20 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Cliente } from '../../app/models/cliente';
-import { ClienteService } from '../../app/services/cliente.service';
-import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
-import { ToolbarModule } from 'primeng/toolbar';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
+import { Cliente } from '../../models/cliente';
+import { ClienteService } from '../../services/cliente.service';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ToastModule } from 'primeng/toast';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
-import { Plano } from '../../app/models/plano';
-import { PlanoService } from '../../app/services/plano.service';
+import { Plano } from '../../models/plano';
+import { PlanoService } from '../../services/plano.service';
 import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -24,7 +16,6 @@ import {
   ApexDataLabels,
   ApexPlotOptions,
   ApexYAxis,
-  ApexStroke,
   ApexXAxis,
   ApexTooltip,
   ApexLegend
@@ -53,14 +44,7 @@ export type BarChartOptions = {
   standalone: true,
   imports: [
     CommonModule,
-    TableModule,
-    ButtonModule,
-    ToolbarModule,
-    DialogModule,
-    ConfirmDialogModule,
     FormsModule,
-    ReactiveFormsModule,
-    ToastModule,
     MultiSelectModule,
     TooltipModule,
     NgApexchartsModule
