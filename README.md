@@ -91,11 +91,15 @@ git clone https://https://github.com/GustavoPalmaFig/Gestao-Planos-Telefonia.git
    ```sh
    npm install
    ```
-3. Execute a aplicação:
+   Caso retorne algum erro, utilize o comando:
+    ```sh
+   npm install --legacy-peer-deps
+   ```
+4. Execute a aplicação:
    ```sh
    ng serve
    ```
-4. O frontend estará disponível em: [http://localhost:4200](http://localhost:4200)
+5. O frontend estará disponível em: [http://localhost:4200](http://localhost:4200)
 
 ## Estrutura do Banco de Dados (Modelo UML)
 
