@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\gestao-planos-telefonia.backend.props" />
-</Project>
