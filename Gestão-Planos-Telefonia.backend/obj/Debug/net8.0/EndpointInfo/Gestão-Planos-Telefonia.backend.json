@@ -1,15 +1,13 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Gestão-Planos-Telefonia.backend",
+    "title": "gestao-planos-telefonia.backend",
     "version": "1.0"
   },
   "paths": {
     "/Cliente/GetAllClientes": {
       "get": {
-        "tags": [
-          "Cliente"
-        ],
+        "tags": ["Cliente"],
         "responses": {
           "200": {
             "description": "OK"
@@ -19,9 +17,7 @@
     },
     "/Cliente/GetClienteById/{id}": {
       "get": {
-        "tags": [
-          "Cliente"
-        ],
+        "tags": ["Cliente"],
         "parameters": [
           {
             "name": "id",
@@ -42,9 +38,7 @@
     },
     "/Cliente/CreateCliente": {
       "post": {
-        "tags": [
-          "Cliente"
-        ],
+        "tags": ["Cliente"],
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -78,9 +72,7 @@
     },
     "/Cliente/UpdateCliente/{id}": {
       "put": {
-        "tags": [
-          "Cliente"
-        ],
+        "tags": ["Cliente"],
         "parameters": [
           {
             "name": "id",
@@ -125,9 +117,7 @@
     },
     "/Cliente/DeleteCliente/{id}": {
       "delete": {
-        "tags": [
-          "Cliente"
-        ],
+        "tags": ["Cliente"],
         "parameters": [
           {
             "name": "id",
@@ -148,9 +138,7 @@
     },
     "/Plano/GetAllPlanos": {
       "get": {
-        "tags": [
-          "Plano"
-        ],
+        "tags": ["Plano"],
         "responses": {
           "200": {
             "description": "OK"
@@ -160,9 +148,7 @@
     },
     "/Plano/GetPlanoById/{id}": {
       "get": {
-        "tags": [
-          "Plano"
-        ],
+        "tags": ["Plano"],
         "parameters": [
           {
             "name": "id",
@@ -183,9 +169,7 @@
     },
     "/Plano/CreatePlano": {
       "post": {
-        "tags": [
-          "Plano"
-        ],
+        "tags": ["Plano"],
         "requestBody": {
           "content": {
             "application/json-patch+json": {
@@ -219,9 +203,7 @@
     },
     "/Plano/UpdatePlano/{id}": {
       "put": {
-        "tags": [
-          "Plano"
-        ],
+        "tags": ["Plano"],
         "parameters": [
           {
             "name": "id",
@@ -266,9 +248,7 @@
     },
     "/Plano/DeletePlano/{id}": {
       "delete": {
-        "tags": [
-          "Plano"
-        ],
+        "tags": ["Plano"],
         "parameters": [
           {
             "name": "id",
@@ -291,12 +271,7 @@
   "components": {
     "schemas": {
       "Cliente": {
-        "required": [
-          "cpf",
-          "email",
-          "nome",
-          "telefone"
-        ],
+        "required": ["cpf", "email", "nome", "telefone"],
         "type": "object",
         "properties": {
           "id": {
@@ -366,12 +341,7 @@
         "additionalProperties": false
       },
       "Plano": {
-        "required": [
-          "franquiaDados",
-          "minutosLigacao",
-          "nome",
-          "preco"
-        ],
+        "required": ["franquiaDados", "minutosLigacao", "nome", "preco"],
         "type": "object",
         "properties": {
           "id": {

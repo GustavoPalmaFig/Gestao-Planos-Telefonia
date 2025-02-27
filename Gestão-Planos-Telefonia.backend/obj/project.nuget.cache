@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l+SZgiBHlXU=",
+  "dgSpecHash": "dgaNFigy1Y0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\Gestão-Planos-Telefonia.backend\\Gestão-Planos-Telefonia.backend.csproj",
+  "projectFilePath": "C:\\Users\\gutof\\Projetos\\Projeto Angular .NET\\gestao-planos-telefonia.backend\\gestao-planos-telefonia.backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gutof\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.3.0\\microsoft.aspnetcore.cors.2.3.0.nupkg.sha512",
     "C:\\Users\\gutof\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.0\\microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512",

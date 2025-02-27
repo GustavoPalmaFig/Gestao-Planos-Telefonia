@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "Gestão-Planos-Telefonia.backend/1.0.0": {
+      "gestao-planos-telefonia.backend/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Cors": "2.3.0",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.0",
@@ -15,7 +15,7 @@
           "Swashbuckle.AspNetCore": "6.6.2"
         },
         "runtime": {
-          "Gestão-Planos-Telefonia.backend.dll": {}
+          "gestao-planos-telefonia.backend.dll": {}
         }
       },
       "Microsoft.AspNetCore.Cors/2.3.0": {
@@ -293,7 +293,7 @@
     }
   },
   "libraries": {
-    "Gestão-Planos-Telefonia.backend/1.0.0": {
+    "gestao-planos-telefonia.backend/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
