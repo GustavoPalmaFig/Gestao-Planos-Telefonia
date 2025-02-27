@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Gestão_Planos_Telefonia.backend</RootNamespace>
+    <RootNamespace>gestao-planos-telefonia.backend</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

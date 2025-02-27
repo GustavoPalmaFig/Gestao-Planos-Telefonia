@@ -1,8 +1,8 @@
 {
   "Version": 1,
   "Hash": "9Nd+cPrV9os/rkn+dG/ONdTN423nOGYXBQ7+YBQ0ejA=",
-  "Source": "Gestão-Planos-Telefonia.backend",
-  "BasePath": "_content/Gestão-Planos-Telefonia.backend",
+  "Source": "gestao-planos-telefonia.backend",
+  "BasePath": "_content/gestao-planos-telefonia.backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
