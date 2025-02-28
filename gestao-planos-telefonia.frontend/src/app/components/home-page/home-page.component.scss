@@ -65,8 +65,14 @@
 .chart-filter {
   width: 35%;
   justify-content: end;
-  display: flex
-;
+  display: flex;
+}
+
+.no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: grey;
 }
 
 @media (max-width: 768px) {

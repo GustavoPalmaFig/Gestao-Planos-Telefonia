@@ -12,6 +12,8 @@
     </div>
 </p-toolbar>
 
+<i *ngIf="loadingService.loading$ | async" class="pi pi-spin pi-spinner loading-icon"></i>
+
 <div class="page-padding page-background">
     <router-outlet></router-outlet>
 </div>

@@ -17,6 +17,15 @@
     padding: 0 2rem;
 }
 
+.loading-icon {
+    font-size: 7rem;
+    top: 50%;
+    left: 45%;
+    position: absolute;
+    color: #1c88b7;
+    z-index: 1;
+}
+
 ::ng-deep {
     .p-toolbar {
         border: unset;
