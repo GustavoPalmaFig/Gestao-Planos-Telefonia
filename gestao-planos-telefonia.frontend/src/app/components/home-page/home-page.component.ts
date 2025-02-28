@@ -20,6 +20,7 @@ import {
   ApexTooltip,
   ApexLegend
 } from "ng-apexcharts";
+import { LoadingService } from '../../services/loading.service';
 
 export type PieChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -65,9 +66,12 @@ export class HomePageComponent implements OnInit{
   availableYears!: { label: string, value: number }[];
   selectedYears: number[] = [new Date().getFullYear()];
   
-  constructor(private clienteService: ClienteService, private planoService: PlanoService, private router: Router) {}
+  constructor(private clienteService: ClienteService, private planoService: PlanoService, private router: Router,
+    public loadingService: LoadingService
+  ) {}
 
   ngOnInit() {
+    this.loadingService.show();
     forkJoin({
       planos: this.planoService.getAllPlanos(),
       clientes: this.clienteService.getAllClientes()
@@ -78,6 +82,7 @@ export class HomePageComponent implements OnInit{
       this.getAvailableYears();
       this.onYearChange();
     });
+    this.loadingService.hide();
   }
 
   calculateAverageAssociatedPlanosClientes() {
@@ -197,5 +202,9 @@ export class HomePageComponent implements OnInit{
     this.selectedClientes = this.allClientes.filter(c => c.createdAt && this.selectedYears.includes(new Date(c.createdAt).getFullYear()));
     this.preparePieChartData();
     this.prepareBarChartData();
+  }
+
+  checkIfBarHasData(): boolean {
+    return this.barChart?.series?.some(series => series.data.some(d => typeof d === 'number' && d > 0));
   }
 }
