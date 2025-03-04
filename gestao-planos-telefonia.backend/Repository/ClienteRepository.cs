@@ -1,49 +1,49 @@
-﻿using Gestão_Planos_Telefonia.backend.Models;
+﻿using Gestão_Planos_Telefonia.backend;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
-namespace Gestão_Planos_Telefonia.backend.Repository
+namespace Repository;
+
+public class ClienteRepository(TelefoniaContext _context) : IClienteRepository
 {
-    public class ClienteRepository(TelefoniaContext _context) : IClienteRepository
+    private readonly TelefoniaContext context = _context;
+
+    public async Task<List<Cliente>> GetAllAsync()
     {
-        private readonly TelefoniaContext context = _context;
+        return await context.Clientes.Include(c => c.ClientesPlanos).ThenInclude(cp => cp.Plano).ToListAsync();
+    }
 
-        public async Task<List<Cliente>> GetAllAsync()
+    public async Task<Cliente> GetByIdAsync(int id)
+    {
+        return await context.Clientes.Include(c => c.ClientesPlanos).ThenInclude(cp => cp.Plano).FirstAsync(c => c.Id == id);
+    }
+
+    public async Task<Cliente> AddAsync(Cliente cliente)
+    {
+        await context.Clientes.AddAsync(cliente);
+        await context.SaveChangesAsync();
+        return cliente;
+    }
+
+    public async Task<Cliente> UpdateAsync(Cliente dbCliente, Cliente cliente)
+    {
+        context.Entry(dbCliente).CurrentValues.SetValues(cliente);
+
+        dbCliente.ClientesPlanos.Clear();
+        dbCliente.ClientesPlanos.AddRange(cliente.ClientesPlanos);
+
+        await context.SaveChangesAsync();
+        return cliente;
+    }
+
+    public async Task DeleteAsync(Cliente cliente)
+    {
+        if (cliente.ClientesPlanos?.Count > 0)
         {
-            return await context.Clientes.Include(c => c.ClientesPlanos).ThenInclude(cp => cp.Plano).ToListAsync();
+            context.ClientePlanos.RemoveRange(cliente.ClientesPlanos);
         }
 
-        public async Task<Cliente> GetByIdAsync(Guid id)
-        {
-            return await context.Clientes.Include(c => c.ClientesPlanos).ThenInclude(cp => cp.Plano).FirstAsync(c => c.Id == id);
-        }
-
-        public async Task<Cliente> AddAsync(Cliente cliente)
-        {
-            await context.Clientes.AddAsync(cliente);
-            await context.SaveChangesAsync();
-            return cliente;
-        }
-
-        public async Task<Cliente> UpdateAsync(Cliente dbCliente, Cliente cliente)
-        {
-            context.Entry(dbCliente).CurrentValues.SetValues(cliente);
-
-            dbCliente.ClientesPlanos.Clear();
-            dbCliente.ClientesPlanos.AddRange(cliente.ClientesPlanos);
-
-            await context.SaveChangesAsync();
-            return cliente;
-        }
-
-        public async Task DeleteAsync(Cliente cliente)
-        {
-            if (cliente.ClientesPlanos?.Count > 0)
-            {
-                context.ClientePlanos.RemoveRange(cliente.ClientesPlanos);
-            }
-
-            context.Clientes.Remove(cliente);
-            await context.SaveChangesAsync();
-        }
+        context.Clientes.Remove(cliente);
+        await context.SaveChangesAsync();
     }
 }

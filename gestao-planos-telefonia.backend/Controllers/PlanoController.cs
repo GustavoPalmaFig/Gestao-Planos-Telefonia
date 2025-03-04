@@ -1,8 +1,8 @@
-using Gestão_Planos_Telefonia.backend.Models;
-using Gestão_Planos_Telefonia.backend.Services;
 using Microsoft.AspNetCore.Mvc;
+using Models;
+using Services;
 
-namespace Gestão_Planos_Telefonia.backend.Controllers;
+namespace Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -32,7 +32,7 @@ public class PlanoController : ControllerBase
 
     [HttpGet]
     [Route("GetPlanoById/{id}")]
-    public async Task<IActionResult> GetPlanoById(Guid id)
+    public async Task<IActionResult> GetPlanoById(int id)
     {
         try
         {
@@ -62,7 +62,7 @@ public class PlanoController : ControllerBase
 
     [HttpPut]
     [Route("UpdatePlano/{id}")]
-    public async Task<IActionResult> UpdatePlano(Guid id, [FromBody] Plano Plano)
+    public async Task<IActionResult> UpdatePlano(int id, [FromBody] Plano Plano)
     {
         try
         {
@@ -77,7 +77,7 @@ public class PlanoController : ControllerBase
 
     [HttpDelete]
     [Route("DeletePlano/{id}")]
-    public async Task<IActionResult> DeletePlano(Guid id)
+    public async Task<IActionResult> DeletePlano(int id)
     {
         try
         {

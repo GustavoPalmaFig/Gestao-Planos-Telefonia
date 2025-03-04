@@ -1,13 +1,12 @@
-﻿using Gestão_Planos_Telefonia.backend.Models;
+﻿using Models;
 
-namespace Gestão_Planos_Telefonia.backend.Services
+namespace Services;
+
+public interface IPlanoService
 {
-    public interface IPlanoService
-    {
-        Task<List<Plano>> GetAllPlanosAsync();
-        Task<Plano> GetPlanoByIdAsync(Guid id);
-        Task<Plano> CreatePlanoAsync(Plano Plano);
-        Task<Plano> UpdatePlanoAsync(Guid id, Plano Plano);
-        Task DeletePlanoAsync(Guid id);
-    }
+    Task<List<Plano>> GetAllPlanosAsync();
+    Task<Plano> GetPlanoByIdAsync(int id);
+    Task<Plano> CreatePlanoAsync(Plano Plano);
+    Task<Plano> UpdatePlanoAsync(int id, Plano Plano);
+    Task DeletePlanoAsync(int id);
 }
