@@ -24,6 +24,7 @@
         <h5 class="subtitle chart-subtitle">Selecione à direita os anos de análise para filtrar os gráficos e interaja passando o mouse sobre cada um deles.</h5>
         <div class="chart-filter">
             <p-multiSelect 
+                *ngIf="availableYears.length > 0"
                 [options]="availableYears" 
                 [(ngModel)]="selectedYears" 
                 (onChange)="onYearChange()" 
