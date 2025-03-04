@@ -15,6 +15,8 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TooltipModule } from 'primeng/tooltip';
 import { Plano } from '../../models/plano';
 import { PlanoService } from '../../services/plano.service';
+import { LoadingService } from '../../services/loading.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-clientes',
@@ -49,7 +51,7 @@ export class ClientesComponent implements OnInit {
 
   constructor(private clienteService: ClienteService, private planoService: PlanoService, private confirmationService: ConfirmationService,
     private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig,
-    public maskPipe: NgxMaskPipe) {
+    public maskPipe: NgxMaskPipe, public loadingService: LoadingService) {
       this.clienteForm = this.fb.group({
         id: [null],
         nome: ['', Validators.required],
@@ -61,8 +63,15 @@ export class ClientesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.planoService.getAllPlanos().subscribe(planos => this.allPlanos = planos);
-    this.clienteService.getAllClientes().subscribe(clientes => this.allClientes = clientes);
+    this.loadingService.show();
+    forkJoin({
+      planos: this.planoService.getAllPlanos(),
+      clientes: this.clienteService.getAllClientes()
+    }).subscribe(({ planos, clientes }) => {
+      this.allPlanos = planos;
+      this.allClientes = clientes;
+      this.loadingService.hide();
+    });
 
     this.primengConfig.setTranslation({
       emptyMessage: 'Nenhum registro encontrado',

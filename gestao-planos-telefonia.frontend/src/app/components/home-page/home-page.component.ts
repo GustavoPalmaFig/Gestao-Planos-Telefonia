@@ -81,8 +81,8 @@ export class HomePageComponent implements OnInit{
       this.calculateAverageAssociatedPlanosClientes();
       this.getAvailableYears();
       this.onYearChange();
+      this.loadingService.hide();
     });
-    this.loadingService.hide();
   }
 
   calculateAverageAssociatedPlanosClientes() {
