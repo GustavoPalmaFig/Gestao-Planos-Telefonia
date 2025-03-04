@@ -1,8 +1,7 @@
 <p class="title">Gestão de Planos de Telefonia</p>
+<h5 class="subtitle">Nesta página estão disponíveis os dados de Clientes, Planos e suas associações.</h5>
 
 <ng-container *ngIf="!(loadingService.loading$ | async)">
-    <h5 class="subtitle">Nesta página estão disponíveis os dados de Clientes, Planos e suas associações.</h5>
-
     <div class="cards-flex-container">
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'clientes', title: 'Clientes Cadastrados', icon: 'user', bigNumber: allClientes.length}"></ng-template>
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'planos', title: 'Planos Disponíveis', icon: 'phone', bigNumber: allPlanos.length}"></ng-template>

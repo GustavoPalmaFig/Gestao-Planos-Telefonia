@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ToastModule } from 'primeng/toast';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask  } from 'ngx-mask';
 import { TooltipModule } from 'primeng/tooltip';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-planos',
@@ -46,7 +47,7 @@ export class PlanosComponent implements OnInit {
 
   constructor(private planoService: PlanoService, private confirmationService: ConfirmationService,
     private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig,
-    public maskPipe: NgxMaskPipe) {
+    public maskPipe: NgxMaskPipe, public loadingService: LoadingService) {
       this.planoForm = this.fb.group({
         id: [null],
         nome: ['', Validators.required],
@@ -58,7 +59,11 @@ export class PlanosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.planoService.getAllPlanos().subscribe(planos => this.allPlanos = planos);
+    this.loadingService.show();
+    this.planoService.getAllPlanos().subscribe(planos => {
+      this.allPlanos = planos;
+      this.loadingService.hide();
+    });
 
     this.primengConfig.setTranslation({
       emptyMessage: 'Nenhum registro encontrado',

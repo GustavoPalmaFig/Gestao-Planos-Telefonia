@@ -3,257 +3,259 @@
 <p class="title">Listagem de Planos</p>
 <h5 class="subtitle">Nesta página estão disponíveis os dados de todos os Planos cadastrados no sistema.</h5>
 
-<p-toolbar styleClass="my-4">
-    <ng-template pTemplate="left">
-        <p-button 
-            severity="success" 
-            label="Novo" 
-            icon="pi pi-plus" 
-            class="mr-2" 
-            (onClick)="openPlanoFormDialog()" />
-        <p-button 
-            severity="danger" 
-            label="Deletar" 
-            icon="pi pi-trash" 
-            (onClick)="deleteSelectedPlanos()" 
-            [disabled]="!selectedPlanosToDelete || !selectedPlanosToDelete.length" />
-    </ng-template>
-</p-toolbar>
-<div class="card">
-    <p-table
-        #planosTable
-        [value]="allPlanos"
-        dataKey="id"
-        styleClass="p-datatable-striped" 
-        [tableStyle]="{ 'min-width': '50rem' }"
-        [rows]="5"
-        [(selection)]="selectedPlanosToDelete"
-        [rowHover]="true"
-        [paginator]="true"
-        [rowsPerPageOptions]="[5, 10, 20]"
-        currentPageReportTemplate="{first}/{last} de {totalRecords}"
-        [expandedRowKeys]="expandedRows">
-        <ng-template pTemplate="caption">
-            <div class="flex">
-                <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash" (onClick)="planosTable.clear();" />
-            </div>
+<ng-container *ngIf="!(loadingService.loading$ | async)">
+    <p-toolbar styleClass="my-4">
+        <ng-template pTemplate="left">
+            <p-button 
+                severity="success" 
+                label="Novo" 
+                icon="pi pi-plus" 
+                class="mr-2" 
+                (onClick)="openPlanoFormDialog()" />
+            <p-button 
+                severity="danger" 
+                label="Deletar" 
+                icon="pi pi-trash" 
+                (onClick)="deleteSelectedPlanos()" 
+                [disabled]="!selectedPlanosToDelete || !selectedPlanosToDelete.length" />
         </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th><p-tableHeaderCheckbox /></th>
-                <th>
-                    <div class="flex align-items-center">
-                        Nome
-                        <p-columnFilter field="nome" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                            <ng-template pTemplate="header">
-                                <div class="px-3 pt-3 pb-0">
-                                    <span class="font-bold">Filtrar por nome</span>
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                <p-multiSelect 
-                                    [ngModel]="value"
-                                    [options]="getFilterOptionsByField('nome')"
-                                    label=""
-                                    placeholder="Selecionar nome" 
-                                    (onChange)="filter($event.value)" 
-                                    [showClear]="true"
-                                    appendTo="body">
-                                </p-multiSelect>
-                            </ng-template>
-                        </p-columnFilter>
-                    </div>
-                </th>
-                <th>
-                    <div class="flex align-items-center">
-                        Preço
-                        <p-columnFilter field="preco" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
-                            <ng-template pTemplate="header">
-                                <div class="px-3 pt-3 pb-0">
-                                    <span class="font-bold">Filtrar por Preço</span>
-                                </div>
-                            </ng-template>
-                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                <p-multiSelect 
-                                    [ngModel]="value" 
-                                    [options]="getFilterOptionsByField('preco')"
-                                    placeholder="Selecionar Preço" 
-                                    (onChange)="filter($event.value)"
-                                    [showClear]="true"
-                                    appendTo="body">
-                                    <ng-template let-option pTemplate="item">
-                                        <div><span>{{ option | currency : 'BRL' }}</span></div>
-                                    </ng-template>
-                                </p-multiSelect>
-                            </ng-template>
-                        </p-columnFilter>
-                    </div>
-                </th>
-                <th>Franquia de Dados</th>
-                <th>Minutos de Ligação</th>
-                <th></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-plano let-expanded="expanded">
-            <tr>
-                <td><p-tableCheckbox [value]="plano"/></td>
-                <td>{{ plano.nome }}</td>
-                <td>{{ plano.preco | currency : 'R$ ' }}</td>
-                <td>{{ plano.franquiaDados }} GB</td>
-                <td>{{ plano.minutosLigacao }}</td>
-                <td>
-                    <span pTooltip="{{ !plano.clientesPlanos || !plano.clientesPlanos.length ? 'Este plano não possui nenhum cliente associado' : 'Clique para visualizar os clientes que possuem este plano' }}" tooltipPosition="left">
+    </p-toolbar>
+    <div class="card">
+        <p-table
+            #planosTable
+            [value]="allPlanos"
+            dataKey="id"
+            styleClass="p-datatable-striped" 
+            [tableStyle]="{ 'min-width': '50rem' }"
+            [rows]="5"
+            [(selection)]="selectedPlanosToDelete"
+            [rowHover]="true"
+            [paginator]="true"
+            [rowsPerPageOptions]="[5, 10, 20]"
+            currentPageReportTemplate="{first}/{last} de {totalRecords}"
+            [expandedRowKeys]="expandedRows">
+            <ng-template pTemplate="caption">
+                <div class="flex">
+                    <p-button label="Limpar" [outlined]="true" icon="pi pi-filter-slash" (onClick)="planosTable.clear();" />
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th><p-tableHeaderCheckbox /></th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Nome
+                            <p-columnFilter field="nome" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                <ng-template pTemplate="header">
+                                    <div class="px-3 pt-3 pb-0">
+                                        <span class="font-bold">Filtrar por nome</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-multiSelect 
+                                        [ngModel]="value"
+                                        [options]="getFilterOptionsByField('nome')"
+                                        label=""
+                                        placeholder="Selecionar nome" 
+                                        (onChange)="filter($event.value)" 
+                                        [showClear]="true"
+                                        appendTo="body">
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Preço
+                            <p-columnFilter field="preco" matchMode="in" display="menu" [showMatchModes]="false" [showOperator]="false" [showAddButton]="false">
+                                <ng-template pTemplate="header">
+                                    <div class="px-3 pt-3 pb-0">
+                                        <span class="font-bold">Filtrar por Preço</span>
+                                    </div>
+                                </ng-template>
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-multiSelect 
+                                        [ngModel]="value" 
+                                        [options]="getFilterOptionsByField('preco')"
+                                        placeholder="Selecionar Preço" 
+                                        (onChange)="filter($event.value)"
+                                        [showClear]="true"
+                                        appendTo="body">
+                                        <ng-template let-option pTemplate="item">
+                                            <div><span>{{ option | currency : 'BRL' }}</span></div>
+                                        </ng-template>
+                                    </p-multiSelect>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>Franquia de Dados</th>
+                    <th>Minutos de Ligação</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-plano let-expanded="expanded">
+                <tr>
+                    <td><p-tableCheckbox [value]="plano"/></td>
+                    <td>{{ plano.nome }}</td>
+                    <td>{{ plano.preco | currency : 'R$ ' }}</td>
+                    <td>{{ plano.franquiaDados }} GB</td>
+                    <td>{{ plano.minutosLigacao }}</td>
+                    <td>
+                        <span pTooltip="{{ !plano.clientesPlanos || !plano.clientesPlanos.length ? 'Este plano não possui nenhum cliente associado' : 'Clique para visualizar os clientes que possuem este plano' }}" tooltipPosition="left">
+                            <p-button 
+                                icon="pi pi-user" 
+                                class="mr-2" 
+                                [rounded]="true" 
+                                [outlined]="!this.expandedRows[plano.id]" 
+                                severity="info" 
+                                [disabled]="!plano.clientesPlanos || !plano.clientesPlanos.length"
+                                [pRowToggler]="plano"/>
+                        </span>
                         <p-button 
-                            icon="pi pi-user" 
+                            icon="pi pi-pencil" 
                             class="mr-2" 
                             [rounded]="true" 
-                            [outlined]="!this.expandedRows[plano.id]" 
-                            severity="info" 
-                            [disabled]="!plano.clientesPlanos || !plano.clientesPlanos.length"
-                            [pRowToggler]="plano"/>
-                    </span>
-                    <p-button 
-                        icon="pi pi-pencil" 
-                        class="mr-2" 
-                        [rounded]="true" 
-                        [outlined]="planoForm.get('id')?.value != plano.id" 
-                        severity="success" 
-                        (onClick)="openPlanoFormDialog(plano)" />
-                    <p-button 
-                        icon="pi pi-trash" 
-                        severity="danger" 
-                        [rounded]="true" 
-                        [outlined]="!(selectedPlanosToDelete && selectedPlanosToDelete.length === 1 && selectedPlanosToDelete[0] === plano)" 
-                        (onClick)="deleteSelectedPlanos(plano)" />
-                </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="rowexpansion" let-plano>
-            <tr>
-                <td colspan="7">
-                    <div class="p-3">
-                        <p-table [value]="plano.clientesPlanos" dataKey="id">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>CPF</th>
-                                    <th>Telefone</th>
-                                    <th>Email</th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-clientesPlanos>
-                                <tr>
-                                    <td>{{ clientesPlanos.cliente.nome }}</td>
-                                    <td>{{ maskPipe.transform(clientesPlanos.cliente.cpf, '000.000.000-00') }}</td>
-                                    <td>{{ maskPipe.transform(clientesPlanos.cliente.telefone, '(00) 00000-0000')}}</td>
-                                    <td>{{ clientesPlanos.cliente.email}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
+                            [outlined]="planoForm.get('id')?.value != plano.id" 
+                            severity="success" 
+                            (onClick)="openPlanoFormDialog(plano)" />
+                        <p-button 
+                            icon="pi pi-trash" 
+                            severity="danger" 
+                            [rounded]="true" 
+                            [outlined]="!(selectedPlanosToDelete && selectedPlanosToDelete.length === 1 && selectedPlanosToDelete[0] === plano)" 
+                            (onClick)="deleteSelectedPlanos(plano)" />
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="rowexpansion" let-plano>
+                <tr>
+                    <td colspan="7">
+                        <div class="p-3">
+                            <p-table [value]="plano.clientesPlanos" dataKey="id">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Telefone</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-clientesPlanos>
+                                    <tr>
+                                        <td>{{ clientesPlanos.cliente.nome }}</td>
+                                        <td>{{ maskPipe.transform(clientesPlanos.cliente.cpf, '000.000.000-00') }}</td>
+                                        <td>{{ maskPipe.transform(clientesPlanos.cliente.telefone, '(00) 00000-0000')}}</td>
+                                        <td>{{ clientesPlanos.cliente.email}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    
+    <p-dialog 
+        [(visible)]="planoFormDialog" 
+        [style]="{ width: '450px' }" 
+        [header]="planoForm.get('id')?.value ? 'Edição' : 'Cadastro' + ' Plano'" 
+        [modal]="true" 
+        styleClass="p-fluid"
+        (onHide)="resetForm()">
+            <ng-template pTemplate="content">
+                <form [formGroup]="planoForm" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input
+                            type="text" 
+                            pInputText 
+                            id="nome" 
+                            formControlName="nome" 
+                            autofocus 
+                            class="form-control"
+                            [ngClass]="{'is-invalid': submitted && planoForm.controls['nome'].invalid}"
+                            required/>
+                        <small class="p-error" *ngIf="submitted && planoForm.controls['nome'].invalid">
+                            Nome é obrigatório.
+                        </small>
                     </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
-
-<p-dialog 
-    [(visible)]="planoFormDialog" 
-    [style]="{ width: '450px' }" 
-    [header]="planoForm.get('id')?.value ? 'Edição' : 'Cadastro' + ' Plano'" 
-    [modal]="true" 
-    styleClass="p-fluid"
-    (onHide)="resetForm()">
-        <ng-template pTemplate="content">
-            <form [formGroup]="planoForm" class="needs-validation" novalidate>
-                <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input
-                        type="text" 
-                        pInputText 
-                        id="nome" 
-                        formControlName="nome" 
-                        autofocus 
-                        class="form-control"
-                        [ngClass]="{'is-invalid': submitted && planoForm.controls['nome'].invalid}"
-                        required/>
-                    <small class="p-error" *ngIf="submitted && planoForm.controls['nome'].invalid">
-                        Nome é obrigatório.
-                    </small>
-                </div>
-                <div class="mb-3">
-                    <label for="preco" class="form-label">Preço</label>
-                    <input 
-                        type="text" 
-                        pInputText 
-                        id="preco" 
-                        formControlName="preco" 
-                        [mask]="'separator.2'"
-                        prefix="R$ "
-                        [thousandSeparator]="'.'"
-                        [decimalMarker]="','"
-                        placeholder="R$ 0,00"
-                        autofocus 
-                        class="form-control"
-                        [ngClass]="{'is-invalid': submitted && planoForm.controls['preco'].invalid}"
-                        required/>
-                    <small class="p-error" *ngIf="submitted && planoForm.controls['preco'].invalid">
-                        Preço é obrigatório.
-                    </small>
-                </div>
-                <div class="mb-3">
-                    <label for="franquiaDados" class="form-label">Franquia de Dados</label>
-                    <input 
-                        type="text" 
-                        pInputText 
-                        id="franquiaDados"
-                        formControlName="franquiaDados" 
-                        [mask]="'separator.0'"
-                        suffix=" GB"
-                        [thousandSeparator]="'.'"
-                        placeholder="0 GB"
-                        autofocus 
-                        class="form-control"
-                        [ngClass]="{'is-invalid': submitted && planoForm.controls['franquiaDados'].invalid}"
-                        required/>
-                    <small class="p-error" *ngIf="submitted && planoForm.controls['franquiaDados'].invalid">
-                        Franquia de Dados é obrigatório.
-                    </small>
-                </div>
-                <div class="mb-3">
-                    <label for="minutosLigacao" class="form-label">Minutos Ligação</label>
-                    <input 
-                        type="text" 
-                        pInputText 
-                        id="minutosLigacao" 
-                        formControlName="minutosLigacao" 
-                        [mask]="'separator.0'"
-                        [thousandSeparator]="'.'"
-                        autofocus 
-                        class="form-control"
-                        [ngClass]="{'is-invalid': submitted && planoForm.controls['minutosLigacao'].invalid}"
-                        required/>
-                    <small class="p-error" *ngIf="submitted && planoForm.controls['minutosLigacao'].invalid">
-                        Minutos Ligação é obrigatório.
-                    </small>
-                </div>
-            </form>
-        </ng-template>
-
-        <ng-template pTemplate="footer">
-            <p-button 
-                label="Cancelar" 
-                icon="pi pi-times" 
-                [text]="true"
-                severity="danger"
-                (onClick)="hideDialog()" />
-            <p-button
-                label="Salvar" 
-                icon="pi pi-check" 
-                [text]="true" 
-                severity="success"
-                (onClick)="savePlano()" />
-        </ng-template>
-</p-dialog>
-
-<p-confirmDialog [style]="{ width: '450px' }" />
+                    <div class="mb-3">
+                        <label for="preco" class="form-label">Preço</label>
+                        <input 
+                            type="text" 
+                            pInputText 
+                            id="preco" 
+                            formControlName="preco" 
+                            [mask]="'separator.2'"
+                            prefix="R$ "
+                            [thousandSeparator]="'.'"
+                            [decimalMarker]="','"
+                            placeholder="R$ 0,00"
+                            autofocus 
+                            class="form-control"
+                            [ngClass]="{'is-invalid': submitted && planoForm.controls['preco'].invalid}"
+                            required/>
+                        <small class="p-error" *ngIf="submitted && planoForm.controls['preco'].invalid">
+                            Preço é obrigatório.
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="franquiaDados" class="form-label">Franquia de Dados</label>
+                        <input 
+                            type="text" 
+                            pInputText 
+                            id="franquiaDados"
+                            formControlName="franquiaDados" 
+                            [mask]="'separator.0'"
+                            suffix=" GB"
+                            [thousandSeparator]="'.'"
+                            placeholder="0 GB"
+                            autofocus 
+                            class="form-control"
+                            [ngClass]="{'is-invalid': submitted && planoForm.controls['franquiaDados'].invalid}"
+                            required/>
+                        <small class="p-error" *ngIf="submitted && planoForm.controls['franquiaDados'].invalid">
+                            Franquia de Dados é obrigatório.
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="minutosLigacao" class="form-label">Minutos Ligação</label>
+                        <input 
+                            type="text" 
+                            pInputText 
+                            id="minutosLigacao" 
+                            formControlName="minutosLigacao" 
+                            [mask]="'separator.0'"
+                            [thousandSeparator]="'.'"
+                            autofocus 
+                            class="form-control"
+                            [ngClass]="{'is-invalid': submitted && planoForm.controls['minutosLigacao'].invalid}"
+                            required/>
+                        <small class="p-error" *ngIf="submitted && planoForm.controls['minutosLigacao'].invalid">
+                            Minutos Ligação é obrigatório.
+                        </small>
+                    </div>
+                </form>
+            </ng-template>
+    
+            <ng-template pTemplate="footer">
+                <p-button 
+                    label="Cancelar" 
+                    icon="pi pi-times" 
+                    [text]="true"
+                    severity="danger"
+                    (onClick)="hideDialog()" />
+                <p-button
+                    label="Salvar" 
+                    icon="pi pi-check" 
+                    [text]="true" 
+                    severity="success"
+                    (onClick)="savePlano()" />
+            </ng-template>
+    </p-dialog>
+    
+    <p-confirmDialog [style]="{ width: '450px' }" />
+</ng-container>
