@@ -1,23 +1,36 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Gestão_Planos_Telefonia.backend.Models
+namespace Models;
+
+[Table("Plano")]
+public class Plano
 {
-    public class Plano
-    {
-        [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
-        [Required]
-        public string Nome { get; set; } = string.Empty;
-        [Required]
-        public decimal Preco { get; set; }
-        [Required]
-        public int FranquiaDados { get; set; }  // GB
-        [Required]
-        public int MinutosLigacao { get; set; }
+    [Key]
+    [Column("id")]
+    public int Id { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+    [Required]
+    [Column("nome")]
+    public string Nome { get; set; } = string.Empty;
 
-        public List<ClientePlano> ClientesPlanos { get; set; } = new();
-    }
+    [Required]
+    [Column("preco")]
+    public decimal Preco { get; set; }
+
+    [Required]
+    [Column("franquiaDados")]
+    public int FranquiaDados { get; set; }  // GB
+
+    [Required]
+    [Column("minutosLigacao")]
+    public int MinutosLigacao { get; set; }
+
+    [Column("createAt")]
+    public DateTime CreatedAt { get; set; }
+
+    [Column("updatedAt")]
+    public DateTime UpdatedAt { get; set; }
+
+    public List<ClientePlano> ClientesPlanos { get; set; } = new();
 }

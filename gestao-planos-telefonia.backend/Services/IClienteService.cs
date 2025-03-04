@@ -1,13 +1,12 @@
-﻿using Gestão_Planos_Telefonia.backend.Models;
+﻿using Models;
 
-namespace Gestão_Planos_Telefonia.backend.Services
+namespace Services;
+
+public interface IClienteService
 {
-    public interface IClienteService
-    {
-        Task<List<Cliente>> GetAllClientesAsync();
-        Task<Cliente> GetClienteByIdAsync(Guid id);
-        Task<Cliente> CreateClienteAsync(Cliente cliente);
-        Task<Cliente> UpdateClienteAsync(Guid id, Cliente cliente);
-        Task DeleteClienteAsync(Guid id);
-    }
+    Task<List<Cliente>> GetAllClientesAsync();
+    Task<Cliente> GetClienteByIdAsync(int id);
+    Task<Cliente> CreateClienteAsync(Cliente cliente);
+    Task<Cliente> UpdateClienteAsync(int id, Cliente cliente);
+    Task DeleteClienteAsync(int id);
 }

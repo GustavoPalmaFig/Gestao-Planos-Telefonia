@@ -1,5 +1,5 @@
-﻿using Gestão_Planos_Telefonia.backend.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace Gestão_Planos_Telefonia.backend
 {
