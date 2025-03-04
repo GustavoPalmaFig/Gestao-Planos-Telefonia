@@ -1,9 +1,10 @@
 using Gestão_Planos_Telefonia.backend;
-using Gestão_Planos_Telefonia.backend.Repository;
-using Gestão_Planos_Telefonia.backend.Services;
 using Microsoft.EntityFrameworkCore;
+using Repository;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var dataBaseConnectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 
 builder.Services.AddCors(options =>
 {
@@ -14,12 +15,11 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TelefoniaContext>(options =>
-    options.UseInMemoryDatabase("GestaoPlanosTelefoniaDB"));
+    options.UseSqlite(dataBaseConnectionString));
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
@@ -28,7 +28,6 @@ builder.Services.AddScoped<IPlanoRepository, PlanoRepository>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
