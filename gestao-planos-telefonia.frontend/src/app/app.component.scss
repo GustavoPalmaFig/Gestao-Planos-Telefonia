@@ -1,5 +1,5 @@
 
-.fixed-header {
+.app-header {
     position: fixed;
     top: 0;
     left: 0;
@@ -27,15 +27,20 @@
 }
 
 ::ng-deep {
-    .p-toolbar {
+    .app-header .p-toolbar {
         border: unset;
         border-radius: unset;
         border-bottom: 1px solid #dadada;
+        padding: 0.2rem
     }
 
     .header-button.p-button {
         background-color: #5897fb;
         border-color: #5897fb;
+    }
+
+    .p-toolbar-group-start {
+        margin-left: 1.5rem;
     }
 
     .p-toolbar-group-end {
