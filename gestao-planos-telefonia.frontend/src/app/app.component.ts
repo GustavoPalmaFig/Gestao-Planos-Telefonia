@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
@@ -17,13 +17,10 @@ import { CommonModule } from '@angular/common';
   providers: [MessageService]
 })
 export class AppComponent {
-  constructor(private router: Router, public loadingService: LoadingService, private cdr: ChangeDetectorRef) {}
+  private router = inject(Router);
+  protected loadingService = inject(LoadingService);
 
   navigate(address: string) {
     this.router.navigate([address]);
-  }
-
-  ngAfterViewChecked() {
-    this.cdr.detectChanges();
   }
 }
