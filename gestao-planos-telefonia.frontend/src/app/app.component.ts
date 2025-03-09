@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
 import { LoadingService } from './services/loading.service';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +17,16 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./app.component.scss'],
   providers: [MessageService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   private router = inject(Router);
   protected loadingService = inject(LoadingService);
+  protected themeService = inject(ThemeService);
 
   navigate(address: string) {
     this.router.navigate([address]);
+  }
+
+  ngOnInit() {
+    this.themeService.setTheme();
   }
 }

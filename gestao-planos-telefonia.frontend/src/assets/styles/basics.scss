@@ -1,3 +1,5 @@
+@import '../../app/themes.scss';
+
 ::ng-deep {
   .p-toast {
     max-width: 300px;
@@ -16,20 +18,25 @@
     border: 1px solid red;
   }
 
-  .p-multiselect {
+  .p-multiselect,
+  .p-multiselect-panel,
+  .p-multiselect-panel .p-multiselect-header,
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
     width: 100%;
+    background: var(--bkg-input-color);
+    color: var(--input-color);
   }
 }
 
 .title {
   font-size: 36px;
   font-weight: bold;
-  color: #5897fb;
+  color: var(--main-color);
   margin-top: 15px;
 }
 
 .subtitle {
-  color: grey;
+  color: var(--text-color);
 }
 
 .clickable {
