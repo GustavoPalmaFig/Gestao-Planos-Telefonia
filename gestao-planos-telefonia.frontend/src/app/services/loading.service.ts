@@ -8,7 +8,6 @@ export class LoadingService {
 
   show() {
     this.loading.set(true);
-    console.log(this.loading)
   }
 
   hide() {
