@@ -1,10 +1,41 @@
 @use '../../../assets/styles/basics.scss';
+@import '../../themes.scss';
 
 .card {
-    background: #fff;
-    border: solid 1px #e2e8f0;
+    background: var(--bkg-card-color);
+    border: solid 1px var(--border-color);
     padding: 2rem;
     border-radius: 10px;
     margin-bottom: 1rem;
 }
 
+::ng-deep {
+    .p-toolbar {
+        background: var(--bkg-card-color);
+        border: solid 1px var(--border-color);
+    }
+
+    .p-datatable .p-datatable-header {
+        background: var(--bkg-card-color);
+        color: var(--text-color);
+        border: solid 1px var(--border-color);
+    }
+
+    .p-datatable .p-datatable-thead > tr > th {
+        background: var(--bkg-card-color);
+        color: var(--text-color);
+        border: solid 1px var(--border-color);
+    }
+
+    .p-datatable .p-datatable-tbody > tr {
+        background: var(--bkg-card-color);
+        color: var(--text-color);
+        border: solid 1px var(--border-color);
+    }
+
+    .p-paginator {
+        background: var(--bkg-card-color);
+        color: var(--text-color);
+        border: solid 1px var(--border-color);
+    }
+}

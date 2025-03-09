@@ -118,7 +118,7 @@ export class HomePageComponent implements OnInit{
         fontFamily: 'Segoe UI',
         fontWeight: 600,
         labels: {
-          colors: planoCounts.map(pc => '#808080'),
+          colors: planoCounts.map(pc => '#fafafa'),
           useSeriesColors: false
         }
       },
@@ -187,7 +187,7 @@ export class HomePageComponent implements OnInit{
 
   getStyle(): { colors: string, fontWeight: string, fontSize: string } {
     return {
-      colors: '#747678',
+      colors: '#fafafa',
       fontWeight: 'bold',
       fontSize: '14px'
     };

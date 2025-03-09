@@ -1,24 +1,24 @@
 @use '../../../assets/styles/basics.scss';
 
-.cards-flex-container{
+.cards-flex-container {
   display: flex;
   column-gap: 1%;
   margin: 1.5rem 0;
 }
   
-.big-number{
+.big-number {
   font-size: 48px;
   font-weight: bold;
-  color: #5897fb;
+  color: var(--main-color);
   margin-bottom: 30px;
 
   &-card {
-    border: 1px solid #dadada;
+    border: 1px solid var(--border-color);
     padding: .5rem 1rem;
     display: flex;
     width: 100%;
     border-radius: 7px;
-    background-color: white;
+    background-color: var(--bkg-card-color);
   }
 
   &-title{
@@ -29,22 +29,22 @@
 
   &-icon {
     font-size: 28px;
-    color: #7ccbed;
-    border-color: #5897fb;
+    color: var(--card-icon-color);
+    border-color: var(--main-color);
   }
 }
 
 .charts-section {
-  border-top: 2px solid #1c88b7;
+  border-top: 2px solid var(--main-color);
   padding-top: 1.5rem;
   display: flex;
 }
 
 .chart-card {
-  border: 1px solid #dadada;
+  border: 1px solid var(--border-color);
   border-radius: 7px;
   padding: 1.5rem;
-  background-color: white;
+  background-color: var(--bkg-card-color);
   width: 100%;
   justify-content: center;
 }
@@ -52,7 +52,7 @@
 .chart-title {
   font-size: 22px;
   font-weight: bold;
-  color: #5897fb;
+  color: var(--main-color);;
   display: flex;
   justify-content: center;
 }
@@ -72,7 +72,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: grey;
+  color: var(--text-color);
 }
 
 @media (max-width: 768px) {
