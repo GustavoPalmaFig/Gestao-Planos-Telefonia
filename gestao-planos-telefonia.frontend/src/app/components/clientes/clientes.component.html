@@ -3,7 +3,7 @@
 <p class="title">Listagem de Clientes</p>
 <h5 class="subtitle">Nesta página estão disponíveis os dados de todos os Clientes cadastrados no sistema.</h5>
 
-<ng-container *ngIf="!(loadingService.loading$ | async)">
+<ng-container *ngIf="!loadingService.loading()">
     <p-toolbar styleClass="my-4">
         <ng-template pTemplate="left">
             <p-button 
