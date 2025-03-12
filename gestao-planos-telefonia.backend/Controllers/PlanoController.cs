@@ -69,9 +69,9 @@ public class PlanoController : ControllerBase
             var updatedPlano = await PlanoService.UpdatePlanoAsync(id, Plano);
             return Ok(updatedPlano);
         }
-        catch (KeyNotFoundException)
+        catch (Exception ex)
         {
-            return NotFound();
+            return BadRequest("Erro:" + ex.Message);
         }
     }
 
@@ -84,9 +84,9 @@ public class PlanoController : ControllerBase
             await PlanoService.DeletePlanoAsync(id);
             return Ok();
         }
-        catch (KeyNotFoundException)
+        catch (Exception ex)
         {
-            return NotFound();
+            return BadRequest("Erro:" + ex.Message);
         }
     }
 }

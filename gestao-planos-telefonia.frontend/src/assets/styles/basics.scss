@@ -21,7 +21,8 @@
   .p-multiselect,
   .p-multiselect-panel,
   .p-multiselect-panel .p-multiselect-header,
-  .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item,
+  .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext {
     width: 100%;
     background: var(--bkg-input-color);
     color: var(--input-color);
@@ -29,7 +30,7 @@
 }
 
 .title {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: bold;
   color: var(--main-color);
   margin-top: 15px;

@@ -69,9 +69,9 @@ public class ClienteController : ControllerBase
             var updatedCliente = await clienteService.UpdateClienteAsync(id, cliente);
             return Ok(updatedCliente);
         }
-        catch (KeyNotFoundException)
+        catch (Exception ex)
         {
-            return NotFound();
+            return BadRequest("Erro:" + ex.Message);
         }
     }
 
@@ -84,9 +84,9 @@ public class ClienteController : ControllerBase
             await clienteService.DeleteClienteAsync(id);
             return Ok();
         }
-        catch (KeyNotFoundException)
+        catch (Exception ex)
         {
-            return NotFound();
+            return BadRequest("Erro:" + ex.Message);
         }
     }
 }

@@ -16,7 +16,7 @@ export class PlanoService {
     return this.apiService.get<Plano[]>(`${this.apiRoot}/GetAllPlanos`);
   }
 
-  getPlanoById(id: string): Observable<Plano> {
+  getPlanoById(id: number): Observable<Plano> {
     return this.apiService.get<Plano>(`${this.apiRoot}/GetPlanoById/${id}`);
   }
 
@@ -29,7 +29,7 @@ export class PlanoService {
     return this.apiService.put<Plano>(`${this.apiRoot}/UpdatePlano/${plano.id}`, plano);
   }
 
-  deletePlano(id: string): Observable<void> {
+  deletePlano(id: number): Observable<void> {
     return this.apiService.delete<void>(`${this.apiRoot}/DeletePlano/${id}`);
   }
 }

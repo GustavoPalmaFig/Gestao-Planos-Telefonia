@@ -99,7 +99,7 @@ export class ClientesComponent implements OnInit {
     if (this.clienteForm.valid) {
       const cliente = this.clienteForm.value as Cliente;
 
-      const selectedPlanosIds = this.clienteForm.get('clientesPlanos')?.value as string[];
+      const selectedPlanosIds = this.clienteForm.get('clientesPlanos')?.value as number[];
 
       if (selectedPlanosIds?.length > 0) {
         cliente.clientesPlanos = selectedPlanosIds.map(planoId => {

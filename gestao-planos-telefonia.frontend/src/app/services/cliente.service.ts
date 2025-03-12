@@ -16,7 +16,7 @@ export class ClienteService {
     return this.apiService.get<Cliente[]>(`${this.apiRoot}/GetAllClientes`);
   }
 
-  getClienteById(id: string): Observable<Cliente> {
+  getClienteById(id: number): Observable<Cliente> {
     return this.apiService.get<Cliente>(`${this.apiRoot}/GetClienteById/${id}`);
   }
 
@@ -29,7 +29,7 @@ export class ClienteService {
     return this.apiService.put<Cliente>(`${this.apiRoot}/UpdateCliente/${cliente.id}`, cliente);
   }
 
-  deleteCliente(id: string): Observable<void> {
+  deleteCliente(id: number): Observable<void> {
     return this.apiService.delete<void>(`${this.apiRoot}/DeleteCliente/${id}`);
   }
 }

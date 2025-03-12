@@ -1,7 +1,7 @@
 import { ClientePlano } from "./clientePlano";
 
 export interface Plano {
-    id?: string;
+    id?: number;
     nome?: string;
     preco?: number;
     franquiaDados?: number;
