@@ -118,8 +118,7 @@ export class HomePageComponent implements OnInit{
         fontFamily: 'Segoe UI',
         fontWeight: 600,
         labels: {
-          colors: planoCounts.map(pc => '#fafafa'),
-          useSeriesColors: false
+          useSeriesColors: true
         }
       },
       responsive: [{

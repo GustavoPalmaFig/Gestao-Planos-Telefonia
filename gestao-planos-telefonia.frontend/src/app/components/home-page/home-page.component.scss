@@ -9,7 +9,7 @@
 .big-number {
   font-size: 48px;
   font-weight: bold;
-  color: var(--main-color);
+  color: #5897fb;
   margin-bottom: 30px;
 
   &-card {
@@ -24,12 +24,12 @@
   &-title{
     font-size: 22px;
     font-weight: 500;
-    color: grey;
+    color: #5897fb;
   }
 
   &-icon {
     font-size: 28px;
-    color: var(--card-icon-color);
+    color: #5897fb;
     border-color: var(--main-color);
   }
 }

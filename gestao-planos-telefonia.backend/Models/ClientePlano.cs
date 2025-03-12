@@ -6,7 +6,7 @@ namespace Models;
 public class ClientePlano
 {
     [Column("id")]
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     [Column("clienteId")]
     public int ClienteId { get; set; }
@@ -17,5 +17,5 @@ public class ClientePlano
     public Plano? Plano { get; set; }
 
     [Column("createdAt")]
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
 }

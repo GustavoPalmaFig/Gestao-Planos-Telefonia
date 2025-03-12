@@ -2,10 +2,10 @@ import { Cliente } from "./cliente";
 import { Plano } from "./plano";
 
 export interface ClientePlano {
-    id?: string;
-    clienteId?: string;
+    id?: number;
+    clienteId?: number;
     cliente?: Cliente;
-    planoId?: string;
+    planoId?: number;
     plano?: Plano;
     createdAt?: Date;
     updatedAt?: Date;
