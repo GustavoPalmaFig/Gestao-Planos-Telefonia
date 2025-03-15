@@ -1,4 +1,10 @@
 {
+  "builds": [
+    {
+      "src": "dist/gestao-planos-telefonia.frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
