@@ -7,8 +7,7 @@
     "types": []
   },
   "files": [
-    "src/main.ts",
-    "src/polyfilss.ts"
+    "src/main.ts"
   ],
   "include": [
     "src/**/*.d.ts"
