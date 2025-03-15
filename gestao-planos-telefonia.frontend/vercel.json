@@ -3,12 +3,15 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/static-build",
+      "use": "@vercel/node",
       "config": {
         "distDir": "dist/browser"
       }
     }
   ],
+  "scripts": {
+    "build": "npx npm-force-resolutions && npm install --legacy-peer-deps && npm run build"
+  },
   "routes": [
     {
       "src": "/(.*)",
