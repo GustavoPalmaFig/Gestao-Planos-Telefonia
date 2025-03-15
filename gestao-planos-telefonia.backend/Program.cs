@@ -19,7 +19,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TelefoniaContext>(options =>
-    options.UseSqlite(dataBaseConnectionString));
+    options.UseSqlServer(dataBaseConnectionString));
 
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
