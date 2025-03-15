@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { environment } from '../../environments/environment';
 import { Cliente } from '../models/cliente';
@@ -9,8 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ClienteService {
   private apiRoot = environment.apiRoot + '/Cliente';
-
-  constructor(private apiService: ApiService) { }
+  private apiService = inject(ApiService);
 
   getAllClientes(): Observable<Cliente[]> {
     return this.apiService.get<Cliente[]>(`${this.apiRoot}/GetAllClientes`);
