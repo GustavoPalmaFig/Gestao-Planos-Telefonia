@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { environment } from '../../environments/environment';
 import { Plano } from '../models/plano';
@@ -9,8 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class PlanoService {
   private apiRoot = environment.apiRoot + '/Plano';
-
-  constructor(private apiService: ApiService) { }
+  private apiService = inject(ApiService);
 
   getAllPlanos(): Observable<Plano[]> {
     return this.apiService.get<Plano[]>(`${this.apiRoot}/GetAllPlanos`);

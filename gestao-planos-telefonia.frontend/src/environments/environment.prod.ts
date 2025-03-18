@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    apiRoot: 'https://localhost:7020',
+    apiRoot: 'https://gestao-planos-telefonia-api-b2bmb9dubhgrbjhv.brazilsouth-01.azurewebsites.net',
 };
   

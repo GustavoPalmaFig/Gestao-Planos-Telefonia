@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Cliente } from '../../models/cliente';
 import { ClienteService } from '../../services/cliente.service';
 import { TableModule } from 'primeng/table';
@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
@@ -43,24 +43,27 @@ export class ClientesComponent implements OnInit {
   allPlanos: Plano[] = [];
   allClientes: Cliente[] = [];
   selectedClientesToDelete!: Cliente[] | null;
-  clienteForm!: FormGroup;
   expandedRows: { [key: string]: boolean } = {};
 
   clienteFormDialog: boolean = false;
   submitted: boolean = false;
 
-  constructor(private clienteService: ClienteService, private planoService: PlanoService, private confirmationService: ConfirmationService,
-    private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig,
-    public maskPipe: NgxMaskPipe, public loadingService: LoadingService) {
-      this.clienteForm = this.fb.group({
-        id: [null],
-        nome: ['', Validators.required],
-        cpf: ['', Validators.required],
-        telefone: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        clientesPlanos: []
-      });
-  }
+  private clienteService = inject(ClienteService);
+  private planoService = inject(PlanoService);
+  private confirmationService = inject(ConfirmationService);
+  private messageService = inject(MessageService);
+  private fb = inject(FormBuilder);
+  protected maskPipe = inject(NgxMaskPipe);
+  protected loadingService = inject(LoadingService);
+
+  clienteForm: FormGroup = this.fb.group({
+    id: [null],
+    nome: ['', Validators.required],
+    cpf: ['', Validators.required],
+    telefone: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    clientesPlanos: []
+  });
 
   ngOnInit() {
     this.loadingService.show();
@@ -71,12 +74,6 @@ export class ClientesComponent implements OnInit {
       this.allPlanos = planos;
       this.allClientes = clientes;
       this.loadingService.hide();
-    });
-
-    this.primengConfig.setTranslation({
-      emptyMessage: 'Nenhum registro encontrado',
-      apply: 'Aplicar',
-      clear: 'Limpar'
     });
   }
 
