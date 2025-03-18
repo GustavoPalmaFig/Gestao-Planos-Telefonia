@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Plano } from '../../models/plano';
 import { PlanoService } from '../../services/plano.service';
 import { TableModule } from 'primeng/table';
@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationService, MessageService, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
@@ -38,37 +38,33 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class PlanosComponent implements OnInit {
   allPlanos: Plano[] = [];
-  planoForm!: FormGroup;
   selectedPlanosToDelete!: Plano[] | null;
   expandedRows: { [key: string]: boolean } = {};
 
   planoFormDialog: boolean = false;
   submitted = false;
 
-  constructor(private planoService: PlanoService, private confirmationService: ConfirmationService,
-    private messageService: MessageService, private fb: FormBuilder, private primengConfig: PrimeNGConfig,
-    public maskPipe: NgxMaskPipe, public loadingService: LoadingService) {
-      this.planoForm = this.fb.group({
-        id: [null],
-        nome: ['', Validators.required],
-        preco: ['', Validators.required],
-        franquiaDados: ['', Validators.required],
-        minutosLigacao: ['', [Validators.required]],
-        planosPlanos: [[]]
-      });
-  }
+  private planoService = inject(PlanoService);
+  private confirmationService = inject(ConfirmationService);
+  private messageService = inject(MessageService);
+  private fb = inject(FormBuilder);
+  protected maskPipe = inject(NgxMaskPipe);
+  protected loadingService = inject(LoadingService);
+
+  planoForm: FormGroup = this.fb.group({
+    id: [null],
+    nome: ['', Validators.required],
+    preco: ['', Validators.required],
+    franquiaDados: ['', Validators.required],
+    minutosLigacao: ['', [Validators.required]],
+    planosPlanos: [[]]
+  });
 
   ngOnInit() {
     this.loadingService.show();
     this.planoService.getAllPlanos().subscribe(planos => {
       this.allPlanos = planos;
       this.loadingService.hide();
-    });
-
-    this.primengConfig.setTranslation({
-      emptyMessage: 'Nenhum registro encontrado',
-      apply: 'Aplicar',
-      clear: 'Limpar'
     });
   }
 
