@@ -1,10 +1,16 @@
 import { Routes } from '@angular/router';
-import { PlanosComponent } from '../app/components/planos/planos.component';
-import { ClientesComponent } from '../app/components/clientes/clientes.component';
-import { HomePageComponent } from '../app/components/home-page/home-page.component';
 
 export const routes: Routes = [
-  { path: 'planos', component: PlanosComponent },
-  { path: 'clientes', component: ClientesComponent },
-  { path: '', component: HomePageComponent }
+  {
+    path: '',
+    loadComponent: () => import('./components/home-page/home-page.component').then(m => m.HomePageComponent)
+  },
+  {
+    path: 'planos',
+    loadComponent: () => import('./components/planos/planos.component').then(m => m.PlanosComponent)
+  },
+  {
+    path: 'clientes',
+    loadComponent: () => import('./components/clientes/clientes.component').then(m => m.ClientesComponent)
+  },
 ];
