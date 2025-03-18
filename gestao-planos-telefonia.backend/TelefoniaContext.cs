@@ -15,8 +15,6 @@ namespace Gestão_Planos_Telefonia.backend
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ClientePlano>().HasKey(cp => new { cp.ClienteId, cp.PlanoId });
-
             modelBuilder.Entity<ClientePlano>()
                 .HasOne(cp => cp.Cliente)
                 .WithMany(c => c.ClientesPlanos)
