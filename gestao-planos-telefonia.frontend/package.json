@@ -20,7 +20,6 @@
     "@angular/router": "^19.1.0",
     "@primeng/themes": "^19.0.9",
     "apexcharts": "^4.5.0",
-    "bootstrap": "^5.3.3",
     "ng-apexcharts": "^1.15.0",
     "ngx-mask": "^19.0.6",
     "primeicons": "^7.0.0",
