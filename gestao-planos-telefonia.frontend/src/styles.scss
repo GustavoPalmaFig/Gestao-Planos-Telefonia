@@ -1,8 +1,11 @@
-@use "../node_modules/primeicons/primeicons.css";
-@use '../src/app/themes.scss';
+@use "tailwindcss";
+@use "primeicons/primeicons.css";
+@use 'app/themes.scss';
 
 body {
     background-color: var(--bkg-color);
 }
 
-teste
+h5 {
+    font-size: 1.2rem;
+}
