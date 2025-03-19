@@ -122,13 +122,16 @@ export class HomePageComponent implements OnInit{
         }
       },
       responsive: [{
-        breakpoint: 480,
+        breakpoint: 1000,
         options: {
           chart: {
-            width: 200
+            width: 200,
+            heigh: 200
           },
           legend: {
-            position: 'bottom'
+            offsetY: -80,
+            position: 'bottom',
+            fontSize: '12px',
           }
         }
       }]
@@ -186,7 +189,7 @@ export class HomePageComponent implements OnInit{
 
   getStyle(): { colors: string, fontWeight: string, fontSize: string } {
     return {
-      colors: '#fafafa',
+      colors: '#808080',
       fontWeight: 'bold',
       fontSize: '14px'
     };

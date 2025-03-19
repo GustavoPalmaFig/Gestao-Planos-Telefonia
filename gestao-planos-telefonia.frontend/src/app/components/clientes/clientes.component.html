@@ -168,70 +168,54 @@
             <ng-template pTemplate="content">
                 <form [formGroup]="clienteForm" class="needs-validation" novalidate>
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Nome</label>
+                        <label for="nome">Nome</label>
                         <input
                             type="text" 
                             pInputText 
-                            id="nome" 
                             formControlName="nome" 
-                            autofocus 
-                            class="form-control"
                             [ngClass]="{'is-invalid': submitted && clienteForm.controls['nome'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && clienteForm.controls['nome'].invalid">
+                        />
+                        <small class="is-invalid" *ngIf="submitted && clienteForm.controls['nome'].invalid">
                             Nome é obrigatório.
                         </small>
                     </div>
                     <div class="mb-3">
-                        <label for="cpf" class="form-label">CPF</label>
-                        <input 
-                            type="text" 
-                            pInputText 
-                            id="cpf" 
+                        <label for="cpf">CPF</label>
+                        <p-inputmask
+                            mask="999.999.999-99" 
                             formControlName="cpf" 
-                            [mask]="'000.000.000-00'"
-                            autofocus 
-                            class="form-control"
-                            [ngClass]="{'is-invalid': submitted && clienteForm.controls['cpf'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && clienteForm.controls['cpf'].invalid">
+                            [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['cpf'].invalid}"
+                        />
+                        <small class="is-invalid" *ngIf="submitted && clienteForm.controls['cpf'].invalid">
                             CPF é obrigatório.
                         </small>
                     </div>
                     <div class="mb-3">
-                        <label for="telefone" class="form-label">Telefone</label>
-                        <input 
-                            type="text" 
-                            pInputText 
-                            id="telefone" 
+                        <label for="telefone">Telefone</label>
+                        <p-inputmask 
                             formControlName="telefone"
-                            [mask]="'(00) 00000-0000'"
-                            autofocus 
-                            class="form-control"
-                            [ngClass]="{'is-invalid': submitted && clienteForm.controls['telefone'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && clienteForm.controls['telefone'].invalid">
+                            mask="(99) 99999-9999"
+                            [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['telefone'].invalid}"
+                        />
+                        <small class="is-invalid" *ngIf="submitted && clienteForm.controls['telefone'].invalid">
                             Telefone é obrigatório.
                         </small>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
+                        <label for="email">Email</label>
                         <input 
                             type="email" 
                             pInputText 
-                            id="email" 
                             formControlName="email"
-                            autofocus 
-                            class="form-control"
                             [ngClass]="{'is-invalid': submitted && clienteForm.controls['email'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && clienteForm.controls['email'].invalid">
+                        />
+                        <small class="is-invalid" *ngIf="submitted && clienteForm.controls['email'].invalid">
                             Email é obrigatório.
                         </small>
                     </div>
     
                     <div class="mb-3">
-                        <label for="planosAssociados" class="form-label">Planos Associados</label>
+                        <label for="planosAssociados">Planos Associados</label>
                         <p-multiSelect 
                             formControlName="clientesPlanos"
                             [options]="allPlanos"

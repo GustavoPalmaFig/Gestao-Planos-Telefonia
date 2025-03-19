@@ -168,73 +168,50 @@
             <ng-template pTemplate="content">
                 <form [formGroup]="planoForm" class="needs-validation" novalidate>
                     <div class="mb-3">
-                        <label for="nome" class="form-label">Nome</label>
+                        <label for="nome">Nome</label>
                         <input
                             type="text" 
                             pInputText 
-                            id="nome" 
                             formControlName="nome" 
-                            autofocus 
-                            class="form-control"
                             [ngClass]="{'is-invalid': submitted && planoForm.controls['nome'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && planoForm.controls['nome'].invalid">
+                        />
+                        <small class="is-invalid" *ngIf="submitted && planoForm.controls['nome'].invalid">
                             Nome é obrigatório.
                         </small>
                     </div>
                     <div class="mb-3">
-                        <label for="preco" class="form-label">Preço</label>
-                        <input 
-                            type="text" 
-                            pInputText 
-                            id="preco" 
-                            formControlName="preco" 
-                            [mask]="'separator.2'"
-                            prefix="R$ "
-                            [thousandSeparator]="'.'"
-                            [decimalMarker]="','"
-                            placeholder="R$ 0,00"
-                            autofocus 
-                            class="form-control"
-                            [ngClass]="{'is-invalid': submitted && planoForm.controls['preco'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && planoForm.controls['preco'].invalid">
+                        <label for="preco">Preço</label>
+                        <p-inputnumber 
+                            formControlName="preco"
+                            mode="currency"
+                            currency="BRL"
+                            locale="pt-BR"
+                            [ngClass]="{'ng-invalid ng-dirty': submitted && planoForm.controls['preco'].invalid}"
+                        />
+                        <small class="is-invalid" *ngIf="submitted && planoForm.controls['preco'].invalid">
                             Preço é obrigatório.
                         </small>
                     </div>
                     <div class="mb-3">
-                        <label for="franquiaDados" class="form-label">Franquia de Dados</label>
-                        <input 
-                            type="text" 
-                            pInputText 
-                            id="franquiaDados"
-                            formControlName="franquiaDados" 
-                            [mask]="'separator.0'"
+                        <label for="franquiaDados">Franquia de Dados</label>
+                        <p-inputnumber 
+                            formControlName="franquiaDados"
                             suffix=" GB"
-                            [thousandSeparator]="'.'"
-                            placeholder="0 GB"
-                            autofocus 
-                            class="form-control"
-                            [ngClass]="{'is-invalid': submitted && planoForm.controls['franquiaDados'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && planoForm.controls['franquiaDados'].invalid">
+                            [ngClass]="{'ng-invalid ng-dirty': submitted && planoForm.controls['franquiaDados'].invalid}"
+                        />
+                        <small class="is-invalid" *ngIf="submitted && planoForm.controls['franquiaDados'].invalid">
                             Franquia de Dados é obrigatório.
                         </small>
                     </div>
                     <div class="mb-3">
-                        <label for="minutosLigacao" class="form-label">Minutos Ligação</label>
+                        <label for="minutosLigacao">Minutos Ligação</label>
                         <input 
                             type="text" 
                             pInputText 
-                            id="minutosLigacao" 
                             formControlName="minutosLigacao" 
-                            [mask]="'separator.0'"
-                            [thousandSeparator]="'.'"
-                            autofocus 
-                            class="form-control"
                             [ngClass]="{'is-invalid': submitted && planoForm.controls['minutosLigacao'].invalid}"
-                            required/>
-                        <small class="p-error" *ngIf="submitted && planoForm.controls['minutosLigacao'].invalid">
+                        />
+                        <small class="is-invalid" *ngIf="submitted && planoForm.controls['minutosLigacao'].invalid">
                             Minutos Ligação é obrigatório.
                         </small>
                     </div>
