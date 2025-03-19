@@ -11,7 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TooltipModule } from 'primeng/tooltip';
 import { Plano } from '../../models/plano';
 import { PlanoService } from '../../services/plano.service';
@@ -33,7 +33,6 @@ import { InputMaskModule } from 'primeng/inputmask';
     ReactiveFormsModule,
     ToastModule,
     MultiSelectModule,
-    NgxMaskDirective,
     TooltipModule,
     InputTextModule,
     InputMaskModule 
