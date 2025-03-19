@@ -17,7 +17,8 @@ import { Plano } from '../../models/plano';
 import { PlanoService } from '../../services/plano.service';
 import { LoadingService } from '../../services/loading.service';
 import { forkJoin } from 'rxjs';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
 @Component({
   selector: 'app-clientes',
   standalone: true,
@@ -33,7 +34,9 @@ import { forkJoin } from 'rxjs';
     ToastModule,
     MultiSelectModule,
     NgxMaskDirective,
-    TooltipModule
+    TooltipModule,
+    InputTextModule,
+    InputMaskModule 
   ],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],

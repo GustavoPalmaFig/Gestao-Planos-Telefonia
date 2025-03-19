@@ -18,6 +18,10 @@
     border: 1px solid red;
   }
 
+  .p-inputtext, .p-inputnumber {
+    width: 100%;
+  }
+
   .p-multiselect,
   .p-multiselect-panel,
   .p-multiselect-panel .p-multiselect-header,
@@ -45,4 +49,16 @@
   &:hover {
     filter: brightness(110%) !important;
   }
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: .5rem;
+}
+
+.is-invalid {
+  border-color: red;
+  color: red;
 }
