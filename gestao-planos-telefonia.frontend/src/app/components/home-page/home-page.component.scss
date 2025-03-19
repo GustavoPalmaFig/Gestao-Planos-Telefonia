@@ -34,10 +34,12 @@
   }
 }
 
-.charts-section {
+.charts-section-header {
   border-top: 2px solid var(--main-color);
   padding-top: 1.5rem;
   display: flex;
+  column-gap: 5vw;
+  justify-content: space-between;
 }
 
 .chart-card {
@@ -46,7 +48,6 @@
   padding: 1.5rem;
   background-color: var(--bkg-card-color);
   width: 100%;
-  justify-content: center;
 }
 
 .chart-title {
@@ -58,14 +59,7 @@
 }
 
 .chart-subtitle {
-  width: 65%;
   text-align: justify;
-}
-
-.chart-filter {
-  width: 35%;
-  justify-content: end;
-  display: flex;
 }
 
 .no-data {

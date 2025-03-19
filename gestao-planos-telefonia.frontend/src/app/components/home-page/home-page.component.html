@@ -20,7 +20,7 @@
         </div>
     </ng-template>
 
-    <div class="charts-section">
+    <div class="charts-section-header">
         <h5 class="subtitle chart-subtitle">Selecione à direita os anos de análise para filtrar os gráficos e interaja passando o mouse sobre cada um deles.</h5>
         <div class="chart-filter">
             <p-multiSelect 
@@ -39,8 +39,8 @@
     </div>
 
     <div class="cards-flex-container">
-        <div class="chart-card" style="display: grid;">
-            <p class="chart-title">Proporção de Clientes Associados a Cada Plano</p>
+        <div class="chart-card" style="display: grid; justify-items: center;">
+            <p class="chart-title mb-8">Proporção de Clientes Associados a Cada Plano</p>
             <apx-chart
                 *ngIf="pieChart && pieChart.series.length > 0; else noDataTemplate"
                 [series]="pieChart.series" 
@@ -51,7 +51,7 @@
             </apx-chart>
         </div>
         <div class="chart-card">
-            <p class="chart-title">Clientes cadastrados por mês</p>
+            <p class="chart-title mb-8">Clientes cadastrados por mês</p>
             <apx-chart 
             *ngIf="checkIfBarHasData(); else noDataTemplate"
             [series]="barChart.series"
