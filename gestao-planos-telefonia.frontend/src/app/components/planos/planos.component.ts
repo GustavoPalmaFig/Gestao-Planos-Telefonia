@@ -11,9 +11,11 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask  } from 'ngx-mask';
+import { NgxMaskPipe, provideNgxMask  } from 'ngx-mask';
 import { TooltipModule } from 'primeng/tooltip';
 import { LoadingService } from '../../services/loading.service';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-planos',
@@ -29,8 +31,9 @@ import { LoadingService } from '../../services/loading.service';
     ReactiveFormsModule,
     ToastModule,
     MultiSelectModule,
-    NgxMaskDirective,
-    TooltipModule
+    TooltipModule,
+    InputTextModule,
+    InputNumberModule 
   ],
   templateUrl: './planos.component.html',
   styleUrls: ['./planos.component.scss'],

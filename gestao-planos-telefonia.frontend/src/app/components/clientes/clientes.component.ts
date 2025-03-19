@@ -11,13 +11,14 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { TooltipModule } from 'primeng/tooltip';
 import { Plano } from '../../models/plano';
 import { PlanoService } from '../../services/plano.service';
 import { LoadingService } from '../../services/loading.service';
 import { forkJoin } from 'rxjs';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
 @Component({
   selector: 'app-clientes',
   standalone: true,
@@ -32,8 +33,9 @@ import { forkJoin } from 'rxjs';
     ReactiveFormsModule,
     ToastModule,
     MultiSelectModule,
-    NgxMaskDirective,
-    TooltipModule
+    TooltipModule,
+    InputTextModule,
+    InputMaskModule 
   ],
   templateUrl: './clientes.component.html',
   styleUrls: ['./clientes.component.scss'],

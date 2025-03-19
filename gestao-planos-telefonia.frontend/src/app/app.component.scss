@@ -47,4 +47,14 @@
     .p-toolbar-group-end {
         margin-right: 2rem;
     }
+    
+    @media (max-width: 768px) {
+        .p-toolbar-group-start {
+            margin: .5rem;
+        }
+
+        .p-toolbar-group-end {
+            margin-right: unset;
+        }
+    }
 }

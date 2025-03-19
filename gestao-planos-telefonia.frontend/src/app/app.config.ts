@@ -19,8 +19,7 @@ export const appConfig: ApplicationConfig = {
         options: {
           cssLayer: {
             name: 'primeng',
-            // order: 'bootstrap, primeng'
-            order: 'primeng'
+            order: 'theme, base, primeng'
           }
         }   
       },
