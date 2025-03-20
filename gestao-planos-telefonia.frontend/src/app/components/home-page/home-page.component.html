@@ -1,26 +1,12 @@
 <p class="title">Gestão de Planos de Telefonia</p>
 <h5 class="subtitle">Nesta página estão disponíveis os dados de Clientes, Planos e suas associações.</h5>
 
-<ng-container *ngIf="!loadingService.loading()">
+@defer (when !isLoading) {
     <div class="cards-flex-container">
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'clientes', title: 'Clientes Cadastrados', icon: 'user', bigNumber: allClientes.length}"></ng-template>
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'planos', title: 'Planos Disponíveis', icon: 'phone', bigNumber: allPlanos.length}"></ng-template>
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {title: 'Média Planos/Clientes', icon: 'flag', bigNumber: averageAssociatedPlanosClientes.toFixed(2)}"></ng-template>
     </div>
-
-    <ng-template #bigNumberTemplate let-pageRedirect="pageRedirect" let-title="title" let-icon="icon" let-bigNumber="bigNumber">
-        <p-card class="card w-full" (click)="navigate(pageRedirect)" [ngClass]="{'clickable': pageRedirect}" [pTooltip]="pageRedirect ? 'Acessar ' + title : ''" tooltipPosition="top">
-            <div class="flex">
-                <div class="w-9/10">
-                    <div class="big-number"><span>{{bigNumber}}</span></div>
-                    <div class="big-number-title">
-                        <span>{{title}}</span>
-                    </div>
-                </div>
-                <em [class]="'big-number-icon pi pi-' + icon"></em>
-            </div>
-        </p-card>
-    </ng-template>
 
     <div class="charts-section-header">
         <h5 class="subtitle chart-subtitle">Selecione à direita os anos de análise para filtrar os gráficos e interaja passando o mouse sobre cada um deles.</h5>
@@ -88,4 +74,38 @@
             </ng-template>
         </p-card>
     </div>
-</ng-container>
+} @placeholder {
+    <div class="cards-flex-container">
+        <ng-template *ngTemplateOutlet="bigNumberTemplate;"></ng-template>
+        <ng-template *ngTemplateOutlet="bigNumberTemplate;"></ng-template>
+        <ng-template *ngTemplateOutlet="bigNumberTemplate;"></ng-template>
+    </div>
+
+    <div class="charts-section-header"></div>
+
+    <div class="cards-flex-container">
+        <p-card class="card flex-1 placeholder">
+            <ng-template #content>
+            </ng-template>
+        </p-card>
+        
+        <p-card class="card flex-1 placeholder">
+            <ng-template #content>
+            </ng-template>
+        </p-card>
+    </div>
+}
+
+<ng-template #bigNumberTemplate let-pageRedirect="pageRedirect" let-title="title" let-icon="icon" let-bigNumber="bigNumber">
+    <p-card class="card w-full" (click)="navigate(pageRedirect)" [ngClass]="{'clickable': pageRedirect, 'placeholder': !title}" [pTooltip]="pageRedirect ? 'Acessar ' + title : ''" tooltipPosition="top">
+        <div class="flex">
+            <div class="w-9/10">
+                <div class="big-number"><span>{{bigNumber}}</span></div>
+                <div class="big-number-title">
+                    <span>{{title}}</span>
+                </div>
+            </div>
+            <em [class]="'skeleton-box big-number-icon pi pi-' + icon"></em>
+        </div>
+    </p-card>
+</ng-template>

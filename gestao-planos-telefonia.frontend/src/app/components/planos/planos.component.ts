@@ -64,10 +64,10 @@ export class PlanosComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.loadingService.show();
+    this.loadingService.setLoading(true);
     this.planoService.getAllPlanos().subscribe(planos => {
       this.allPlanos = planos;
-      this.loadingService.hide();
+      this.loadingService.setLoading(false);
     });
   }
 

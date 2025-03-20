@@ -63,17 +63,15 @@ export class HomePageComponent implements OnInit{
   averageAssociatedPlanosClientes: number = 0;
   pieChart!: PieChartOptions;
   barChart!: BarChartOptions;
+  isLoading: boolean = true;
 
   months = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
   availableYears!: { label: string, value: number }[];
   selectedYears: number[] = [new Date().getFullYear()];
   
-  constructor(private clienteService: ClienteService, private planoService: PlanoService, private router: Router,
-    public loadingService: LoadingService
-  ) {}
+  constructor(private clienteService: ClienteService, private planoService: PlanoService, private router: Router) {}
 
   ngOnInit() {
-    this.loadingService.show();
     forkJoin({
       planos: this.planoService.getAllPlanos(),
       clientes: this.clienteService.getAllClientes()
@@ -83,7 +81,9 @@ export class HomePageComponent implements OnInit{
       this.calculateAverageAssociatedPlanosClientes();
       this.getAvailableYears();
       this.onYearChange();
-      this.loadingService.hide();
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 3000);
     });
   }
 
@@ -131,7 +131,7 @@ export class HomePageComponent implements OnInit{
             heigh: 200
           },
           legend: {
-            offsetY: -180,
+            offsetY: -200,
             position: 'bottom',
             fontSize: '12px',
           }
