@@ -76,23 +76,16 @@
     </div>
 } @placeholder {
     <div class="cards-flex-container">
-        <ng-template *ngTemplateOutlet="bigNumberTemplate;"></ng-template>
-        <ng-template *ngTemplateOutlet="bigNumberTemplate;"></ng-template>
-        <ng-template *ngTemplateOutlet="bigNumberTemplate;"></ng-template>
+        <p-card class="placeholder card flex-1"></p-card>
+        <p-card class="placeholder card flex-1"></p-card>
+        <p-card class="placeholder card flex-1"></p-card>
     </div>
 
     <div class="charts-section-header"></div>
 
     <div class="cards-flex-container">
-        <p-card class="card flex-1 placeholder">
-            <ng-template #content>
-            </ng-template>
-        </p-card>
-        
-        <p-card class="card flex-1 placeholder">
-            <ng-template #content>
-            </ng-template>
-        </p-card>
+        <p-card class="placeholder card flex-1"></p-card>
+        <p-card class="placeholder card flex-1"></p-card>
     </div>
 }
 
@@ -105,7 +98,7 @@
                     <span>{{title}}</span>
                 </div>
             </div>
-            <em [class]="'skeleton-box big-number-icon pi pi-' + icon"></em>
+            <em [class]="'big-number-icon pi pi-' + icon"></em>
         </div>
     </p-card>
 </ng-template>

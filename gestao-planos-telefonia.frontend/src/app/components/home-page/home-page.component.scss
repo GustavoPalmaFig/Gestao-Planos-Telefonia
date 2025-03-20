@@ -93,7 +93,7 @@
 
 @media (max-width: 768px) {
   .cards-flex-container {
-    flex-direction: column;
+    display: grid;
   }
 
   .card, .chart-card {
