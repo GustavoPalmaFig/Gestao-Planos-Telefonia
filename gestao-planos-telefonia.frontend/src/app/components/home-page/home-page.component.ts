@@ -21,6 +21,7 @@ import {
   ApexLegend
 } from "ng-apexcharts";
 import { LoadingService } from '../../services/loading.service';
+import { CardModule } from 'primeng/card';
 
 export type PieChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -48,7 +49,8 @@ export type BarChartOptions = {
     FormsModule,
     MultiSelectModule,
     TooltipModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    CardModule
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
@@ -61,6 +63,7 @@ export class HomePageComponent implements OnInit{
   averageAssociatedPlanosClientes: number = 0;
   pieChart!: PieChartOptions;
   barChart!: BarChartOptions;
+  isLoading: boolean = true;
 
   months = ['Jan', 'Fev', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
   availableYears!: { label: string, value: number }[];
@@ -81,7 +84,9 @@ export class HomePageComponent implements OnInit{
       this.calculateAverageAssociatedPlanosClientes();
       this.getAvailableYears();
       this.onYearChange();
-      this.loadingService.hide();
+      setTimeout(() => {
+        this.isLoading = false;
+      }, 3000);
     });
   }
 
@@ -107,8 +112,8 @@ export class HomePageComponent implements OnInit{
       series: planoCounts.map(pc => pc.value),
       chart: {
         type: 'pie',
-        height: 400,
-        width: 400
+        height: 500,
+        width: 500
       },
       labels: planoCounts.map(pc => pc.label),
       legend: {
@@ -129,7 +134,7 @@ export class HomePageComponent implements OnInit{
             heigh: 200
           },
           legend: {
-            offsetY: -80,
+            offsetY: -200,
             position: 'bottom',
             fontSize: '12px',
           }

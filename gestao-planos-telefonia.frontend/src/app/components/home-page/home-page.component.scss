@@ -12,15 +12,6 @@
   color: #5897fb;
   margin-bottom: 30px;
 
-  &-card {
-    border: 1px solid var(--border-color);
-    padding: .5rem 1rem;
-    display: flex;
-    width: 100%;
-    border-radius: 7px;
-    background-color: var(--bkg-card-color);
-  }
-
   &-title{
     font-size: 22px;
     font-weight: 500;
@@ -56,6 +47,7 @@
   color: var(--main-color);;
   display: flex;
   justify-content: center;
+  text-align: center;
 }
 
 .chart-subtitle {
@@ -69,12 +61,42 @@
   color: var(--text-color);
 }
 
+.placeholder {
+  height: 34vh;
+  border-radius: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.placeholder::before {
+  content: "";
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 400% 100%;
+  animation: loading 1.5s infinite;
+}
+
+
+@keyframes loading {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 @media (max-width: 768px) {
   .cards-flex-container {
-    flex-direction: column;
+    display: grid;
   }
 
-  .big-number-card, .chart-card {
+  .card, .chart-card {
     margin-bottom: 1rem;
   }
 

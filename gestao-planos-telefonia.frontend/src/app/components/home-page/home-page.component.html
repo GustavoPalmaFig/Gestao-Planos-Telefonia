@@ -1,24 +1,12 @@
 <p class="title">Gestão de Planos de Telefonia</p>
 <h5 class="subtitle">Nesta página estão disponíveis os dados de Clientes, Planos e suas associações.</h5>
 
-<ng-container *ngIf="!loadingService.loading()">
+@defer (when !isLoading) {
     <div class="cards-flex-container">
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'clientes', title: 'Clientes Cadastrados', icon: 'user', bigNumber: allClientes.length}"></ng-template>
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {pageRedirect: 'planos', title: 'Planos Disponíveis', icon: 'phone', bigNumber: allPlanos.length}"></ng-template>
         <ng-template *ngTemplateOutlet="bigNumberTemplate; context: {title: 'Média Planos/Clientes', icon: 'flag', bigNumber: averageAssociatedPlanosClientes.toFixed(2)}"></ng-template>
     </div>
-
-    <ng-template #bigNumberTemplate let-pageRedirect="pageRedirect" let-title="title" let-icon="icon" let-bigNumber="bigNumber">
-        <div class="big-number-card" (click)="navigate(pageRedirect)" [ngClass]="{'clickable': pageRedirect}" [pTooltip]="pageRedirect ? 'Acessar ' + title : ''" tooltipPosition="top">
-            <div style="width: 93%;">
-                <div class="big-number"><span>{{bigNumber}}</span></div>
-                <div class="big-number-title">
-                    <span>{{title}}</span>
-                </div>
-            </div>
-            <em [class]="'big-number-icon pi pi-' + icon"></em>
-        </div>
-    </ng-template>
 
     <div class="charts-section-header">
         <h5 class="subtitle chart-subtitle">Selecione à direita os anos de análise para filtrar os gráficos e interaja passando o mouse sobre cada um deles.</h5>
@@ -39,41 +27,78 @@
     </div>
 
     <div class="cards-flex-container">
-        <div class="chart-card" style="display: grid; justify-items: center;">
-            <p class="chart-title mb-8">Proporção de Clientes Associados a Cada Plano</p>
-            @if(pieChart && pieChart.series.length > 0) {
-                <apx-chart
-                    [series]="pieChart.series" 
-                    [chart]="pieChart.chart" 
-                    [labels]="pieChart.labels"
-                    [legend]="pieChart.legend" 
-                    [responsive]="pieChart.responsive">
-                </apx-chart>
-            }
-            @else {
-                <div class="no-data">
-                    <h6>Não há dados disponíveis para o ano selecionado.</h6>
-                </div>
-            }
-        </div>
-        <div class="chart-card">
-            <p class="chart-title mb-8">Clientes cadastrados por mês</p>
-            @if(checkIfBarHasData()) {
-                <apx-chart 
-                    [series]="barChart.series"
-                    [chart]="barChart.chart"
-                    [xaxis]="barChart.xaxis"
-                    [yaxis]="barChart.yaxis"
-                    [plotOptions]="barChart.plotOptions"
-                    [dataLabels]="barChart.dataLabels"
-                    [tooltip]="barChart.tooltip">
-                </apx-chart>
-            }
-            @else {
-                <div class="no-data">
-                    <h6>Não há dados disponíveis para o ano selecionado.</h6>
-                </div>
-            }
-        </div>
+        <p-card class="card flex-1">
+            <ng-template #title>
+                <p class="chart-title mb-8">Proporção de Clientes Associados a Cada Plano</p>
+            </ng-template>
+            <ng-template #content>
+                @if(pieChart && pieChart.series.length > 0) {
+                    <apx-chart
+                        class="h-full flex items-center justify-center"
+                        [series]="pieChart.series" 
+                        [chart]="pieChart.chart" 
+                        [labels]="pieChart.labels"
+                        [legend]="pieChart.legend" 
+                        [responsive]="pieChart.responsive">
+                    </apx-chart>
+                }
+                @else {
+                    <div class="no-data">
+                        <h6>Não há dados disponíveis para o ano selecionado.</h6>
+                    </div>
+                }
+            </ng-template>
+        </p-card>
+        
+        <p-card class="card flex-1">
+            <ng-template #title>
+                <p class="chart-title mb-8">Clientes cadastrados por mês</p>
+            </ng-template>
+            <ng-template #content>
+                @if(checkIfBarHasData()) {
+                    <apx-chart 
+                        [series]="barChart.series"
+                        [chart]="barChart.chart"
+                        [xaxis]="barChart.xaxis"
+                        [yaxis]="barChart.yaxis"
+                        [plotOptions]="barChart.plotOptions"
+                        [dataLabels]="barChart.dataLabels"
+                        [tooltip]="barChart.tooltip">
+                    </apx-chart>
+                }
+                @else {
+                    <div class="no-data">
+                        <h6>Não há dados disponíveis para o ano selecionado.</h6>
+                    </div>
+                }
+            </ng-template>
+        </p-card>
     </div>
-</ng-container>
+} @placeholder {
+    <div class="cards-flex-container">
+        <p-card class="placeholder card flex-1"></p-card>
+        <p-card class="placeholder card flex-1"></p-card>
+        <p-card class="placeholder card flex-1"></p-card>
+    </div>
+
+    <div class="charts-section-header"></div>
+
+    <div class="cards-flex-container">
+        <p-card class="placeholder card flex-1"></p-card>
+        <p-card class="placeholder card flex-1"></p-card>
+    </div>
+}
+
+<ng-template #bigNumberTemplate let-pageRedirect="pageRedirect" let-title="title" let-icon="icon" let-bigNumber="bigNumber">
+    <p-card class="card w-full" (click)="navigate(pageRedirect)" [ngClass]="{'clickable': pageRedirect, 'placeholder': !title}" [pTooltip]="pageRedirect ? 'Acessar ' + title : ''" tooltipPosition="top">
+        <div class="flex">
+            <div class="w-9/10">
+                <div class="big-number"><span>{{bigNumber}}</span></div>
+                <div class="big-number-title">
+                    <span>{{title}}</span>
+                </div>
+            </div>
+            <em [class]="'big-number-icon pi pi-' + icon"></em>
+        </div>
+    </p-card>
+</ng-template>

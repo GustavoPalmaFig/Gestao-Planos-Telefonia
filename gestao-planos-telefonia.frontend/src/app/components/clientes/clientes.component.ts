@@ -68,14 +68,14 @@ export class ClientesComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.loadingService.show();
+    this.loadingService.setLoading(true);
     forkJoin({
       planos: this.planoService.getAllPlanos(),
       clientes: this.clienteService.getAllClientes()
     }).subscribe(({ planos, clientes }) => {
       this.allPlanos = planos;
       this.allClientes = clientes;
-      this.loadingService.hide();
+      this.loadingService.setLoading(false);
     });
   }
 
