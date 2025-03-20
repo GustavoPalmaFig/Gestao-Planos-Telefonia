@@ -74,7 +74,6 @@ export class HomePageComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.loadingService.show();
     forkJoin({
       planos: this.planoService.getAllPlanos(),
       clientes: this.clienteService.getAllClientes()
