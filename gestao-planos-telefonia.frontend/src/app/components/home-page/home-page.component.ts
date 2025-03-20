@@ -21,6 +21,7 @@ import {
   ApexLegend
 } from "ng-apexcharts";
 import { LoadingService } from '../../services/loading.service';
+import { CardModule } from 'primeng/card';
 
 export type PieChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -48,7 +49,8 @@ export type BarChartOptions = {
     FormsModule,
     MultiSelectModule,
     TooltipModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    CardModule
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
@@ -107,8 +109,8 @@ export class HomePageComponent implements OnInit{
       series: planoCounts.map(pc => pc.value),
       chart: {
         type: 'pie',
-        height: 400,
-        width: 400
+        height: 500,
+        width: 500
       },
       labels: planoCounts.map(pc => pc.label),
       legend: {
@@ -129,7 +131,7 @@ export class HomePageComponent implements OnInit{
             heigh: 200
           },
           legend: {
-            offsetY: -80,
+            offsetY: -180,
             position: 'bottom',
             fontSize: '12px',
           }

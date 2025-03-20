@@ -9,15 +9,17 @@
     </div>
 
     <ng-template #bigNumberTemplate let-pageRedirect="pageRedirect" let-title="title" let-icon="icon" let-bigNumber="bigNumber">
-        <div class="big-number-card" (click)="navigate(pageRedirect)" [ngClass]="{'clickable': pageRedirect}" [pTooltip]="pageRedirect ? 'Acessar ' + title : ''" tooltipPosition="top">
-            <div style="width: 93%;">
-                <div class="big-number"><span>{{bigNumber}}</span></div>
-                <div class="big-number-title">
-                    <span>{{title}}</span>
+        <p-card class="card w-full" (click)="navigate(pageRedirect)" [ngClass]="{'clickable': pageRedirect}" [pTooltip]="pageRedirect ? 'Acessar ' + title : ''" tooltipPosition="top">
+            <div class="flex">
+                <div class="w-9/10">
+                    <div class="big-number"><span>{{bigNumber}}</span></div>
+                    <div class="big-number-title">
+                        <span>{{title}}</span>
+                    </div>
                 </div>
+                <em [class]="'big-number-icon pi pi-' + icon"></em>
             </div>
-            <em [class]="'big-number-icon pi pi-' + icon"></em>
-        </div>
+        </p-card>
     </ng-template>
 
     <div class="charts-section-header">
@@ -39,41 +41,51 @@
     </div>
 
     <div class="cards-flex-container">
-        <div class="chart-card" style="display: grid; justify-items: center;">
-            <p class="chart-title mb-8">Proporção de Clientes Associados a Cada Plano</p>
-            @if(pieChart && pieChart.series.length > 0) {
-                <apx-chart
-                    [series]="pieChart.series" 
-                    [chart]="pieChart.chart" 
-                    [labels]="pieChart.labels"
-                    [legend]="pieChart.legend" 
-                    [responsive]="pieChart.responsive">
-                </apx-chart>
-            }
-            @else {
-                <div class="no-data">
-                    <h6>Não há dados disponíveis para o ano selecionado.</h6>
-                </div>
-            }
-        </div>
-        <div class="chart-card">
-            <p class="chart-title mb-8">Clientes cadastrados por mês</p>
-            @if(checkIfBarHasData()) {
-                <apx-chart 
-                    [series]="barChart.series"
-                    [chart]="barChart.chart"
-                    [xaxis]="barChart.xaxis"
-                    [yaxis]="barChart.yaxis"
-                    [plotOptions]="barChart.plotOptions"
-                    [dataLabels]="barChart.dataLabels"
-                    [tooltip]="barChart.tooltip">
-                </apx-chart>
-            }
-            @else {
-                <div class="no-data">
-                    <h6>Não há dados disponíveis para o ano selecionado.</h6>
-                </div>
-            }
-        </div>
+        <p-card class="card flex-1">
+            <ng-template #title>
+                <p class="chart-title mb-8">Proporção de Clientes Associados a Cada Plano</p>
+            </ng-template>
+            <ng-template #content>
+                @if(pieChart && pieChart.series.length > 0) {
+                    <apx-chart
+                        class="h-full flex items-center justify-center"
+                        [series]="pieChart.series" 
+                        [chart]="pieChart.chart" 
+                        [labels]="pieChart.labels"
+                        [legend]="pieChart.legend" 
+                        [responsive]="pieChart.responsive">
+                    </apx-chart>
+                }
+                @else {
+                    <div class="no-data">
+                        <h6>Não há dados disponíveis para o ano selecionado.</h6>
+                    </div>
+                }
+            </ng-template>
+        </p-card>
+        
+        <p-card class="card flex-1">
+            <ng-template #title>
+                <p class="chart-title mb-8">Clientes cadastrados por mês</p>
+            </ng-template>
+            <ng-template #content>
+                @if(checkIfBarHasData()) {
+                    <apx-chart 
+                        [series]="barChart.series"
+                        [chart]="barChart.chart"
+                        [xaxis]="barChart.xaxis"
+                        [yaxis]="barChart.yaxis"
+                        [plotOptions]="barChart.plotOptions"
+                        [dataLabels]="barChart.dataLabels"
+                        [tooltip]="barChart.tooltip">
+                    </apx-chart>
+                }
+                @else {
+                    <div class="no-data">
+                        <h6>Não há dados disponíveis para o ano selecionado.</h6>
+                    </div>
+                }
+            </ng-template>
+        </p-card>
     </div>
 </ng-container>
