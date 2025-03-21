@@ -20,6 +20,7 @@
     "@angular/router": "^19.1.0",
     "@primeng/themes": "^19.0.9",
     "@tailwindcss/postcss": "^4.0.14",
+    "@types/google-one-tap": "^1.2.6",
     "apexcharts": "^4.5.0",
     "ng-apexcharts": "^1.15.0",
     "ngx-mask": "^19.0.6",
