@@ -14,7 +14,7 @@
 }
 
 .page-padding {
-    padding: 5vh 2.5vw 0 2.5vw;
+    padding: 6vh 1vw 0;
 }
 
 .loading-icon {
@@ -46,14 +46,10 @@
     .p-toolbar-group-end {
         margin-right: 1%;
     }
-    
-    @media (max-width: 768px) {
-        .p-toolbar-group-start {
-            margin: .5rem;
-        }
+}
 
-        .p-toolbar-group-end {
-            margin-right: unset;
-        }
+@media (max-width: 768px) {
+    .page-padding {
+        padding: 5vh 3vw 0;
     }
 }
