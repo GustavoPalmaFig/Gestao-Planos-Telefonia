@@ -33,14 +33,18 @@
             </ng-template>
             <ng-template #content>
                 @if(pieChart && pieChart.series.length > 0) {
-                    <apx-chart
-                        class="h-full flex items-center justify-center"
-                        [series]="pieChart.series" 
-                        [chart]="pieChart.chart" 
-                        [labels]="pieChart.labels"
-                        [legend]="pieChart.legend" 
-                        [responsive]="pieChart.responsive">
-                    </apx-chart>
+                    <div #pieChartBlock>
+                        @defer (on viewport(pieChartBlock)) {
+                            <apx-chart
+                                class="h-full flex items-center justify-center"
+                                [series]="pieChart.series" 
+                                [chart]="pieChart.chart" 
+                                [labels]="pieChart.labels"
+                                [legend]="pieChart.legend" 
+                                [responsive]="pieChart.responsive">
+                            </apx-chart>
+                        }
+                    </div>
                 }
                 @else {
                     <div class="no-data">
@@ -56,15 +60,19 @@
             </ng-template>
             <ng-template #content>
                 @if(checkIfBarHasData()) {
-                    <apx-chart 
-                        [series]="barChart.series"
-                        [chart]="barChart.chart"
-                        [xaxis]="barChart.xaxis"
-                        [yaxis]="barChart.yaxis"
-                        [plotOptions]="barChart.plotOptions"
-                        [dataLabels]="barChart.dataLabels"
-                        [tooltip]="barChart.tooltip">
-                    </apx-chart>
+                    <div #barChartBlock>
+                        @defer (on viewport(barChartBlock)) {
+                            <apx-chart 
+                                [series]="barChart.series"
+                                [chart]="barChart.chart"
+                                [xaxis]="barChart.xaxis"
+                                [yaxis]="barChart.yaxis"
+                                [plotOptions]="barChart.plotOptions"
+                                [dataLabels]="barChart.dataLabels"
+                                [tooltip]="barChart.tooltip">
+                            </apx-chart>
+                        }
+                    </div>
                 }
                 @else {
                     <div class="no-data">
