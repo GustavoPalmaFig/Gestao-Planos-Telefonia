@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  private authService = inject(AuthService);
+  private ngZone = inject(NgZone);
+
+  ngOnInit(): void {
+    this.authService.initializeGoogleAuth();
+  }
 }
