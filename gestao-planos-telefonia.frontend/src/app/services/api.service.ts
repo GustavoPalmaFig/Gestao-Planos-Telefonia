@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
@@ -24,9 +24,9 @@ export class ApiService {
       catchError(this.handleError)
     );
   }
-
-  post<T>(url: string, body: any): Observable<T> {
-    return this.http.post<T>(url, body).pipe(
+  
+  post<T>(url: string, body: any, headers?: HttpHeaders): Observable<T> {
+    return this.http.post<T>(url, body, { headers }).pipe(
       catchError(this.handleError)
     );
   }

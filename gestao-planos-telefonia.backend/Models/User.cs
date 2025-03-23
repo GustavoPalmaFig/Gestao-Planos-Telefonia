@@ -8,7 +8,7 @@ public class User
 {
     [Key]
     [Column("id")]
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; }
 
     [EmailAddress]
     [Column("email")]

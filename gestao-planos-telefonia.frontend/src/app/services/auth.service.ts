@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { CredentialResponse } from 'google-one-tap';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
 declare const google: any;
 
 @Injectable({
@@ -34,7 +35,11 @@ export class AuthService {
   }
 
   handleCredentialResponse(response: CredentialResponse) {
-    console.log(response.credential);
-    
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    this.apiService.post(`${this.apiRoot}/GoogleLogin`, JSON.stringify(response.credential), headers).subscribe((res: any) => {
+      sessionStorage.setItem('access_token', res.token);
+      this.router.navigate(['']);
+    });
   }
 }
