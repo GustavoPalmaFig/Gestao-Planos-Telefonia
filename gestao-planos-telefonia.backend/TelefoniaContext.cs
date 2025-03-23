@@ -12,6 +12,7 @@ namespace Gestão_Planos_Telefonia.backend
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Plano> Planos { get; set; }
         public DbSet<ClientePlano> ClientePlanos { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
