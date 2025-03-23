@@ -5,6 +5,8 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var dataBaseConnectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
+var googleClientId = builder.Configuration.GetSection("GoogleAuth")["GoogleClientId"];
+var secretId = builder.Configuration.GetSection("Jwt")["SecretId"];
 
 builder.Services.AddCors(options =>
 {
@@ -25,6 +27,9 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IPlanoService, PlanoService>();
 builder.Services.AddScoped<IPlanoRepository, PlanoRepository>();
+
+Environment.SetEnvironmentVariable("googleClientId", googleClientId);
+Environment.SetEnvironmentVariable("secretId", secretId);
 
 var app = builder.Build();
 
