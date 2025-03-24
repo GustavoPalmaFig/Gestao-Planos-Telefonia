@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import { MessageService } from 'primeng/api';
     ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
-  providers: [MessageService]
+  providers: [AuthService, ApiService]
 })
 export class LoginComponent {
   protected isCreatingAccount = false;
@@ -23,12 +23,11 @@ export class LoginComponent {
 
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
-  private messageService = inject(MessageService);
 
   public userForm: FormGroup = this.fb.group({
-    name: ['', this.isCreatingAccount ? Validators.required : null],
+    name: ['', this.isCreatingAccount && Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    passwordHash: ['', [Validators.required, Validators.pattern(this.strongPasswordRegx)]]
+    passwordHash: ['', this.isCreatingAccount && [Validators.required, Validators.pattern(this.strongPasswordRegx)]]
   });
 
   ngAfterViewInit(): void {

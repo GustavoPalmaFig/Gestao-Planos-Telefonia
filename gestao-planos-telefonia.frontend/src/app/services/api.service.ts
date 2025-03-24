@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ApiService {
   private http = inject(HttpClient);
-  // private messageService = inject(MessageService);
+  private messageService = inject(MessageService);
   
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
@@ -29,32 +29,31 @@ export class ApiService {
         errorMessage = `Erro inesperado. Código: ${error.status} - ${error.message}`;
         break;
     }
-
-    // this.messageService.add({ severity: 'Error', summary: 'Erro', detail: errorMessage, life: 3000 });
+    this.messageService.add({ severity: 'warn', summary: 'Erro', detail: errorMessage, life: 30000 });
     return throwError(() => new Error(errorMessage));
   }
 
   get<T>(url: string): Observable<T> {
     return this.http.get<T>(url).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError.bind(this))
     );
   }
 
   post<T>(url: string, body: any, headers?: HttpHeaders): Observable<T> {
     return this.http.post<T>(url, body, { headers }).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError.bind(this))
     );
   }
 
   put<T>(url: string, body: any): Observable<T> {
     return this.http.put<T>(url, body).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError.bind(this))
     );
   }
 
   delete<T>(url: string): Observable<T> {
     return this.http.delete<T>(url).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError.bind(this))
     );
   }
 }

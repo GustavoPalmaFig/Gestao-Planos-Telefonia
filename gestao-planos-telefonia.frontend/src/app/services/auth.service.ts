@@ -17,7 +17,7 @@ export class AuthService {
   public isAuthenticated = signal<boolean>(false);
   private apiService = inject(ApiService);
   private router = inject(Router);
-  // private messageService = inject(MessageService);
+  private messageService = inject(MessageService);
 
   checkAuthenticated() {
     const token = sessionStorage.getItem('access_token');
@@ -55,7 +55,7 @@ export class AuthService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     this.apiService.post(`${this.apiRoot}/CreateUser`, user, headers).subscribe((response: any) => {
       sessionStorage.setItem('access_token', response.token);
-      // this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário Cadastrado', life: 3000 });
+      this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário Cadastrado', life: 3000 });
       this.router.navigate(['']);
     });
   }
@@ -77,15 +77,4 @@ export class AuthService {
       this.router.navigate(['']);
     });
   }
-
-  // registerUser() {
-  //   this.apiService.post().subscribe({
-  //     next: () => {
-  //       this.message = 'Usuário cadastrado com sucesso!';
-  //     },
-  //     error: (err) => {
-  //       this.message = err.message;
-  //     }
-  //   });
-  // }
 }
