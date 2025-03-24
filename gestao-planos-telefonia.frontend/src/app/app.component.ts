@@ -8,6 +8,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { LoadingService } from './services/loading.service';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from './services/theme.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   private router = inject(Router);
   protected loadingService = inject(LoadingService);
   protected themeService = inject(ThemeService);
+  protected authService = inject(AuthService);
   protected isResponsiveMode: boolean = false;
 
   navigate(address: string) {

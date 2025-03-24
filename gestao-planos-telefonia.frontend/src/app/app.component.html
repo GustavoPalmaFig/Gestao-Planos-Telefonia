@@ -5,18 +5,20 @@
         <img [src]="isResponsiveMode ? 'assets/images/gpt-logo-mini.svg' : 'assets/images/gpt-logo-5.svg'" alt="Gestão de Planos de Telefonia" class="logo clickable" (click)="navigate('')" />
     </div>
     
-    <div class="p-toolbar-group-end">
-        <p-button [icon]="themeService.selectedTheme() == 'light' ? 'pi pi-sun' : 'pi pi-moon'" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Alterar Tema" tooltipPosition="left" size="large" (onClick)="themeService.toggleTheme()"/>
-        <p-button icon="pi pi-home" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Tela Inicial" tooltipPosition="left" size="large" (onClick)="navigate('')"/>
-        <p-button icon="pi pi-users" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Clientes" tooltipPosition="left" size="large" (onClick)="navigate('clientes')"/>
-        <p-button icon="pi pi-phone" [rounded]="false" [text]="true" class="header-button" pTooltip="Planos" tooltipPosition="left" size="large" (onClick)="navigate('planos')"/>
-    </div>
+    @if(authService.isAuthenticated()) {
+        <div class="p-toolbar-group-end">
+            <p-button [icon]="themeService.selectedTheme() == 'light' ? 'pi pi-sun' : 'pi pi-moon'" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Alterar Tema" tooltipPosition="left" size="large" (onClick)="themeService.toggleTheme()"/>
+            <p-button icon="pi pi-home" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Tela Inicial" tooltipPosition="left" size="large" (onClick)="navigate('')"/>
+            <p-button icon="pi pi-users" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Clientes" tooltipPosition="left" size="large" (onClick)="navigate('clientes')"/>
+            <p-button icon="pi pi-phone" [rounded]="false" [text]="true" class="header-button" pTooltip="Planos" tooltipPosition="left" size="large" (onClick)="navigate('planos')"/>
+        </div>
+    }
 </p-toolbar>
 
 @if(loadingService.loading()) {
     <i class="pi pi-spin pi-spinner loading-icon"></i>
 }
 
-<div class="page-padding page-background">
+<div [ngClass]="{'page-padding page-background' : authService.isAuthenticated()}">
     <router-outlet></router-outlet>
 </div>

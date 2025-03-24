@@ -21,11 +21,50 @@ public class AuthController(IAuthService _authService, IAuthRepository _authRepo
 
             var jwtToken = await authService.HandleGoogleLogin(payload);
 
-            return Ok(new { token = jwtToken });
+            return Ok(new { jwtToken });
         }
         catch (Exception ex)
         {
             return BadRequest("Erro:" + ex.Message);
         }
     }
+
+    [HttpPost("CreateUser")]
+    public async Task<IActionResult> Login([FromBody] User user)
+    {
+        try
+        {
+            var token = await authService.CreateUserAsync(user);
+            if (token == null)
+                return Conflict("Este e-mail já está sendo utilizado.");
+
+            return Ok(new { token });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest("Erro:" + ex.Message);
+        }
+    }
+
+    [HttpPost("Login")]
+    public async Task<IActionResult> Login([FromBody] LoginRequest request)
+    {
+        try
+        {
+            var token = await authService.HandleLogin(request);
+            return Ok(new { token });
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return BadRequest("Erro:" + ex.Message);
+        }
+    }
+
+    //[HttpPost("GuestToken")]
+    //public IActionResult GenerateGuestToken()
+    //{
+    //    var claims = new List<Claim> { new Claim("role", "guest") };
+    //    var token = GenerateJwtToken(claims);
+    //    return Ok(new { token });
+    //}
 }
