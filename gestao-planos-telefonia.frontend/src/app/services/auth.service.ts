@@ -63,7 +63,7 @@ export class AuthService {
   login(user: User) {
     const loginRequest = {
       email: user.email,
-      passwordHash: user.passwordHash
+      password: user.passwordHash
     };
     this.apiService.post(`${this.apiRoot}/Login`, loginRequest).subscribe((token: any) => {
       sessionStorage.setItem('access_token', token);
