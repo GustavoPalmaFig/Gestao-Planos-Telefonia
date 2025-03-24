@@ -60,11 +60,17 @@ public class AuthController(IAuthService _authService, IAuthRepository _authRepo
         }
     }
 
-    //[HttpPost("GuestToken")]
-    //public IActionResult GenerateGuestToken()
-    //{
-    //    var claims = new List<Claim> { new Claim("role", "guest") };
-    //    var token = GenerateJwtToken(claims);
-    //    return Ok(new { token });
-    //}
+    [HttpPost("GuestLogin")]
+    public IActionResult GenerateGuestToken()
+    {
+        try
+        {
+            var token = authService.GuestLogin();
+            return Ok(new { token });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest("Erro:" + ex.Message);
+        }
+    }
 }

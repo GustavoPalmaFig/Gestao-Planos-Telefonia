@@ -24,9 +24,6 @@ public class User
     [Column("passwordHash")]
     public string? PasswordHash { get; set; }
 
-    [Column("isGuest")]
-    public bool IsGuest { get; set; } = false;
-
     [Required]
     [Column("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

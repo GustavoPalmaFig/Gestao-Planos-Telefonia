@@ -9,4 +9,5 @@ public interface IAuthService
     Task<string> HandleGoogleLogin(GoogleJsonWebSignature.Payload payload);
     Task<string?> CreateUserAsync(User user);
     Task<string> HandleLogin(LoginRequest request);
+    string GuestLogin();
 }

@@ -53,8 +53,8 @@ export class AuthService {
 
   createUser(user: User) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.apiService.post(`${this.apiRoot}/CreateUser`, user, headers).subscribe((token: any) => {
-      sessionStorage.setItem('access_token', token);
+    this.apiService.post(`${this.apiRoot}/CreateUser`, user, headers).subscribe((response: any) => {
+      sessionStorage.setItem('access_token', response.token);
       // this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário Cadastrado', life: 3000 });
       this.router.navigate(['']);
     });
@@ -65,8 +65,15 @@ export class AuthService {
       email: user.email,
       password: user.passwordHash
     };
-    this.apiService.post(`${this.apiRoot}/Login`, loginRequest).subscribe((token: any) => {
-      sessionStorage.setItem('access_token', token);
+    this.apiService.post(`${this.apiRoot}/Login`, loginRequest).subscribe((response: any) => {
+      sessionStorage.setItem('access_token', response.token);
+      this.router.navigate(['']);
+    });
+  }
+
+  loginAsGuest() {
+    this.apiService.post(`${this.apiRoot}/GuestLogin`, null).subscribe((response: any) => {
+      sessionStorage.setItem('access_token', response.token);
       this.router.navigate(['']);
     });
   }

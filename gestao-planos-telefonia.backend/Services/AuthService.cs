@@ -24,9 +24,8 @@ public class AuthService(IAuthRepository _authRepository) : IAuthService
         return await GoogleJsonWebSignature.ValidateAsync(idToken, settings);
     }
 
-    public string GenerateJwtToken(User user)
+    private static List<Claim> GenerateClaims(User user)
     {
-        var key = Encoding.ASCII.GetBytes(secretId);
         var claims = new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -38,10 +37,14 @@ public class AuthService(IAuthRepository _authRepository) : IAuthService
             claims.Add(new Claim(ClaimTypes.Email, user.Email));
         }
 
-        if (user.IsGuest)
-        {
-            claims.Add(new Claim("role", "guest"));
-        }
+        return claims;
+    }
+
+    private string GenerateJwtToken(List<Claim> claims)
+    {
+        var key = Encoding.ASCII.GetBytes(secretId);
+
+        
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
@@ -85,14 +88,15 @@ public class AuthService(IAuthRepository _authRepository) : IAuthService
                 Email = payload.Email,
                 Name = payload.Name,
                 GoogleId = payload.Subject,
-                IsGuest = false,
                 LastLoginAt = DateTime.UtcNow
             };
 
             await authRepository.AddUserAsync(user);
         }
 
-        return GenerateJwtToken(user);
+        await authRepository.UpdateLastLoginAsync(user);
+        var claims = GenerateClaims(user);
+        return GenerateJwtToken(claims);
     }
 
     public async Task<string?> CreateUserAsync(User user)
@@ -104,7 +108,8 @@ public class AuthService(IAuthRepository _authRepository) : IAuthService
 
         user.PasswordHash = HashPassword(user.PasswordHash!);
         User registeredUser = await authRepository.AddUserAsync(user);
-        return GenerateJwtToken(registeredUser);
+        var claims = GenerateClaims(registeredUser);
+        return GenerateJwtToken(claims);
     }
 
     public async Task<string> HandleLogin(LoginRequest request)
@@ -116,6 +121,14 @@ public class AuthService(IAuthRepository _authRepository) : IAuthService
             throw new UnauthorizedAccessException("Credenciais inválidas");
         }
 
-        return GenerateJwtToken(user);
+        await authRepository.UpdateLastLoginAsync(user);
+        var claims = GenerateClaims(user);
+        return GenerateJwtToken(claims);
+    }
+
+    public string GuestLogin()
+    {
+        var claims = new List<Claim> { new ("role", "guest") };
+        return GenerateJwtToken(claims);
     }
 }

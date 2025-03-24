@@ -52,4 +52,8 @@ export class LoginComponent {
       this.authService.login(this.userForm.value);
     }
   }
+
+  loginAsGuest(): void {
+    this.authService.loginAsGuest();
+  }
 }

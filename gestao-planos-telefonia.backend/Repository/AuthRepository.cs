@@ -24,4 +24,11 @@ public class AuthRepository(TelefoniaContext _context) : IAuthRepository
         await context.SaveChangesAsync();
         return user;
     }
+
+    public async Task UpdateLastLoginAsync(User user)
+    {
+        user.LastLoginAt = DateTime.UtcNow;
+        context.Users.Update(user);
+        await context.SaveChangesAsync();
+    }
 }

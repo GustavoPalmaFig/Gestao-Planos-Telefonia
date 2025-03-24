@@ -53,7 +53,7 @@
             <small class="hover:underline cursor-pointer" (click)="isCreatingAccount = !isCreatingAccount">
               {{ isCreatingAccount ? 'Fazer Login' : 'Criar Conta' }}
             </small>
-            <small class="hover:underline cursor-pointer">
+            <small class="hover:underline cursor-pointer" (click)="loginAsGuest()">
               Acessar como convidado
             </small>
           </div>
