@@ -1,62 +1,93 @@
-<div class="absolute top-0 w-full h-full bg-gray-900" style="background-size: 100%; background-repeat: no-repeat;"></div>
+<div class="absolute top-0 w-full h-full bg-linear-to-r from-gray-900 to-blue-500 flex items-center justify-center" style="background-size: 100%; background-repeat: no-repeat;">
 
-<div class="container mx-auto px-4 h-full flex content-center items-center justify-center fixed">
-  <div class="lg:w-4/12 px-4">
-    <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
-      <div class="rounded-t mb-0 px-6 py-6 text-center">
-        <h6 class="text-gray-600 text-sm font-bold">Login</h6>
-        <div class="btn-wrapper flex justify-center mt-2" id="google-btn"></div>
-        <hr class="mt-6 border-b-1 border-gray-400" />
-      </div>
-      <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-        <div class="text-gray-500 text-center mb-3 font-bold">
-          <small>Ou acesse com suas credenciais</small>
+  <div style="width: 20em; position: absolute; top: 1rem;">
+    <img src="assets/images/gpt-logo-white.svg" alt="Gestão de Planos de Telefonia" class="logo"/>
+  </div>
+  <p-card class="" [style]="{ width: responsiveService.isMobile() ? '20em' : '35em', overflow: 'hidden' }">
+    <ng-template #title> Acesse sua conta </ng-template>
+    <ng-template #subtitle> 
+      <div class="flex">
+        <div class="mr-1">{{ isCreatingAccount() ? 'Já possui conta?' : 'Novo usuário?' }}</div>
+        <div (click)="toggleAccountCreation()" class="text-blue-500 font-semibold cursor-pointer hover:underline">
+          {{ isCreatingAccount() ? 'Fazer Login' : 'Crie uma conta' }}
         </div>
-        <form [formGroup]="userForm" class="needs-validation" novalidate>
-          @if(isCreatingAccount) {
-            <div class="relative w-full mb-3">
-              <label class="block uppercase text-gray-700 text-xs font-bold mb-2">Nome</label>
-              <input type="text" formControlName="name" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Nome" 
-              [ngClass]="{'ng-invalid ng-dirty': submitted && userForm.controls['name'].invalid}"/>
-            </div>
-          }
-          <div class="relative w-full mb-3">
-            <label class="block uppercase text-gray-700 text-xs font-bold mb-2">Email</label>
-            <input type="email" formControlName="email" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Email" 
-            [ngClass]="{'ng-invalid ng-dirty': submitted && userForm.controls['email'].invalid}"/>
-            <small class="is-invalid" *ngIf="submitted && userForm.controls['email'].invalid">
-              Email é obrigatório.
-          </small>
-          </div>
-          <div class="relative w-full mb-3">
-            <label class="block uppercase text-gray-700 text-xs font-bold mb-2">Senha</label>
-            <input type="password" formControlName="passwordHash" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Senha" 
-            [ngClass]="{'ng-invalid ng-dirty': submitted && userForm.controls['passwordHash'].invalid}" (keyup.enter)="isCreatingAccount ? createUser() : login()"/>
-            @if(isCreatingAccount && passwordFormField?.dirty) {
-              <div class="text-red-400 text-sm font-bold mt-2">
-                <small class="block" [ngClass]="{'text-green-800': passwordFormField?.value?.match('^(?=.*[A-Z])')}">Mínimo uma letra maiúscula</small>
-                <small class="block" [ngClass]="{'text-green-800': passwordFormField?.value?.match('(?=.*[a-z])')}">Mínimo uma letra minúscula</small>
-                <small class="block" [ngClass]="{'text-green-800': passwordFormField?.value?.match('(.*[0-9].*)')}">Mínimo um número</small>
-                <small class="block" [ngClass]="{'text-green-800': passwordFormField?.value?.match('(?=.*[!@#$%^&*])')}">Mínimo um caracter especial</small>
-                <small class="block" [ngClass]="{'text-green-800': passwordFormField?.value?.match('.{8,}')}">Mínimo 8 caracteres</small>
-             </div>
+      </div>
+    </ng-template>
+    <ng-template #content>
+      <form [formGroup]="userForm" class="needs-validation" novalidate #ngForm="ngForm" (ngSubmit)='isCreatingAccount() ? createUser() : login()'>
+        @if(isCreatingAccount()) {
+          <div class="mb-6">
+            <input type="text" pInputText formControlName="name" placeholder="Nome"/>
+            @if(ngForm.submitted && nameFormField && nameFormField.invalid) {
+              <small class="is-invalid">
+                  Nome é obrigatório.
+              </small>
             }
           </div>
-          <div class="text-center mt-6">
-            <button class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none w-full cursor-pointer" type="button" (click)="isCreatingAccount ? createUser() : login()">
-              {{ isCreatingAccount ? 'Criar conta' : 'Entrar' }}
-            </button>
-          </div>
-          <div class="flex justify-between text-gray-500 text-center my-3 font-bold">
-            <small class="hover:underline cursor-pointer" (click)="isCreatingAccount = !isCreatingAccount">
-              {{ isCreatingAccount ? 'Fazer Login' : 'Criar Conta' }}
+        }
+        <div class="mb-6">
+          <input type="email" pInputText formControlName="email" placeholder="E-mail"/>
+            @if(ngForm.submitted && emailFormField && emailFormField.invalid) {
+              <small class="is-invalid">
+                @if(emailFormField.errors?.['required']) {
+                  E-mail é obrigatório.
+                }
+                @else {
+                  Forneça um e-mail válido
+                }
+              </small>
+            }
+        </div>
+        <div class="mb-6">
+          <p-password formControlName="passwordHash" placeholder="Senha" autocomplete="on" appendTo="body" [feedback]="isCreatingAccount()" [toggleMask]="true" 
+            promptLabel="Digite sua senha" weakLabel="Fraca" mediumLabel="Média" strongLabel="Forte"
+            (keyup.enter)="isCreatingAccount() ? createUser() : login()">
+            <ng-template #footer>
+              <p-divider />
+              <ul class="pl-2 ml-2 my-0 leading-normal">
+                <li><i [ngClass]="passwordFormField?.value?.match('(?=.*[A-Z])') ? 'mr-2 pi pi-check-circle text-green-600' : 'mr-2 pi pi-times-circle text-red-500'"></i>Mínimo 1 letra maiúscula</li>
+                <li><i [ngClass]="passwordFormField?.value?.match('(?=.*[a-z])') ? 'mr-2 pi pi-check-circle text-green-600' : 'mr-2 pi pi-times-circle text-red-500'"></i>Mínimo 1 letra minúscula</li>
+                <li><i [ngClass]="passwordFormField?.value?.match('(.*[0-9].*)') ? 'mr-2 pi pi-check-circle text-green-600' : 'mr-2 pi pi-times-circle text-red-500'"></i>Mínimo 1 número</li>
+                <li><i [ngClass]="passwordFormField?.value?.match('(?=.*[!@#$%^&*])') ? 'mr-2 pi pi-check-circle text-green-600' : 'mr-2 pi pi-times-circle text-red-500'"></i>Mínimo 1 caracter especial</li>
+                <li><i [ngClass]="passwordFormField?.value?.match('(.{8,})') ? 'mr-2 pi pi-check-circle text-green-600' : 'mr-2 pi pi-times-circle text-red-500'"></i>Mínimo 8 caracteres</li>
+              </ul>
+            </ng-template>
+          </p-password>
+          @if(ngForm.submitted && passwordFormField && passwordFormField.invalid) {
+            <small class="is-invalid">
+              @if(passwordFormField.errors?.['required']) {
+                Senha é obrigatório.
+              }
+              @else {
+                Senha fora do padrão.
+              }
             </small>
-            <small class="hover:underline cursor-pointer" (click)="loginAsGuest()">
-              Acessar como convidado
-            </small>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+          }
+        </div>
+
+        <div class="text-center mt-8">
+          <button type="submit" [disabled]="isLoading"
+            class="bg-[#5897fb] text-white text-sm font-bold h-[50px] rounded-full shadow hover:shadow-lg w-full cursor-pointer disabled:opacity-50">
+            {{ isCreatingAccount() ? 'Criar conta' : 'Entrar' }}
+          </button>
+
+          <button id="google-btn" type="button" (click)="authService.loginWithGoogle()"
+            class="mt-6 flex items-center justify-center text-sm font-bold h-[50px] rounded-full border-1 border-solid border-gray-400 hover:border-gray-500 w-full
+             cursor-pointer text-[#717783]">
+            <img src="assets/images/google-logo.svg" alt="Google Logo" class="google-logo-icon mr-2">
+            Continuar com Google
+          </button>
+
+          <button type="button" (click)="loginAsGuest()" [disabled]="isLoading"
+            class="mt-6 flex items-center justify-center text-sm font-bold h-[50px] rounded-full border-1 border-solid border-gray-400 hover:border-gray-500 w-full
+              cursor-pointer text-[#717783] disabled:opacity-50">
+            Continuar como convidado
+          </button>
+        </div>
+      </form>
+    </ng-template>
+    <ng-template #footer>
+      <div class="flex gap-4 mt-1"></div>
+    </ng-template>
+  </p-card>
 </div>

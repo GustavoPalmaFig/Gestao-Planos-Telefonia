@@ -1,1 +1,19 @@
 @use '../../../assets/styles/basics.scss';
+
+::ng-deep {
+    .p-card-content {
+        margin-top: 10%;
+    }
+
+    .p-inputtext {
+        border-top: unset;
+        border-left: unset;
+        border-right: unset;
+        border-radius: unset;
+        padding-inline: unset;
+    }
+
+    .p-password {
+        width: 100%;
+    }
+}

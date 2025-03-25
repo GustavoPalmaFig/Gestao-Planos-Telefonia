@@ -1,13 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { ApiService } from '../../services/api.service';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { DividerModule } from 'primeng/divider';
+import { ResponsiveService } from '../../services/responsive.service';
 
 @Component({
   selector: 'app-login',
   imports: [
+    CardModule,
+    InputTextModule,
+    PasswordModule,
+    DividerModule,
     CommonModule,
     ToastModule,
     FormsModule,
@@ -17,37 +26,64 @@ import { ApiService } from '../../services/api.service';
   providers: [AuthService, ApiService]
 })
 export class LoginComponent {
-  protected isCreatingAccount = false;
-  protected submitted = false;
+  protected isCreatingAccount = signal<boolean>(false);
+  protected isLoading = false;
   private strongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
 
-  private authService = inject(AuthService);
+  protected authService = inject(AuthService);
   private fb = inject(FormBuilder);
+  protected responsiveService = inject(ResponsiveService);
 
-  public userForm: FormGroup = this.fb.group({
-    name: ['', this.isCreatingAccount && Validators.required],
+  protected userForm: FormGroup = this.fb.group({
+    name: [''],
     email: ['', [Validators.required, Validators.email]],
-    passwordHash: ['', this.isCreatingAccount && [Validators.required, Validators.pattern(this.strongPasswordRegx)]]
+    passwordHash: ['']
   });
 
-  ngAfterViewInit(): void {
-    this.authService.initializeGoogleAuth();
+  constructor() {
+    effect(() => {
+      this.updateValidators();
+    });
+  }
+
+  get nameFormField() {
+    return this.userForm.get('name');
+  }
+
+  get emailFormField() {
+    return this.userForm.get('email');
   }
 
   get passwordFormField() {
     return this.userForm.get('passwordHash');
   }
 
+  toggleAccountCreation(): void {
+    this.isCreatingAccount.set(!this.isCreatingAccount());
+  }
+
+  updateValidators(): void {
+    if (this.isCreatingAccount()) {
+      this.userForm.get('name')?.setValidators([Validators.required]);
+      this.userForm.get('passwordHash')?.setValidators([Validators.required, Validators.pattern(this.strongPasswordRegx)]);
+    } else {
+      this.userForm.get('name')?.clearValidators();
+      this.userForm.get('passwordHash')?.setValidators([Validators.required]);
+    }
+    this.userForm.get('name')?.updateValueAndValidity();
+    this.userForm.get('passwordHash')?.updateValueAndValidity();
+  }
+
   createUser(): void {
-    this.submitted = true;
     if (this.userForm.valid) {
+      this.isLoading = true;
       this.authService.createUser(this.userForm.value);
     }
   }
 
   login(): void {
-    this.submitted = true;
     if (this.userForm.valid) {
+      this.isLoading = true;
       this.authService.login(this.userForm.value);
     }
   }

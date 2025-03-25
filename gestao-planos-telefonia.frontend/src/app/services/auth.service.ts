@@ -24,22 +24,12 @@ export class AuthService {
     this.isAuthenticated.set(!!token);
   }
 
-  initializeGoogleAuth() {
-    google.accounts.id.initialize({
+  loginWithGoogle() {
+    google.accounts.oauth2.initCodeClient({
       client_id: this.googleClientId,
+      scope: 'openid profile email',
       callback: (response: any) => this.handleGoogleCredentialResponse(response),
-      auto_select: false,
-      cancel_on_tap_outside: true
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById('google-btn'),
-      {
-        theme: 'outline',
-        size: 'medium',
-        width: '100%',
-      }
-    );
+    }).requestCode();
   }
 
   handleGoogleCredentialResponse(response: CredentialResponse) {

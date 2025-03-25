@@ -9,6 +9,7 @@ import { LoadingService } from './services/loading.service';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from './services/theme.service';
 import { AuthService } from './services/auth.service';
+import { ResponsiveService } from './services/responsive.service';
 
 @Component({
   selector: 'app-root',
@@ -23,20 +24,13 @@ export class AppComponent implements OnInit {
   protected loadingService = inject(LoadingService);
   protected themeService = inject(ThemeService);
   protected authService = inject(AuthService);
-  protected isResponsiveMode: boolean = false;
+  protected responsiveService = inject(ResponsiveService);
 
   navigate(address: string) {
     this.router.navigate([address]);
   }
 
   ngOnInit() {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    this.isResponsiveMode = mediaQuery.matches;
-    
-    mediaQuery.addEventListener('change', (event) => {
-      this.isResponsiveMode = event.matches;
-    });
-
     this.themeService.setTheme();
   }
 }
