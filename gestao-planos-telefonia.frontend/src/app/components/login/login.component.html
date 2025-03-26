@@ -71,9 +71,9 @@
             {{ isCreatingAccount() ? 'Criar conta' : 'Entrar' }}
           </button>
 
-          <button id="google-btn" type="button" (click)="authService.loginWithGoogle()"
+          <button type="button" (click)="authService.loginWithGoogle()"
             class="mt-6 flex items-center justify-center text-sm font-bold h-[50px] rounded-full border-1 border-solid border-gray-400 hover:border-gray-500 w-full
-             cursor-pointer text-[#717783]">
+              cursor-pointer text-[#717783]">
             <img src="assets/images/google-logo.svg" alt="Google Logo" class="google-logo-icon mr-2">
             Continuar com Google
           </button>

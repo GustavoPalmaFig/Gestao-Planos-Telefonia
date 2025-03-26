@@ -1,12 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { CredentialResponse } from 'google-one-tap';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http'; 
 import { User } from '../models/user'; 
 import { MessageService } from 'primeng/api';
 declare const google: any;
+import { CredentialResponse } from 'google-one-tap';
 
 @Injectable({
   providedIn: 'root',
@@ -25,11 +25,15 @@ export class AuthService {
   }
 
   loginWithGoogle() {
-    google.accounts.oauth2.initCodeClient({
+    google.accounts.id.initialize({
       client_id: this.googleClientId,
-      scope: 'openid profile email',
       callback: (response: any) => this.handleGoogleCredentialResponse(response),
-    }).requestCode();
+      auto_select: false,
+      cancel_on_tap_outside: true,
+      ux_mode: "popup"
+    });
+
+    google.accounts.id.prompt();
   }
 
   handleGoogleCredentialResponse(response: CredentialResponse) {

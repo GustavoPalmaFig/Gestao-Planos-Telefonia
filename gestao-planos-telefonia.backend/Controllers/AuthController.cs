@@ -1,15 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
-using Repository;
 using Services;
 namespace Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AuthController(IAuthService _authService, IAuthRepository _authRepository) : ControllerBase
+public class AuthController(IAuthService _authService) : ControllerBase
 {
     private readonly IAuthService authService = _authService;
-    private readonly IAuthRepository authRepository = _authRepository;
 
     [HttpPost("GoogleLogin")]
     public async Task<IActionResult> GoogleLogin([FromBody] string credential)
