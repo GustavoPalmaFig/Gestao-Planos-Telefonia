@@ -4,7 +4,6 @@ export interface User {
     name: string;
     googleId?: string;
     passwordHash?: string;
-    isGuest: boolean;
-    createdAt: Date;
+    createdAt?: Date;
     lastLoginAt?: Date;
 }

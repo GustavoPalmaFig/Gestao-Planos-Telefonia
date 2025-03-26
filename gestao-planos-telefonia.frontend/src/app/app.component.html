@@ -19,6 +19,6 @@
     <i class="pi pi-spin pi-spinner loading-icon"></i>
 }
 
-<div [ngClass]="{'page-padding page-background' : authService.isAuthenticated()}">
+<div [ngClass]="{'page-padding' : authService.isAuthenticated()}">
     <router-outlet></router-outlet>
 </div>

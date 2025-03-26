@@ -77,18 +77,18 @@ export class LoginComponent {
   createUser(): void {
     if (this.userForm.valid) {
       this.isLoading = true;
-      this.authService.createUser(this.userForm.value);
+      this.authService.createUser(this.userForm.value).add(() => this.isLoading = false);
     }
   }
 
   login(): void {
     if (this.userForm.valid) {
       this.isLoading = true;
-      this.authService.login(this.userForm.value);
+      this.authService.login(this.userForm.value).add(() => this.isLoading = false);
     }
   }
 
   loginAsGuest(): void {
-    this.authService.loginAsGuest();
+    this.authService.loginAsGuest().add(() => this.isLoading = false);
   }
 }
