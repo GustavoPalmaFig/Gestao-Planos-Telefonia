@@ -107,7 +107,7 @@ export class AuthService {
   }
 
   storeUser(payload: string) {
-    const user = payload;
+    const user = JSON.stringify(payload);
     sessionStorage.setItem('user', user);
   }
 
