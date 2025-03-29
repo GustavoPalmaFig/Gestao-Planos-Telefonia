@@ -9,6 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { ResponsiveService } from '../../services/responsive.service';
+import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -20,19 +23,21 @@ import { ResponsiveService } from '../../services/responsive.service';
     CommonModule,
     ToastModule,
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    ButtonModule,
+    TooltipModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   providers: [AuthService, ApiService]
 })
 export class LoginComponent {
   protected isCreatingAccount = signal<boolean>(false);
-  protected isLoading = false;
   private strongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
 
   protected authService = inject(AuthService);
   private fb = inject(FormBuilder);
   protected responsiveService = inject(ResponsiveService);
+  protected loadingService = inject(LoadingService);
 
   protected userForm: FormGroup = this.fb.group({
     name: [''],
@@ -44,6 +49,10 @@ export class LoginComponent {
     effect(() => {
       this.updateValidators();
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.authService.initializeGoogleAuth();
   }
 
   get nameFormField() {
@@ -76,19 +85,19 @@ export class LoginComponent {
 
   createUser(): void {
     if (this.userForm.valid) {
-      this.isLoading = true;
-      this.authService.createUser(this.userForm.value).add(() => this.isLoading = false);
+      this.loadingService.setLoading(true);
+      this.authService.createUser(this.userForm.value).add(() => this.loadingService.setLoading(false));
     }
   }
 
   login(): void {
     if (this.userForm.valid) {
-      this.isLoading = true;
-      this.authService.login(this.userForm.value).add(() => this.isLoading = false);
+      this.loadingService.setLoading(true);
+      this.authService.login(this.userForm.value).add(() => this.loadingService.setLoading(false));
     }
   }
 
   loginAsGuest(): void {
-    this.authService.loginAsGuest().add(() => this.isLoading = false);
+    this.authService.loginAsGuest().add(() => this.loadingService.setLoading(false));
   }
 }

@@ -24,23 +24,33 @@ export class AuthService {
     this.isAuthenticated.set(!!token);
   }
 
-  loginWithGoogle() {
+  initializeGoogleAuth() {
     google.accounts.id.initialize({
       client_id: this.googleClientId,
       callback: (response: any) => this.handleGoogleCredentialResponse(response),
       auto_select: false,
       cancel_on_tap_outside: true,
       ux_mode: "popup"
-    });
+    })
 
-    google.accounts.id.prompt();
+    google.accounts.id.renderButton(
+      document.getElementById("google-sign"),
+      {
+        theme: "outline",
+        type: "icon", 
+        size: "large", 
+        shape: "pill", 
+     }
+    );
+
+    // google.accounts.id.prompt();
   }
 
   handleGoogleCredentialResponse(response: CredentialResponse) {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     this.apiService.post(`${this.apiRoot}/GoogleLogin`, JSON.stringify(response.credential), headers).subscribe((token: any) => {
-      sessionStorage.setItem('access_token', token);
+      sessionStorage.setItem('access_token', token.jwtToken);
       this.router.navigate(['']);
     });
   }

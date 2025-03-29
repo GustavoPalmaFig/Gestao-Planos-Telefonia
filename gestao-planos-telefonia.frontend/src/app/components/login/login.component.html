@@ -1,7 +1,7 @@
-<div class="absolute top-0 w-full h-full bg-linear-to-r from-gray-900 to-blue-500">
-  <div class="w-full h-full flex items-center justify-around" [ngClass]="{'grid justify-center content-start' : responsiveService.isMobile()}">
+@if(!loadingService.loading()) {
+  <div class="absolute w-full h-full flex items-center justify-around" [ngClass]="{'grid justify-center content-start' : responsiveService.isMobile()}">
     <div [class]="responsiveService.isMobile() ? 'w-[20em] my-8' : 'w-[30em]'">
-      <img src="assets/images/gpt-logo-white.svg" alt="Gestão de Planos de Telefonia" class="logo"/>
+      <img src="assets/images/gpt-logo-blue.svg" alt="Gestão de Planos de Telefonia" class="logo"/>
     </div>
     <p-card class="" [style]="{ width: responsiveService.isMobile() ? '20em' : '35em', overflow: 'hidden' }">
       <ng-template #title> Acesse sua conta </ng-template>
@@ -20,7 +20,7 @@
               <input type="text" pInputText formControlName="name" placeholder="Nome"/>
               @if(ngForm.submitted && nameFormField && nameFormField.invalid) {
                 <small class="is-invalid">
-                    Nome é obrigatório.
+                  Nome é obrigatório
                 </small>
               }
             </div>
@@ -29,19 +29,14 @@
             <input type="email" pInputText formControlName="email" placeholder="E-mail"/>
               @if(ngForm.submitted && emailFormField && emailFormField.invalid) {
                 <small class="is-invalid">
-                  @if(emailFormField.errors?.['required']) {
-                    E-mail é obrigatório.
-                  }
-                  @else {
-                    Forneça um e-mail válido
-                  }
+                  {{emailFormField.errors?.['required'] ? 'E-mail é obrigatório' : 'Forneça um e-mail válido'}}
                 </small>
               }
           </div>
           <div class="mb-6">
             <p-password formControlName="passwordHash" placeholder="Senha" autocomplete="on" appendTo="body" [feedback]="isCreatingAccount()" [toggleMask]="true" 
-              promptLabel="Digite sua senha" weakLabel="Fraca" mediumLabel="Média" strongLabel="Forte"
-              (keyup.enter)="isCreatingAccount() ? createUser() : login()">
+              promptLabel="Digite sua senha" weakLabel="Senha Fraca" mediumLabel="Senha Média" strongLabel="Senha Forte"
+              (keyup.enter)="ngForm.ngSubmit">
               <ng-template #footer>
                 <p-divider />
                 <ul class="pl-2 ml-2 my-0 leading-normal">
@@ -55,40 +50,38 @@
             </p-password>
             @if(ngForm.submitted && passwordFormField && passwordFormField.invalid) {
               <small class="is-invalid">
-                @if(passwordFormField.errors?.['required']) {
-                  Senha é obrigatório.
-                }
-                @else {
-                  Senha fora do padrão.
-                }
+                {{passwordFormField.errors?.['required'] ? 'Senha é obrigatório' : 'Senha fora do padrão'}}
               </small>
             }
           </div>
   
           <div class="text-center mt-8">
-            <button type="submit" [disabled]="isLoading"
-              class="bg-[#5897fb] text-white text-sm font-bold h-[50px] rounded-full shadow hover:shadow-lg w-full cursor-pointer disabled:opacity-50">
-              {{ isCreatingAccount() ? 'Criar conta' : 'Entrar' }}
+            <button type="submit"
+              class="bg-[#5897fb] text-white text-sm font-bold py-4 rounded-full shadow hover:shadow-lg w-2/3 cursor-pointer disabled:opacity-50">
+              {{ isCreatingAccount() ? 'Criar conta' : 'Acessar' }}
             </button>
   
-            <button type="button" (click)="authService.loginWithGoogle()" [disabled]="isLoading"
-              class="mt-6 flex items-center justify-center text-sm font-bold h-[50px] rounded-full border-1 border-solid border-gray-400 hover:border-gray-500 w-full
-                cursor-pointer text-[#717783] disabled:opacity-50">
-              <img src="assets/images/google-logo.svg" alt="Google Logo" class="google-logo-icon mr-2">
-              Continuar com Google
-            </button>
-  
-            <button type="button" (click)="loginAsGuest()" [disabled]="isLoading"
-              class="mt-6 flex items-center justify-center text-sm font-bold h-[50px] rounded-full border-1 border-solid border-gray-400 hover:border-gray-500 w-full
-                cursor-pointer text-[#717783] disabled:opacity-50">
-              Continuar como convidado
-            </button>
+            <div class="w-full content-center justify-center py-3">
+              <div class="w-full justify-center flex items-center">
+                <p-divider class="w-1/2 text-center"><span>ou</span></p-divider>
+              </div>
+              <div class="flex items-center justify-center">
+                <div id="google-sign" pTooltip="Continuar com Google" tooltipPosition="left"></div>
+                <p-button
+                  icon="pi pi-user"
+                  [rounded]="true"
+                  [text]="false"
+                  class="ml-3 rounded-full bg-white cursor-pointer disabled:opacity-50"
+                  pTooltip="Continuar como visitante"
+                  tooltipPosition="left"
+                  size="large"
+                  (onClick)="loginAsGuest()"
+                ></p-button>
+              </div>
+            </div>
           </div>
         </form>
       </ng-template>
-      <ng-template #footer>
-        <div class="flex gap-4 mt-1"></div>
-      </ng-template>
     </p-card>
   </div>
-</div>
+}

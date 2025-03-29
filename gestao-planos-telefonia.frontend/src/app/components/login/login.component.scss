@@ -17,3 +17,11 @@
         width: 100%;
     }
 }
+
+::ng-deep  {
+    .p-button {
+        background-color: white;
+        color: #b5b5b5;
+        border-color: #dcdde1
+    }
+}
