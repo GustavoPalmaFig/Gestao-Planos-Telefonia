@@ -81,4 +81,10 @@ export class AuthService {
       this.router.navigate(['']);
     });
   }
+
+  logout() {
+    sessionStorage.removeItem('access_token');
+    this.isAuthenticated.set(false);
+    this.router.navigate(['login']);
+  }
 }

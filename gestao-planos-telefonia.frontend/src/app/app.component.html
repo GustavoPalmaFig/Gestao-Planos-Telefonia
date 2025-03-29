@@ -11,6 +11,7 @@
             <p-button icon="pi pi-home" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Tela Inicial" tooltipPosition="left" size="large" (onClick)="navigate('')"/>
             <p-button icon="pi pi-users" [rounded]="false" [text]="true" class="header-button mr-2" pTooltip="Clientes" tooltipPosition="left" size="large" (onClick)="navigate('clientes')"/>
             <p-button icon="pi pi-phone" [rounded]="false" [text]="true" class="header-button" pTooltip="Planos" tooltipPosition="left" size="large" (onClick)="navigate('planos')"/>
+            <p-button icon="pi pi-power-off" [rounded]="false" [text]="true" class="header-button" pTooltip="Fazer Logout" tooltipPosition="left" size="large" (onClick)="authService.logout()"/>
         </div>
     </p-toolbar>
 }
