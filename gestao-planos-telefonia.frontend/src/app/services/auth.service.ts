@@ -14,14 +14,25 @@ import { CredentialResponse } from 'google-one-tap';
 export class AuthService {
   private googleClientId = environment.googleClientId;
   private apiRoot = environment.apiRoot + '/Auth';
+  private jsonHeaders = new HttpHeaders({'Content-Type': 'application/json'});
+
   public isAuthenticated = signal<boolean>(false);
   private apiService = inject(ApiService);
   private router = inject(Router);
   private messageService = inject(MessageService);
 
-  checkAuthenticated() {
-    const token = sessionStorage.getItem('access_token');
-    this.isAuthenticated.set(!!token);
+  setAuthentication() {
+    const user = sessionStorage.getItem('user');
+    
+    if (!user) {
+      this.isAuthenticated.set(false);
+      return;
+    }
+
+    const userData = JSON.parse(user);
+    const expirationDate = new Date(userData.exp * 1000);
+    const isAuthenticated = new Date() < expirationDate;
+    this.isAuthenticated.set(isAuthenticated);
   }
 
   initializeGoogleAuth() {
@@ -47,20 +58,15 @@ export class AuthService {
   }
 
   handleGoogleCredentialResponse(response: CredentialResponse) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-
-    this.apiService.post(`${this.apiRoot}/GoogleLogin`, JSON.stringify(response.credential), headers).subscribe((token: any) => {
-      sessionStorage.setItem('access_token', token.jwtToken);
-      this.router.navigate(['']);
+    this.apiService.post(`${this.apiRoot}/GoogleLogin`, JSON.stringify(response.credential), this.jsonHeaders).subscribe((token: any) => {
+      this.handleAccessToken(token.jwtToken);
     });
   }
 
   createUser(user: User) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.apiService.post(`${this.apiRoot}/CreateUser`, user, headers).subscribe((response: any) => {
-      sessionStorage.setItem('access_token', response.token);
+    return this.apiService.post(`${this.apiRoot}/CreateUser`, user, this.jsonHeaders).subscribe((response: any) => {
       this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Usuário Cadastrado', life: 3000 });
-      this.router.navigate(['']);
+      this.handleAccessToken(response.token);
     });
   }
 
@@ -70,20 +76,43 @@ export class AuthService {
       password: user.passwordHash
     };
     return this.apiService.post(`${this.apiRoot}/Login`, loginRequest).subscribe((response: any) => {
-      sessionStorage.setItem('access_token', response.token);
-      this.router.navigate(['']);
+      this.handleAccessToken(response.token);
     });
   }
 
   loginAsGuest() {
     return this.apiService.post(`${this.apiRoot}/GuestLogin`, null).subscribe((response: any) => {
-      sessionStorage.setItem('access_token', response.token);
-      this.router.navigate(['']);
+      this.handleAccessToken(response.token);
     });
   }
 
+  handleAccessToken(token: string) {
+    const decodedPayload = this.decodeToken(token);
+    if (decodedPayload) {
+      this.storeUser(decodedPayload);
+      this.router.navigate(['']);
+    } else {
+      console.error('Token inválido. Não foi possível processar o acesso.');
+    }
+  }
+
+  decodeToken(token: string) {
+    try {
+      const payload = token.split('.')[1];
+      return JSON.parse(atob(payload));
+    } catch (error) {
+      console.error('Erro ao decodificar o token:', error);
+      return null;
+    }
+  }
+
+  storeUser(payload: string) {
+    const user = payload;
+    sessionStorage.setItem('user', user);
+  }
+
   logout() {
-    sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('user');
     this.isAuthenticated.set(false);
     this.router.navigate(['login']);
   }

@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   private router = inject(Router);
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    this.authService.checkAuthenticated();
+    this.authService.setAuthentication();
     const isAuthenticated = this.authService.isAuthenticated();
 
     if (isAuthenticated && state.url === '/login') {
