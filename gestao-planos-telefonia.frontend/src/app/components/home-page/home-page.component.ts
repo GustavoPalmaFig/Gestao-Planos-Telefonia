@@ -69,9 +69,7 @@ export class HomePageComponent implements OnInit{
   availableYears!: { label: string, value: number }[];
   selectedYears: number[] = [new Date().getFullYear()];
   
-  constructor(private clienteService: ClienteService, private planoService: PlanoService, private router: Router,
-    public loadingService: LoadingService
-  ) {}
+  constructor(private clienteService: ClienteService, private planoService: PlanoService, private router: Router) {}
 
   ngOnInit() {
     forkJoin({
